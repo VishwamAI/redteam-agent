@@ -78,9 +78,9 @@ class RedTeamAgent:
                 if isinstance(result, dict):
                     logging.info(f"Task {task_function.__name__} returned a dictionary, skipping shape check.")
                     continue
-                logging.info(f"Task {task_function.__name__} returned result with shape: {result.shape}")
                 if isinstance(result, np.ndarray) and result.ndim == 1:
                     result = result.reshape(1, -1)  # Ensure result is 2D
+                logging.info(f"Task {task_function.__name__} returned result with shape: {result.shape}")
                 # Validate dimensions before appending
                 if collected_data and result.shape[1] != collected_data[0].shape[1]:
                     logging.error(f"Task {task_function.__name__} returned result with incompatible dimensions: {result.shape}")
@@ -121,6 +121,7 @@ class RedTeamAgent:
                 logging.info("Update thread joined successfully.")
         except Exception as e:
             logging.error(f"Error joining update thread: {e}")
+        logging.info(f"Stop method completed - self.running: {self.running}, update_manager.running: {self.update_manager.running}")
         self.learning_module.save_model("trained_model.pkl")
         self.reporting_system.log_activity("Agent stopped and model saved.")
         logging.info("Agent stopped and model saved.")
