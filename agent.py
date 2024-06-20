@@ -75,6 +75,9 @@ class RedTeamAgent:
         for task_function, args, kwargs in self.automation_engine.tasks:
             try:
                 result = task_function(*args, **kwargs)
+                if result is None:
+                    logging.info(f"Task {task_function.__name__} returned None, skipping.")
+                    continue
                 if isinstance(result, dict):
                     logging.info(f"Task {task_function.__name__} returned a dictionary, skipping shape check.")
                     continue
