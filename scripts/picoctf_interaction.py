@@ -101,8 +101,16 @@ class PicoCTFInteraction:
         return "example_solution"
 
     def solve_general_skills_challenge(self, challenge):
-        # Implement general skills challenge-solving logic here
-        return "example_solution"
+        """
+        Solve a general skills challenge by retrieving a file or string from a server.
+        """
+        challenge_url = challenge.get("url")
+        response = self.session.get(challenge_url)
+        if response.status_code == 200:
+            return response.text.strip()
+        else:
+            logging.error(f"Failed to retrieve content for challenge: {response.status_code} - {response.text}")
+            return None
 
     def list_challenges(self):
         challenges_url = f"{self.base_url}/challenges"
