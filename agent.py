@@ -38,6 +38,9 @@ class RedTeamAgent:
         max_iterations = 10  # Set a limit for the number of iterations
         while self.running and iteration_count < max_iterations:
             logging.info(f"Loop iteration {iteration_count} - self.running: {self.running}")
+            if not self.running:
+                logging.info("Running flag is False, exiting loop.")
+                break
             self.run_tasks()
             time.sleep(1)  # Sleep for a short duration to simulate continuous operation
             iteration_count += 1
@@ -47,8 +50,6 @@ class RedTeamAgent:
                 self.stop()  # Ensure the stop method is called within the loop
                 break
         logging.info(f"Loop has exited - self.running: {self.running}, iteration_count: {iteration_count}")
-        self.running = False  # Ensure the running flag is set to False after the loop
-        logging.info("Loop has exited, self.running set to False.")
 
     def run_tasks(self):
         logging.info("Running automated tasks...")
@@ -114,7 +115,10 @@ class RedTeamAgent:
         logging.info("Running flag set to False. Attempting to join update thread.")
         try:
             self.update_thread.join(timeout=5)  # Add a timeout to the join call
-            logging.info("Update thread joined successfully.")
+            if self.update_thread.is_alive():
+                logging.error("Update thread did not terminate within the timeout period.")
+            else:
+                logging.info("Update thread joined successfully.")
         except Exception as e:
             logging.error(f"Error joining update thread: {e}")
         self.learning_module.save_model("trained_model.pkl")
