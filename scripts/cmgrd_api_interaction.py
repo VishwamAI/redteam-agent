@@ -97,21 +97,27 @@ if __name__ == "__main__":
         build_id = build['id']
         build_info = api.get_build(build_id)
         print("Build Info:", build_info)
+    else:
+        build_info = None
 
     # Test start_instance method
-    if build and isinstance(build, dict) and 'id' in build:
-        build_id = build['id']
+    if build_info and isinstance(build_info, dict) and 'id' in build_info:
+        build_id = build_info['id']
         instance = api.start_instance(build_id)
         print("Instance:", instance)
+    else:
+        instance = None
 
     # Test get_instance method
     if instance and isinstance(instance, dict) and 'id' in instance:
         instance_id = instance['id']
         instance_info = api.get_instance(instance_id)
         print("Instance Info:", instance_info)
+    else:
+        instance_info = None
 
     # Test run_solver method
-    if instance and isinstance(instance, dict) and 'id' in instance:
-        instance_id = instance['id']
+    if instance_info and isinstance(instance_info, dict) and 'id' in instance_info:
+        instance_id = instance_info['id']
         solver_result = api.run_solver(instance_id)
         print("Solver Result:", solver_result)
