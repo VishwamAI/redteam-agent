@@ -14,7 +14,10 @@ class PicoCTFInteraction:
             "username": username,
             "password": password
         }
-        response = self.session.post(login_url, data=payload)
+        headers = {
+            "X-CSRFToken": "4mvr3FwCYZYptKjo5kXlHRcOb5fS8y07"
+        }
+        response = self.session.post(login_url, data=payload, headers=headers)
         if response.status_code == 200:
             logging.info("Successfully logged in to picoCTF.")
         else:
