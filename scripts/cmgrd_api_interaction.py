@@ -45,7 +45,7 @@ class CMGRDAPI:
     def start_instance(self, build_id):
         instance_url = f"{self.base_url}/builds/{build_id}"
         response = self.session.post(instance_url)
-        if response.status_code == 200:
+        if response.status_code == 201:
             return response.json()
         else:
             print(f"Failed to start instance for build {build_id} with status code {response.status_code}: {response.text}")
@@ -63,8 +63,8 @@ class CMGRDAPI:
     def run_solver(self, instance_id):
         solver_url = f"{self.base_url}/instances/{instance_id}"
         response = self.session.post(solver_url)
-        if response.status_code == 200:
-            return response.json()
+        if response.status_code == 204:
+            return {"message": "Solver ran correctly"}
         else:
             print(f"Failed to run solver for instance {instance_id} with status code {response.status_code}: {response.text}")
             return None
@@ -72,6 +72,9 @@ class CMGRDAPI:
 if __name__ == "__main__":
     base_url = "http://localhost:4200/api"
     api = CMGRDAPI(base_url)
+
+    # Define build variable at the beginning
+    build = None
 
     # Test list_challenges method
     challenges = api.list_challenges()
