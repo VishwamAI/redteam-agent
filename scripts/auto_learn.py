@@ -28,22 +28,26 @@ def main():
             # Print the actual challenge details for inspection
             print(f"Challenge details for {challenge_id}: {challenge_details}")
 
-            # Example: Extract raw data from challenge details (this will depend on the actual challenge data format)
-            raw_data = np.array(challenge_details['data'])
+            # Check if 'data' key is present in challenge details
+            if 'data' in challenge_details:
+                # Extract raw data from challenge details
+                raw_data = np.array(challenge_details['data'])
 
-            # Preprocess the raw data
-            features, labels = learning_module.preprocess_data(raw_data)
+                # Preprocess the raw data
+                features, labels = learning_module.preprocess_data(raw_data)
 
-            # Train the model on the preprocessed data
-            learning_module.train(features, labels)
+                # Train the model on the preprocessed data
+                learning_module.train(features, labels)
 
-            # Save the trained model
-            model_path = f"models/{challenge_id}_model.pkl"
-            learning_module.save_model(model_path)
+                # Save the trained model
+                model_path = f"models/{challenge_id}_model.pkl"
+                learning_module.save_model(model_path)
 
-            # Example: Make predictions on new data (this will depend on the actual use case)
-            predictions = learning_module.predict(features)
-            print(f"Predictions for {challenge_id}: {predictions}")
+                # Make predictions on new data
+                predictions = learning_module.predict(features)
+                print(f"Predictions for {challenge_id}: {predictions}")
+            else:
+                print(f"No 'data' key found in challenge details for {challenge_id}")
 
         except Exception as e:
             print(f"An error occurred while processing challenge {challenge_id}: {e}")
