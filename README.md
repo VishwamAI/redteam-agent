@@ -78,3 +78,9 @@ This project is licensed under the MIT License. See the [LICENSE](LICENSE) file 
 
 ## Contact
 For any questions or inquiries, please contact the project maintainer at [email@example.com](mailto:email@example.com).
+
+## Additional Information
+- **Learning and Auto-Upgrade**: The agent is designed to learn and auto-upgrade using training rooms on the picoCTF platform. It stores its learning data for continuous improvement.
+- **Configuration**: Ensure the `cmgr_interface.py` script is correctly configured to interact with the `cmgrd` server. The `base_url` should be set to `http://127.0.0.1:4200`.
+- **Swagger Documentation**: The `swagger.yaml` file contains the REST API documentation for `cmgr`, detailing endpoints for managing challenges, builds, instances, and schemas.
+- **Endpoints and Methods**: The `build_challenge` method uses `/challenges/{challenge_id}`, POST request, status code 200. The `start_instance` method uses `/builds/{build_id}`, POST request, status code 201. The `run_solver` method uses `/instances/{instance_id}`, POST request, status code 204.
