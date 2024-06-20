@@ -100,8 +100,10 @@ class RedTeamAgent:
             self.reporting_system.log_activity(f"Error listing challenges: {e}")
 
     def stop(self):
+        logging.info("Stop method called. Setting running flag to False.")
         self.running = False
         self.update_manager.running = False
+        logging.info("Running flag set to False. Attempting to join update thread.")
         try:
             self.update_thread.join(timeout=5)  # Add a timeout to the join call
             logging.info("Update thread joined successfully.")
