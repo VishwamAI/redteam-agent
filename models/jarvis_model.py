@@ -23,10 +23,14 @@ class JarvisModel:
         numerical_features = [i for i in range(features.shape[1]) if np.issubdtype(features[:, i].dtype, np.number)]
         categorical_features = [i for i in range(features.shape[1]) if not np.issubdtype(features[:, i].dtype, np.number)]
 
+        # Convert categorical features to string type to ensure compatibility with OneHotEncoder
+        for i in categorical_features:
+            features[:, i] = features[:, i].astype(str)
+
         # Define preprocessing steps for numerical and categorical data
         numerical_transformer = Pipeline(steps=[
             ('imputer', SimpleImputer(strategy='mean')),
-            ('scaler', StandardScaler())
+            ('scaler', StandardScaler(with_mean=False))
         ])
 
         categorical_transformer = Pipeline(steps=[
@@ -42,8 +46,11 @@ class JarvisModel:
             ]
         )
 
-        # Fit and transform the features using the preprocessor
-        features_preprocessed = self.preprocessor.fit_transform(features)
+        # Fit the preprocessor on the training data
+        self.preprocessor.fit(features)
+
+        # Transform the features using the preprocessor
+        features_preprocessed = self.preprocessor.transform(features)
 
         return features_preprocessed, labels
 
@@ -54,8 +61,9 @@ class JarvisModel:
         accuracy = accuracy_score(y_test, predictions)
         print(f"Training accuracy: {accuracy}")
 
-    def predict(self, features):
-        features_preprocessed = self.preprocessor.transform(features)
+    def predict(self, raw_features):
+        # Preprocess the raw features before making predictions
+        features_preprocessed, _ = self.preprocess_data(raw_features)
         return self.model.predict(features_preprocessed)
 
     def save_model(self, model_path):
@@ -74,7 +82,7 @@ if __name__ == "__main__":
     raw_data = np.random.rand(100, 11)  # Example data
     features, labels = jarvis.preprocess_data(raw_data)
     jarvis.train(features, labels)
-    predictions = jarvis.predict(features)
+    predictions = jarvis.predict(raw_data)
     print(f"Predictions: {predictions}")
     jarvis.save_model("jarvis_model.pkl")
     jarvis.load_model("jarvis_model.pkl")
