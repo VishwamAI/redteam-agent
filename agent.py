@@ -37,10 +37,12 @@ class RedTeamAgent:
         iteration_count = 0
         max_iterations = 10  # Set a limit for the number of iterations
         while self.running and iteration_count < max_iterations:
+            logging.info(f"Loop iteration {iteration_count} - self.running: {self.running}")
             self.run_tasks()
             time.sleep(1)  # Sleep for a short duration to simulate continuous operation
             iteration_count += 1
             logging.info(f"Iteration {iteration_count} completed.")
+        logging.info(f"Loop has exited - self.running: {self.running}, iteration_count: {iteration_count}")
         self.running = False  # Ensure the running flag is set to False after the loop
         logging.info("Loop has exited, self.running set to False.")
         self.stop()  # Ensure the stop method is called after the loop exits
