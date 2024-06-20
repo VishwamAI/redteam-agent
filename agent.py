@@ -35,8 +35,12 @@ class RedTeamAgent:
         self.update_thread.start()
         self.reporting_system.log_activity("RedTeamAgent started.")
         iteration_count = 0
+        max_iterations = 10  # Set a maximum number of iterations for testing
         while self.running:
             logging.info(f"Loop iteration {iteration_count} - self.running: {self.running}")
+            if iteration_count >= max_iterations:
+                logging.info("Reached maximum iterations, setting running flag to False.")
+                self.running = False
             if not self.running:
                 logging.info("Running flag is False, exiting loop.")
                 break
