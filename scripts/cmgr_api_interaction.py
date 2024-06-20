@@ -68,3 +68,50 @@ class CMGRAPI:
         else:
             print(f"Failed to run solver for instance {instance_id} with status code {response.status_code}: {response.text}")
             return None
+
+if __name__ == "__main__":
+    base_url = "http://localhost:4200/api"
+    api = CMGRAPI(base_url)
+
+    # Test list_challenges method
+    challenges = api.list_challenges()
+    print("Challenges:", challenges)
+
+    # Test get_challenge method
+    if challenges and len(challenges) > 0:
+        challenge_id = challenges[0].get('id')
+        if challenge_id:
+            challenge = api.get_challenge(challenge_id)
+            print("Challenge:", challenge)
+
+    # Test build_challenge method
+    if challenges and len(challenges) > 0:
+        challenge_id = challenges[0].get('id')
+        if challenge_id:
+            build_data = {"param1": "value1", "param2": "value2"}
+            build = api.build_challenge(challenge_id, build_data)
+            print("Build:", build)
+
+    # Test get_build method
+    if build and isinstance(build, dict) and 'id' in build:
+        build_id = build['id']
+        build_info = api.get_build(build_id)
+        print("Build Info:", build_info)
+
+    # Test start_instance method
+    if build and isinstance(build, dict) and 'id' in build:
+        build_id = build['id']
+        instance = api.start_instance(build_id)
+        print("Instance:", instance)
+
+    # Test get_instance method
+    if instance and isinstance(instance, dict) and 'id' in instance:
+        instance_id = instance['id']
+        instance_info = api.get_instance(instance_id)
+        print("Instance Info:", instance_info)
+
+    # Test run_solver method
+    if instance and isinstance(instance, dict) and 'id' in instance:
+        instance_id = instance['id']
+        solver_result = api.run_solver(instance_id)
+        print("Solver Result:", solver_result)
