@@ -53,7 +53,10 @@ class UpdateManager:
             logging.info("UpdateManager running state: {}".format(self.running))
             if self.check_for_updates():
                 self.apply_updates()
-            time.sleep(self.update_check_interval)
+            for _ in range(self.update_check_interval):
+                if not self.running:
+                    break
+                time.sleep(1)
         logging.info("UpdateManager has stopped running.")
 
 if __name__ == "__main__":
