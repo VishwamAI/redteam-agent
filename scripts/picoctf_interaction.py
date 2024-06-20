@@ -112,12 +112,18 @@ class PicoCTFInteraction:
             logging.error(f"Failed to retrieve content for challenge: {response.status_code} - {response.text}")
             return None
 
-    def list_challenges(self):
+    def list_challenges(self, category=None, difficulty=None):
         challenges_url = f"{self.base_url}/challenges"
         response = self.session.get(challenges_url)
         if response.status_code == 200:
             logging.info("Successfully retrieved list of challenges.")
-            return response.json()
+            challenges = response.json()
+            # Filter challenges based on category and difficulty if specified
+            if category:
+                challenges = [ch for ch in challenges if ch.get("category") == category]
+            if difficulty:
+                challenges = [ch for ch in challenges if ch.get("difficulty") == difficulty]
+            return challenges
         else:
             logging.error(f"Failed to retrieve list of challenges: {response.status_code} - {response.text}")
             return None
