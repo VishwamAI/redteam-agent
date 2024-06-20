@@ -123,19 +123,22 @@ class RedTeamAgent:
             intent = classify_intent(input_text, candidate_labels)
             logging.info(f"Intent: {intent}")
 
+            # Mapping of intents to task functions and parameters
+            intent_task_mapping = {
+                "reconnaissance": (example_task, "127.0.0.1"),
+                "exploitation": (exploitation_task, "127.0.0.1"),
+                "lateral movement": (lateral_movement_task, "127.0.0.1"),
+                "exfiltration": (exfiltration_task, "127.0.0.1"),
+                "reporting": (self.reporting_system.generate_report, )
+            }
+
             # Determine actions based on the classified intent
-            if intent['labels'][0] == "reconnaissance":
-                self.automation_engine.add_task(example_task, "127.0.0.1")  # Example task, replace with actual task
-            elif intent['labels'][0] == "exploitation":
-                self.automation_engine.add_task(exploitation_task, "127.0.0.1")  # Example task, replace with actual task
-            elif intent['labels'][0] == "lateral movement":
-                self.automation_engine.add_task(lateral_movement_task, "127.0.0.1")  # Example task, replace with actual task
-            elif intent['labels'][0] == "exfiltration":
-                self.automation_engine.add_task(exfiltration_task, "127.0.0.1")  # Example task, replace with actual task
-            elif intent['labels'][0] == "reporting":
-                self.reporting_system.generate_report()
+            top_intent = intent['labels'][0]
+            if top_intent in intent_task_mapping:
+                task_function, *task_args = intent_task_mapping[top_intent]
+                self.automation_engine.add_task(task_function, *task_args)
             else:
-                logging.warning(f"Unrecognized intent: {intent['labels'][0]}")
+                logging.warning(f"Unrecognized intent: {top_intent}")
 
         except Exception as e:
             logging.error(f"Error processing natural language input: {e}")
