@@ -65,9 +65,44 @@ class PicoCTFInteraction:
         Generate a solution for the given challenge.
         This method should be implemented with the actual logic to solve the challenge.
         """
-        # Example placeholder logic
-        solution = "example_solution"
+        category = challenge.get("category", "General Skills")
+        if category == "Cryptography":
+            solution = self.solve_cryptography_challenge(challenge)
+        elif category == "Web Exploitation":
+            solution = self.solve_web_exploitation_challenge(challenge)
+        elif category == "Reverse Engineering":
+            solution = self.solve_reverse_engineering_challenge(challenge)
+        elif category == "Forensics":
+            solution = self.solve_forensics_challenge(challenge)
+        elif category == "Binary Exploitation":
+            solution = self.solve_binary_exploitation_challenge(challenge)
+        else:
+            solution = self.solve_general_skills_challenge(challenge)
         return solution
+
+    def solve_cryptography_challenge(self, challenge):
+        # Implement cryptography challenge-solving logic here
+        return "example_solution"
+
+    def solve_web_exploitation_challenge(self, challenge):
+        # Implement web exploitation challenge-solving logic here
+        return "example_solution"
+
+    def solve_reverse_engineering_challenge(self, challenge):
+        # Implement reverse engineering challenge-solving logic here
+        return "example_solution"
+
+    def solve_forensics_challenge(self, challenge):
+        # Implement forensics challenge-solving logic here
+        return "example_solution"
+
+    def solve_binary_exploitation_challenge(self, challenge):
+        # Implement binary exploitation challenge-solving logic here
+        return "example_solution"
+
+    def solve_general_skills_challenge(self, challenge):
+        # Implement general skills challenge-solving logic here
+        return "example_solution"
 
     def list_challenges(self):
         challenges_url = f"{self.base_url}/challenges"

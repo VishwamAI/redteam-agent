@@ -7,6 +7,7 @@ from scripts.learning.learning_module import LearningModule
 from scripts.update_manager import UpdateManager
 from scripts.reporting_system import ReportingSystem
 from scripts.picoctf_interaction import PicoCTFInteraction  # Importing PicoCTF interaction module
+from scripts.nlu_pipeline import tokenize, named_entity_recognition, classify_intent  # Importing NLU pipeline functions
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s', filename='/home/ubuntu/VishwamAI/logs/agent.log')
@@ -101,6 +102,44 @@ class RedTeamAgent:
                 return None
             return np.vstack(collected_data)  # Stack collected data into a 2D array
         return None
+
+    def process_natural_language_input(self, input_text):
+        """
+        Process natural language input using the NLU pipeline and determine actions.
+        """
+        try:
+            # Tokenize the input text
+            tokens = tokenize(input_text)
+            logging.info(f"Tokens: {tokens}")
+
+            # Perform Named Entity Recognition (NER)
+            entities = named_entity_recognition(input_text)
+            logging.info(f"Entities: {entities}")
+
+            # Define candidate labels for intent classification
+            candidate_labels = ["reconnaissance", "exploitation", "lateral movement", "exfiltration", "reporting"]
+
+            # Classify the intent of the input text
+            intent = classify_intent(input_text, candidate_labels)
+            logging.info(f"Intent: {intent}")
+
+            # Determine actions based on the classified intent
+            if intent['labels'][0] == "reconnaissance":
+                self.automation_engine.add_task(example_task, "127.0.0.1")  # Example task, replace with actual task
+            elif intent['labels'][0] == "exploitation":
+                self.automation_engine.add_task(exploitation_task, "127.0.0.1")  # Example task, replace with actual task
+            elif intent['labels'][0] == "lateral movement":
+                self.automation_engine.add_task(lateral_movement_task, "127.0.0.1")  # Example task, replace with actual task
+            elif intent['labels'][0] == "exfiltration":
+                self.automation_engine.add_task(exfiltration_task, "127.0.0.1")  # Example task, replace with actual task
+            elif intent['labels'][0] == "reporting":
+                self.reporting_system.generate_report()
+            else:
+                logging.warning(f"Unrecognized intent: {intent['labels'][0]}")
+
+        except Exception as e:
+            logging.error(f"Error processing natural language input: {e}")
+            self.reporting_system.log_activity(f"Error processing natural language input: {e}")
 
     def list_challenges(self):
         try:
