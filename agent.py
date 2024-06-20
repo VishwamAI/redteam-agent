@@ -41,11 +41,14 @@ class RedTeamAgent:
             self.run_tasks()
             time.sleep(1)  # Sleep for a short duration to simulate continuous operation
             iteration_count += 1
-            logging.info(f"Iteration {iteration_count} completed.")
+            logging.info(f"Iteration {iteration_count} completed - self.running: {self.running}")
+            if iteration_count >= max_iterations:
+                logging.info("Max iterations reached, calling stop method.")
+                self.stop()  # Ensure the stop method is called within the loop
+                break
         logging.info(f"Loop has exited - self.running: {self.running}, iteration_count: {iteration_count}")
         self.running = False  # Ensure the running flag is set to False after the loop
         logging.info("Loop has exited, self.running set to False.")
-        self.stop()  # Ensure the stop method is called after the loop exits
 
     def run_tasks(self):
         logging.info("Running automated tasks...")
@@ -77,6 +80,11 @@ class RedTeamAgent:
                 logging.info(f"Task {task_function.__name__} returned result with shape: {result.shape}")
                 if isinstance(result, np.ndarray) and result.ndim == 1:
                     result = result.reshape(1, -1)  # Ensure result is 2D
+                # Validate dimensions before appending
+                if collected_data and result.shape[1] != collected_data[0].shape[1]:
+                    logging.error(f"Task {task_function.__name__} returned result with incompatible dimensions: {result.shape}")
+                    self.reporting_system.log_activity(f"Task {task_function.__name__} returned result with incompatible dimensions: {result.shape}")
+                    continue
                 collected_data.append(result)
             except Exception as e:
                 logging.error(f"Error collecting data from task {task_function.__name__}: {e}")
