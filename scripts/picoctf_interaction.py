@@ -48,7 +48,7 @@ class PicoCTFInteraction:
         if challenge:
             # Placeholder for challenge-solving logic
             # Replace with actual logic to solve the challenge
-            solution = "example_solution"
+            solution = self.generate_solution(challenge)
             result = self.submit_solution(challenge_id, solution)
             if result and result.get("status") == "correct":
                 logging.info(f"Challenge {challenge_id} solved successfully.")
@@ -59,6 +59,15 @@ class PicoCTFInteraction:
                 return np.array([[]])
         else:
             return np.array([[]])
+
+    def generate_solution(self, challenge):
+        """
+        Generate a solution for the given challenge.
+        This method should be implemented with the actual logic to solve the challenge.
+        """
+        # Example placeholder logic
+        solution = "example_solution"
+        return solution
 
     def list_challenges(self):
         challenges_url = f"{self.base_url}/challenges"
