@@ -8,6 +8,10 @@ def test_picoctf_api():
     password = "1kl12_2>"
     picoctf_api = PicoCTFAPI(base_url, username, password)
 
+    # Initialize variables
+    build = None
+    instance = None
+
     # Test login
     picoctf_api.login()
 
