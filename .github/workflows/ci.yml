@@ -6,7 +6,7 @@ on:
       - debug-loop-logging-fix
   pull_request:
     branches:
-      - debug-loop-logging-fix
+      - '*'
 
 jobs:
   build:
