@@ -5,7 +5,7 @@ import os
 # Add the parent directory to the Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from scripts.rot13_solver import rot13_decrypt
+from rot13_solver import rot13_decrypt
 
 class TestRot13Solver(unittest.TestCase):
     def test_rot13_decrypt(self):
