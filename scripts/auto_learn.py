@@ -137,7 +137,7 @@ def fit_vectorizer(vectorizer, all_text_features):
     Returns:
         np.ndarray: Transformed text features.
     """
-    return vectorizer.fit_transform(all_text_features).toarray()
+    return vectorizer.fit_transform(all_text_features)
 
 def combine_features(text_vectors, challenges):
     """
