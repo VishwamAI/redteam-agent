@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+
 def initialize_undetected_webdriver():
     try:
         # Set up undetected Chrome options for headless mode
@@ -23,6 +24,7 @@ def initialize_undetected_webdriver():
     except Exception as e:
         print(f"Error initializing undetected WebDriver: {e}")
         return None
+
 
 def main():
     driver = initialize_undetected_webdriver()
@@ -46,6 +48,7 @@ def main():
         finally:
             # Close the browser
             driver.quit()
+
 
 if __name__ == "__main__":
     main()

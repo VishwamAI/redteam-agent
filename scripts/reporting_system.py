@@ -4,6 +4,7 @@ import json
 import threading
 from datetime import datetime
 
+
 class ReportingSystem:
     def __init__(self, log_dir="logs"):
         self.log_dir = log_dir
@@ -19,7 +20,7 @@ class ReportingSystem:
         file_handler.setLevel(logging.INFO)
 
         # Create a logging format
-        formatter = logging.Formatter('%(asctime)s - %(message)s')
+        formatter = logging.Formatter("%(asctime)s - %(message)s")
         file_handler.setFormatter(formatter)
 
         # Add the file handler to the logger
@@ -32,18 +33,18 @@ class ReportingSystem:
             self.logger.info(activity)
 
     def generate_report(self):
-        report = {
-            "timestamp": datetime.now().isoformat(),
-            "activities": []
-        }
+        report = {"timestamp": datetime.now().isoformat(), "activities": []}
         with self.lock:
             with open(self.log_file, "r") as f:
                 for line in f:
                     report["activities"].append(line.strip())
-            report_file = os.path.join(self.log_dir, f"report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json")
+            report_file = os.path.join(
+                self.log_dir, f"report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+            )
             with open(report_file, "w") as f:
                 json.dump(report, f, indent=4)
         return report_file
+
 
 if __name__ == "__main__":
     reporting_system = ReportingSystem()

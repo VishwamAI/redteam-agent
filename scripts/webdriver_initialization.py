@@ -7,6 +7,7 @@ from selenium.webdriver.support import expected_conditions as EC
 import subprocess
 import os
 
+
 def initialize_webdriver():
     try:
         # Set up Chrome options for headless mode
@@ -21,11 +22,18 @@ def initialize_webdriver():
         chrome_options.add_argument("--user-data-dir=/tmp")
 
         # Set up the Chrome driver
-        service = Service('/usr/local/bin/chromedriver')
+        service = Service("/usr/local/bin/chromedriver")
 
         # Use Xvfb to run Chrome in a virtual display environment
-        xvfb_command = ["xvfb-run", "--auto-servernum", "--server-args=-screen 0 1920x1080x24", "chromedriver"]
-        xvfb_process = subprocess.Popen(xvfb_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        xvfb_command = [
+            "xvfb-run",
+            "--auto-servernum",
+            "--server-args=-screen 0 1920x1080x24",
+            "chromedriver",
+        ]
+        xvfb_process = subprocess.Popen(
+            xvfb_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE
+        )
 
         # Set the DISPLAY environment variable to use the Xvfb display
         os.environ["DISPLAY"] = ":99"
@@ -36,6 +44,7 @@ def initialize_webdriver():
     except Exception as e:
         print(f"Error initializing WebDriver: {e}")
         return None, None
+
 
 def main():
     driver, xvfb_process = initialize_webdriver()
@@ -52,6 +61,7 @@ def main():
             driver.quit()
             # Terminate the Xvfb process
             xvfb_process.terminate()
+
 
 if __name__ == "__main__":
     main()

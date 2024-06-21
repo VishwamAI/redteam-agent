@@ -13,7 +13,7 @@ params = {
     "apikey": ZENROWS_API_KEY,
     "js_render": "true",
     "antibot": "true",
-    "premium_proxy": "true"
+    "premium_proxy": "true",
 }
 
 # Send a GET request to the ZenRows API

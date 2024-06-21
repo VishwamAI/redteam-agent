@@ -3,6 +3,7 @@ import logging
 import argparse
 import numpy as np
 
+
 class PicoCTFInteraction:
     def __init__(self):
         self.base_url = "https://play.picoctf.org"
@@ -10,18 +11,15 @@ class PicoCTFInteraction:
 
     def login(self, username, password):
         login_url = f"{self.base_url}/login"
-        payload = {
-            "username": username,
-            "password": password
-        }
-        headers = {
-            "X-CSRFToken": "4mvr3FwCYZYptKjo5kXlHRcOb5fS8y07"
-        }
+        payload = {"username": username, "password": password}
+        headers = {"X-CSRFToken": "4mvr3FwCYZYptKjo5kXlHRcOb5fS8y07"}
         response = self.session.post(login_url, data=payload, headers=headers)
         if response.status_code == 200:
             logging.info("Successfully logged in to picoCTF.")
         else:
-            logging.error(f"Failed to log in to picoCTF: {response.status_code} - {response.text}")
+            logging.error(
+                f"Failed to log in to picoCTF: {response.status_code} - {response.text}"
+            )
 
     def get_challenge(self, challenge_id):
         challenge_url = f"{self.base_url}/challenges/{challenge_id}"
@@ -30,20 +28,24 @@ class PicoCTFInteraction:
             logging.info(f"Successfully retrieved challenge {challenge_id}.")
             return response.json()
         else:
-            logging.error(f"Failed to retrieve challenge {challenge_id}: {response.status_code} - {response.text}")
+            logging.error(
+                f"Failed to retrieve challenge {challenge_id}: {response.status_code} - {response.text}"
+            )
             return None
 
     def submit_solution(self, challenge_id, solution):
         submit_url = f"{self.base_url}/challenges/{challenge_id}/submit"
-        payload = {
-            "solution": solution
-        }
+        payload = {"solution": solution}
         response = self.session.post(submit_url, data=payload)
         if response.status_code == 200:
-            logging.info(f"Successfully submitted solution for challenge {challenge_id}.")
+            logging.info(
+                f"Successfully submitted solution for challenge {challenge_id}."
+            )
             return response.json()
         else:
-            logging.error(f"Failed to submit solution for challenge {challenge_id}: {response.status_code} - {response.text}")
+            logging.error(
+                f"Failed to submit solution for challenge {challenge_id}: {response.status_code} - {response.text}"
+            )
             return None
 
     def solve_challenge(self, challenge_id):
@@ -112,7 +114,9 @@ class PicoCTFInteraction:
         if response.status_code == 200:
             return response.text.strip()
         else:
-            logging.error(f"Failed to retrieve content for challenge: {response.status_code} - {response.text}")
+            logging.error(
+                f"Failed to retrieve content for challenge: {response.status_code} - {response.text}"
+            )
             return None
 
     def list_challenges(self, category=None, difficulty=None):
@@ -125,16 +129,25 @@ class PicoCTFInteraction:
             if category:
                 challenges = [ch for ch in challenges if ch.get("category") == category]
             if difficulty:
-                challenges = [ch for ch in challenges if ch.get("difficulty") == difficulty]
+                challenges = [
+                    ch for ch in challenges if ch.get("difficulty") == difficulty
+                ]
             return challenges
         else:
-            logging.error(f"Failed to retrieve list of challenges: {response.status_code} - {response.text}")
+            logging.error(
+                f"Failed to retrieve list of challenges: {response.status_code} - {response.text}"
+            )
             return None
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Interact with picoCTF platform")
-    parser.add_argument("--list-challenges", action="store_true", help="List available challenges")
-    parser.add_argument("--login", nargs=2, metavar=("username", "password"), help="Login to picoCTF")
+    parser.add_argument(
+        "--list-challenges", action="store_true", help="List available challenges"
+    )
+    parser.add_argument(
+        "--login", nargs=2, metavar=("username", "password"), help="Login to picoCTF"
+    )
     parser.add_argument("--category", type=str, help="Filter challenges by category")
     args = parser.parse_args()
 

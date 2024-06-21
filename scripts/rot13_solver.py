@@ -10,13 +10,14 @@ def rot13_decrypt(encoded_message):
     """
     decrypted_message = []
     for char in encoded_message:
-        if 'a' <= char <= 'z':
-            decrypted_message.append(chr((ord(char) - ord('a') + 13) % 26 + ord('a')))
-        elif 'A' <= char <= 'Z':
-            decrypted_message.append(chr((ord(char) - ord('A') + 13) % 26 + ord('A')))
+        if "a" <= char <= "z":
+            decrypted_message.append(chr((ord(char) - ord("a") + 13) % 26 + ord("a")))
+        elif "A" <= char <= "Z":
+            decrypted_message.append(chr((ord(char) - ord("A") + 13) % 26 + ord("A")))
         else:
             decrypted_message.append(char)
-    return ''.join(decrypted_message)
+    return "".join(decrypted_message)
+
 
 if __name__ == "__main__":
     # Example encoded message from the "Mod 26" challenge on picoCTF

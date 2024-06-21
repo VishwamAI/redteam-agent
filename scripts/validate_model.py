@@ -4,7 +4,10 @@ import numpy as np
 from sklearn.metrics import precision_score, recall_score, f1_score
 
 # Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
+)
+
 
 def load_model(model_path):
     """
@@ -24,6 +27,7 @@ def load_model(model_path):
         logging.error(f"Failed to load model from {model_path}: {e}")
         return None
 
+
 def validate_model(model, X_test, y_test):
     """
     Validate the model on the test data and log the accuracy.
@@ -36,9 +40,9 @@ def validate_model(model, X_test, y_test):
     try:
         predictions = model.predict(X_test)
         accuracy = np.mean(predictions == y_test)
-        precision = precision_score(y_test, predictions, average='binary')
-        recall = recall_score(y_test, predictions, average='binary')
-        f1 = f1_score(y_test, predictions, average='binary')
+        precision = precision_score(y_test, predictions, average="binary")
+        recall = recall_score(y_test, predictions, average="binary")
+        f1 = f1_score(y_test, predictions, average="binary")
 
         logging.info(f"Model accuracy on test data: {accuracy}")
         logging.info(f"Model precision on test data: {precision}")
@@ -46,6 +50,7 @@ def validate_model(model, X_test, y_test):
         logging.info(f"Model F1-score on test data: {f1}")
     except Exception as e:
         logging.error(f"Failed to validate model: {e}")
+
 
 def main():
     model_path = "/home/ubuntu/VishwamAI/models/jarvis_model.pkl"
@@ -57,6 +62,7 @@ def main():
         y_test = np.random.randint(0, 2, 10)  # 10 binary labels
 
         validate_model(model, X_test, y_test)
+
 
 if __name__ == "__main__":
     main()

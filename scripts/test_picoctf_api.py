@@ -1,6 +1,7 @@
 import logging
 from .picoctf_api import PicoCTFAPI
 
+
 def test_picoctf_api():
     # Initialize PicoCTFAPI
     base_url = "https://play.picoctf.org"
@@ -24,7 +25,7 @@ def test_picoctf_api():
 
     # Test get challenge
     if challenges:
-        challenge_id = challenges[0]['id']
+        challenge_id = challenges[0]["id"]
         challenge = picoctf_api.get_challenge(challenge_id)
         if challenge:
             logging.info(f"Retrieved challenge {challenge_id}.")
@@ -33,7 +34,7 @@ def test_picoctf_api():
 
     # Test build challenge
     if challenges:
-        challenge_id = challenges[0]['id']
+        challenge_id = challenges[0]["id"]
         build = picoctf_api.build_challenge(challenge_id)
         if build:
             logging.info(f"Built challenge {challenge_id}.")
@@ -42,7 +43,7 @@ def test_picoctf_api():
 
     # Test get build
     if build:
-        build_id = build['id']
+        build_id = build["id"]
         build_metadata = picoctf_api.get_build(build_id)
         if build_metadata:
             logging.info(f"Retrieved build {build_id}.")
@@ -51,7 +52,7 @@ def test_picoctf_api():
 
     # Test start instance
     if build:
-        build_id = build['id']
+        build_id = build["id"]
         instance = picoctf_api.start_instance(build_id)
         if instance:
             logging.info(f"Started instance for build {build_id}.")
@@ -60,7 +61,7 @@ def test_picoctf_api():
 
     # Test get instance
     if instance:
-        instance_id = instance['id']
+        instance_id = instance["id"]
         instance_metadata = picoctf_api.get_instance(instance_id)
         if instance_metadata:
             logging.info(f"Retrieved instance {instance_id}.")
@@ -69,12 +70,13 @@ def test_picoctf_api():
 
     # Test run solver
     if instance:
-        instance_id = instance['id']
+        instance_id = instance["id"]
         solver_result = picoctf_api.run_solver(instance_id)
         if solver_result:
             logging.info(f"Ran solver for instance {instance_id}.")
         else:
             logging.error(f"Failed to run solver for instance {instance_id}.")
+
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)

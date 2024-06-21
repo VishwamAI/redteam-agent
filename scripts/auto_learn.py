@@ -8,7 +8,10 @@ import os
 import requests
 
 # Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(
+    level=logging.INFO, format="%(asctime)s - %(levelname)s - %(message)s"
+)
+
 
 def initialize_components():
     """
@@ -20,6 +23,7 @@ def initialize_components():
     cmgr = CMGRInterface()
     vectorizer = TfidfVectorizer()
     return cmgr, vectorizer
+
 
 def list_challenges(cmgr):
     """
@@ -36,6 +40,7 @@ def list_challenges(cmgr):
         logging.info("No challenges available.")
     return challenges
 
+
 def process_challenge(cmgr, challenge):
     """
     Process a single challenge to extract features and labels.
@@ -47,18 +52,20 @@ def process_challenge(cmgr, challenge):
     Returns:
         tuple: Extracted text features and labels.
     """
-    challenge_id = challenge['id']
+    challenge_id = challenge["id"]
     logging.info(f"Processing challenge: {challenge_id}")
 
     try:
         # Extract details directly from the challenge dictionary
-        name = challenge.get('name', '').strip()
-        description = challenge.get('description', '').strip()
-        hint = challenge.get('hint', '').strip()
-        category = challenge.get('category', '').strip()
+        name = challenge.get("name", "").strip()
+        description = challenge.get("description", "").strip()
+        hint = challenge.get("hint", "").strip()
+        category = challenge.get("category", "").strip()
 
         # Ensure all fields are included and properly concatenated
-        text_features = f"{name} {description} {hint} {category}".replace("  ", " ").strip()
+        text_features = f"{name} {description} {hint} {category}".replace(
+            "  ", " "
+        ).strip()
         labels = np.array([1])  # Simulated labels
 
         return text_features, labels
@@ -67,7 +74,9 @@ def process_challenge(cmgr, challenge):
         logging.error(f"KeyError: Missing key {e} in challenge {challenge_id}")
         return None, None
     except Exception as e:
-        logging.error(f"An unexpected error occurred while processing challenge {challenge_id}: {e}")
+        logging.error(
+            f"An unexpected error occurred while processing challenge {challenge_id}: {e}"
+        )
         return None, None
 
 
@@ -82,11 +91,12 @@ def download_challenge_file(url, file_path):
     try:
         response = requests.get(url)
         response.raise_for_status()
-        with open(file_path, 'wb') as file:
+        with open(file_path, "wb") as file:
             file.write(response.content)
         logging.info(f"Downloaded challenge file from {url}")
     except requests.RequestException as e:
         logging.error(f"Failed to download challenge file from {url}: {e}")
+
 
 def extract_flag(file_path):
     """
@@ -99,13 +109,14 @@ def extract_flag(file_path):
         str: The extracted flag.
     """
     try:
-        with open(file_path, 'r') as file:
+        with open(file_path, "r") as file:
             flag = file.read().strip()
         logging.info(f"Extracted flag: {flag}")
         return flag
     except Exception as e:
         logging.error(f"Failed to extract flag from {file_path}: {e}")
         return None
+
 
 def submit_flag(flag):
     """
@@ -115,12 +126,8 @@ def submit_flag(flag):
         flag (str): The extracted flag.
     """
     submission_url = "https://play.picoctf.org/api/v1/challenges/submit"
-    payload = {
-        "flag": flag
-    }
-    headers = {
-        "Content-Type": "application/json"
-    }
+    payload = {"flag": flag}
+    headers = {"Content-Type": "application/json"}
 
     try:
         response = requests.post(submission_url, json=payload, headers=headers)
@@ -128,6 +135,7 @@ def submit_flag(flag):
         logging.info(f"Successfully submitted flag: {flag}")
     except requests.RequestException as e:
         logging.error(f"Failed to submit flag: {e}")
+
 
 def fit_vectorizer(vectorizer, all_text_features):
     """
@@ -142,6 +150,7 @@ def fit_vectorizer(vectorizer, all_text_features):
     """
     return vectorizer.fit_transform(all_text_features)
 
+
 def combine_features(text_vectors, challenges):
     """
     Combine text vectors with numerical features.
@@ -155,11 +164,12 @@ def combine_features(text_vectors, challenges):
     """
     all_features = []
     for i, challenge in enumerate(challenges):
-        points = challenge.get('points', 0)
+        points = challenge.get("points", 0)
         text_vector = text_vectors[i]
         features = np.hstack((text_vector, np.array([points])))
         all_features.append(features)
     return np.vstack(all_features)
+
 
 def update_knowledge_base(cmgr, vectorizer, learning_module, challenges):
     """
@@ -185,14 +195,22 @@ def update_knowledge_base(cmgr, vectorizer, learning_module, challenges):
     all_labels = np.hstack(all_labels)
 
     if all_features.shape[0] > 1:
-        X_train, X_test, y_train, y_test = train_test_split(all_features, all_labels, test_size=0.2)
+        X_train, X_test, y_train, y_test = train_test_split(
+            all_features, all_labels, test_size=0.2
+        )
     else:
-        X_train, X_test, y_train, y_test = all_features, all_features, all_labels, all_labels
+        X_train, X_test, y_train, y_test = (
+            all_features,
+            all_features,
+            all_labels,
+            all_labels,
+        )
 
     learning_module.train(X_train, y_train)
     learning_module.save_model("/home/ubuntu/VishwamAI/models/jarvis_model.pkl")
     predictions = learning_module.predict(X_test)
     logging.info(f"Predictions: {predictions}")
+
 
 def main():
     cmgr, vectorizer = initialize_components()
@@ -201,14 +219,19 @@ def main():
     while True:
         # Load test dataset from JSON file
         import json
-        with open('/home/ubuntu/VishwamAI/data/picoctf_challenges_test.json', 'r') as file:
+
+        with open(
+            "/home/ubuntu/VishwamAI/data/picoctf_challenges_test.json", "r"
+        ) as file:
             challenges = json.load(file)
 
         if challenges:
             update_knowledge_base(cmgr, vectorizer, learning_module, challenges)
 
         # Example usage of the new functions
-        challenge_url = "https://mercury.picoctf.net/static/a5683698ac318b47bd060cb786859f23/flag"
+        challenge_url = (
+            "https://mercury.picoctf.net/static/a5683698ac318b47bd060cb786859f23/flag"
+        )
         file_path = "/home/ubuntu/VishwamAI/flag"
         download_challenge_file(challenge_url, file_path)
         flag = extract_flag(file_path)
@@ -217,7 +240,9 @@ def main():
 
         # Sleep for a specified interval before checking for new challenges
         import time
+
         time.sleep(3600)  # Sleep for 1 hour
+
 
 if __name__ == "__main__":
     main()

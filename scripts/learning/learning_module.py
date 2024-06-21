@@ -4,6 +4,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 import joblib
 
+
 class LearningModule:
     def __init__(self):
         self.model = RandomForestClassifier()
@@ -12,14 +13,18 @@ class LearningModule:
         """
         Train the model using the provided features and labels.
         """
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+        X_train, X_test, y_train, y_test = train_test_split(
+            X, y, test_size=0.2, random_state=42
+        )
         self.model.fit(X_train, y_train)
         predictions = self.model.predict(X_test)
         accuracy = accuracy_score(y_test, predictions)
-        precision = precision_score(y_test, predictions, average='weighted')
-        recall = recall_score(y_test, predictions, average='weighted')
-        f1 = f1_score(y_test, predictions, average='weighted')
-        print(f"Training completed. Model accuracy: {accuracy}, Precision: {precision}, Recall: {recall}, F1 Score: {f1}")
+        precision = precision_score(y_test, predictions, average="weighted")
+        recall = recall_score(y_test, predictions, average="weighted")
+        f1 = f1_score(y_test, predictions, average="weighted")
+        print(
+            f"Training completed. Model accuracy: {accuracy}, Precision: {precision}, Recall: {recall}, F1 Score: {f1}"
+        )
 
     def predict(self, X):
         """
@@ -58,10 +63,13 @@ class LearningModule:
         self.model.fit(X, y)
         print("Incremental training completed.")
 
+
 if __name__ == "__main__":
     # Example usage
     raw_data = np.random.rand(100, 11)  # Example raw data with 10 features and 1 label
-    raw_data[:, -1] = np.random.randint(0, 2, size=raw_data.shape[0])  # Generate discrete labels (0 or 1)
+    raw_data[:, -1] = np.random.randint(
+        0, 2, size=raw_data.shape[0]
+    )  # Generate discrete labels (0 or 1)
     learning_module = LearningModule()
     X, y = learning_module.preprocess_data(raw_data)
     learning_module.train(X, y)
@@ -72,5 +80,7 @@ if __name__ == "__main__":
 
     # Example incremental training
     new_data = np.random.rand(20, 11)  # Example new data
-    new_data[:, -1] = np.random.randint(0, 2, size=new_data.shape[0])  # Generate discrete labels (0 or 1)
+    new_data[:, -1] = np.random.randint(
+        0, 2, size=new_data.shape[0]
+    )  # Generate discrete labels (0 or 1)
     learning_module.incremental_train(new_data)

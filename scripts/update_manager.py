@@ -3,11 +3,14 @@ import subprocess
 import time
 import requests
 
+
 class UpdateManager:
     def __init__(self):
         self.update_check_interval = 3600  # Check for updates every hour
         self.running = True
-        self.current_version = self.get_current_version()  # Get current version from config file
+        self.current_version = (
+            self.get_current_version()
+        )  # Get current version from config file
 
     def get_current_version(self):
         try:
@@ -35,7 +38,9 @@ class UpdateManager:
         logging.info("Applying updates...")
         try:
             subprocess.run(["git", "pull"], check=True)
-            subprocess.run(["./venv/bin/pip", "install", "-r", "requirements.txt"], check=True)
+            subprocess.run(
+                ["./venv/bin/pip", "install", "-r", "requirements.txt"], check=True
+            )
             logging.info("Updates applied successfully.")
             self.update_version_config()  # Update the version in the config file
         except subprocess.CalledProcessError as e:
@@ -58,6 +63,7 @@ class UpdateManager:
                     break
                 time.sleep(1)
         logging.info("UpdateManager has stopped running.")
+
 
 if __name__ == "__main__":
     update_manager = UpdateManager()
