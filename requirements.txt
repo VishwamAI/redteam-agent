@@ -57,7 +57,6 @@ gym==0.23.0
 gym-notices==0.0.8
 h11==0.14.0
 h5py==3.11.0
-hibagent==1.0.1
 httplib2==0.20.2
 huggingface-hub==0.23.4
 hyperlink==21.0.0
