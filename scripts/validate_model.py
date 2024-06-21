@@ -1,6 +1,7 @@
 import joblib
 import logging
 import numpy as np
+from sklearn.metrics import precision_score, recall_score, f1_score
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -35,7 +36,14 @@ def validate_model(model, X_test, y_test):
     try:
         predictions = model.predict(X_test)
         accuracy = np.mean(predictions == y_test)
+        precision = precision_score(y_test, predictions, average='binary')
+        recall = recall_score(y_test, predictions, average='binary')
+        f1 = f1_score(y_test, predictions, average='binary')
+
         logging.info(f"Model accuracy on test data: {accuracy}")
+        logging.info(f"Model precision on test data: {precision}")
+        logging.info(f"Model recall on test data: {recall}")
+        logging.info(f"Model F1-score on test data: {f1}")
     except Exception as e:
         logging.error(f"Failed to validate model: {e}")
 
