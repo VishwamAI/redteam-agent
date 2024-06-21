@@ -13,7 +13,7 @@ class JarvisModel:
         self.model = RandomForestClassifier()
         self.preprocessor = None
 
-    def preprocess_data(self, raw_data):
+    def preprocess_data(self, raw_data, fit_preprocessor=False):
         # Placeholder for data preprocessing logic
         # For now, assume raw_data is a numpy array with features and labels
         features = raw_data[:, :-1]
@@ -46,8 +46,9 @@ class JarvisModel:
             ]
         )
 
-        # Fit the preprocessor on the training data
-        self.preprocessor.fit(features)
+        # Fit the preprocessor on the training data if specified
+        if fit_preprocessor:
+            self.preprocessor.fit(features)
 
         # Transform the features using the preprocessor
         features_preprocessed = self.preprocessor.transform(features)
@@ -80,7 +81,7 @@ if __name__ == "__main__":
     # Example usage
     jarvis = JarvisModel()
     raw_data = np.random.rand(100, 11)  # Example data
-    features, labels = jarvis.preprocess_data(raw_data)
+    features, labels = jarvis.preprocess_data(raw_data, fit_preprocessor=True)
     jarvis.train(features, labels)
     predictions = jarvis.predict(raw_data)
     print(f"Predictions: {predictions}")
