@@ -5,6 +5,7 @@ import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
 import os
+import requests
 
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -77,6 +78,53 @@ def process_challenge(cmgr, challenge):
         logging.error(f"An unexpected error occurred while processing challenge {challenge_id}: {e}")
         return None, None
 
+def download_challenge_file(url, file_path):
+    """
+    Download the challenge file from the given URL.
+
+    Args:
+        url (str): The URL of the challenge file.
+        file_path (str): The path to save the downloaded file.
+    """
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+        with open(file_path, 'wb') as file:
+            file.write(response.content)
+        logging.info(f"Downloaded challenge file from {url}")
+    except requests.RequestException as e:
+        logging.error(f"Failed to download challenge file from {url}: {e}")
+
+def extract_flag(file_path):
+    """
+    Extract the flag from the downloaded challenge file.
+
+    Args:
+        file_path (str): The path of the downloaded file.
+
+    Returns:
+        str: The extracted flag.
+    """
+    try:
+        with open(file_path, 'r') as file:
+            flag = file.read().strip()
+        logging.info(f"Extracted flag: {flag}")
+        return flag
+    except Exception as e:
+        logging.error(f"Failed to extract flag from {file_path}: {e}")
+        return None
+
+def submit_flag(flag):
+    """
+    Submit the extracted flag to the picoCTF platform.
+
+    Args:
+        flag (str): The extracted flag.
+    """
+    # Placeholder for flag submission logic
+    logging.info(f"Submitting flag: {flag}")
+    # Implement the submission logic here
+
 def fit_vectorizer(vectorizer, all_text_features):
     """
     Fit the TfidfVectorizer on all collected text features.
@@ -110,7 +158,7 @@ def combine_features(text_vectors, challenges):
     return np.vstack(all_features)
 
 def main():
-    cmgr, learning_module, vectorizer = initialize_components()
+    cmgr, vectorizer = initialize_components()
     challenges = list_challenges(cmgr)
     if not challenges:
         return
@@ -133,6 +181,7 @@ def main():
     else:
         X_train, X_test, y_train, y_test = all_features, all_features, all_labels, all_labels
 
+    learning_module = LearningModule()
     learning_module.train(X_train, y_train)
 
     model_path = "/home/ubuntu/VishwamAI/models/jarvis_model.pkl"
@@ -141,6 +190,14 @@ def main():
 
     predictions = learning_module.predict(X_test)
     logging.info(f"Predictions: {predictions}")
+
+    # Example usage of the new functions
+    challenge_url = "https://mercury.picoctf.net/static/a5683698ac318b47bd060cb786859f23/flag"
+    file_path = "/home/ubuntu/VishwamAI/flag"
+    download_challenge_file(challenge_url, file_path)
+    flag = extract_flag(file_path)
+    if flag:
+        submit_flag(flag)
 
 if __name__ == "__main__":
     main()
