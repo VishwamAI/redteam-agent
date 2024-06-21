@@ -30,7 +30,6 @@ cymem==2.0.8
 dbus-python==1.2.18
 decorator==5.1.1
 distro==1.7.0
-distro-info==1.1+ubuntu0.1
 dm-tree==0.1.8
 docker==5.0.3
 docker-compose==1.29.2
