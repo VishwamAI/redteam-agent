@@ -37,17 +37,10 @@ class JarvisModel:
         features = raw_data[:, :-1]
         labels = raw_data[:, -1]
 
-        # Identify numerical and categorical columns
-        numerical_features = [i for i in range(features.shape[1]) if np.issubdtype(features[:, i].dtype, np.number)]
-        categorical_features = [i for i in range(features.shape[1]) if not np.issubdtype(features[:, i].dtype, np.number)]
-
         # Convert categorical features to string type to ensure compatibility with OneHotEncoder
-        for i in categorical_features:
-            features[:, i] = features[:, i].astype(str)
-
-        # Update the column transformer with the correct feature indices
-        self.preprocessor.transformers[0] = ('num', self.preprocessor.transformers[0][1], numerical_features)
-        self.preprocessor.transformers[1] = ('cat', self.preprocessor.transformers[1][1], categorical_features)
+        for i in range(features.shape[1]):
+            if not np.issubdtype(features[:, i].dtype, np.number):
+                features[:, i] = features[:, i].astype(str)
 
         # Fit the preprocessor on the training data if specified
         if fit_preprocessor:
