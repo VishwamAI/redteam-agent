@@ -53,10 +53,11 @@ def process_challenge(cmgr, challenge):
     try:
         # Extract details directly from the challenge dictionary
         name = challenge.get('name', '')
-        points = challenge.get('points', 0)
+        description = challenge.get('description', '')
+        hint = challenge.get('hint', '')
         category = challenge.get('category', '')
 
-        text_features = f"{name} {category}"
+        text_features = f"{name} {description} {hint} {category}"
         labels = np.array([1])  # Simulated labels
 
         return text_features, labels
@@ -67,6 +68,7 @@ def process_challenge(cmgr, challenge):
     except Exception as e:
         logging.error(f"An unexpected error occurred while processing challenge {challenge_id}: {e}")
         return None, None
+
 
 def download_challenge_file(url, file_path):
     """
