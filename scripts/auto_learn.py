@@ -52,12 +52,12 @@ def process_challenge(cmgr, challenge):
 
     try:
         # Extract details directly from the challenge dictionary
-        name = challenge.get('name', '')
-        description = challenge.get('description', '')
-        hint = challenge.get('hint', '')
-        category = challenge.get('category', '')
+        name = challenge.get('name', '').strip()
+        description = challenge.get('description', '').strip()
+        hint = challenge.get('hint', '').strip()
+        category = challenge.get('category', '').strip()
 
-        text_features = f"{name} {description} {hint} {category}"
+        text_features = f"{name} {description} {hint} {category}".strip()
         labels = np.array([1])  # Simulated labels
 
         return text_features, labels
