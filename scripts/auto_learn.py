@@ -121,9 +121,20 @@ def submit_flag(flag):
     Args:
         flag (str): The extracted flag.
     """
-    # Placeholder for flag submission logic
-    logging.info(f"Submitting flag: {flag}")
-    # Implement the submission logic here
+    submission_url = "https://play.picoctf.org/api/v1/challenges/submit"
+    payload = {
+        "flag": flag
+    }
+    headers = {
+        "Content-Type": "application/json"
+    }
+
+    try:
+        response = requests.post(submission_url, json=payload, headers=headers)
+        response.raise_for_status()
+        logging.info(f"Successfully submitted flag: {flag}")
+    except requests.RequestException as e:
+        logging.error(f"Failed to submit flag: {e}")
 
 def fit_vectorizer(vectorizer, all_text_features):
     """
