@@ -26,8 +26,8 @@ class JarvisModel:
         # Create a column transformer to apply the preprocessing steps to the appropriate columns
         self.preprocessor = ColumnTransformer(
             transformers=[
-                ('num', numerical_transformer, [0, 2]),  # Assuming numerical features are at indices 0 and 2
-                ('cat', categorical_transformer, [1])   # Assuming categorical feature is at index 1
+                ('num', numerical_transformer, [0, 1, 2, 3]),  # Updated to include all numerical features
+                ('cat', categorical_transformer, [4])         # Assuming categorical feature is at index 4
             ]
         )
 
@@ -42,12 +42,20 @@ class JarvisModel:
             if not np.issubdtype(features[:, i].dtype, np.number):
                 features[:, i] = features[:, i].astype(str)
 
+        # Debug statements to print the shapes and types of the features
+        print("Features shape before preprocessing:", features.shape)
+        print("Features types before preprocessing:", [type(x) for x in features[0]])
+
         # Fit the preprocessor on the training data if specified
         if fit_preprocessor:
             self.preprocessor.fit(features)
 
         # Transform the features using the preprocessor
         features_preprocessed = self.preprocessor.transform(features)
+
+        # Debug statement to print the shape of the preprocessed features
+        print("Features shape after preprocessing:", features_preprocessed.shape)
+        print("Preprocessed features:", features_preprocessed)
 
         return features_preprocessed, labels
 
@@ -76,7 +84,7 @@ class JarvisModel:
 if __name__ == "__main__":
     # Example usage
     jarvis = JarvisModel()
-    raw_data = np.random.rand(100, 11)  # Example data
+    raw_data = np.random.rand(100, 4)  # Example data with 4 features
     features, labels = jarvis.preprocess_data(raw_data, fit_preprocessor=True)
     jarvis.train(features, labels)
     predictions = jarvis.predict(raw_data)
