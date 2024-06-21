@@ -77,7 +77,7 @@ Contributions are welcome! Please follow the standard GitHub workflow:
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
 
 ## Contact
-For any questions or inquiries, please contact the project maintainer at [email@example.com](mailto:email@example.com).
+For any questions or inquiries, please contact the project maintainer at [email@example.com](mailto:kasinadhsarma@gmail.com).
 
 ## Additional Information
 - **Learning and Auto-Upgrade**: The agent is designed to learn and auto-upgrade using training rooms on the picoCTF platform. It stores its learning data for continuous improvement.
