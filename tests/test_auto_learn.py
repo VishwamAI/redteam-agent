@@ -7,7 +7,7 @@ from unittest.mock import MagicMock
 # Add the parent directory to the Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from scripts.auto_learn import initialize_components, list_challenges, process_challenge, fit_vectorizer, combine_features
+from auto_learn import initialize_components, list_challenges, process_challenge, fit_vectorizer, combine_features
 
 class TestAutoLearn(unittest.TestCase):
     def setUp(self):
