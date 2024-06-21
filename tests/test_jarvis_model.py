@@ -54,8 +54,16 @@ class TestJarvisModel(unittest.TestCase):
         labels = labels.astype(int)  # Ensure labels are of integer type for classification
         self.jarvis.train(features, labels)
 
+        # Create a new dataset for prediction to ensure feature count consistency
+        raw_data_predict = np.array([
+            [1.0, 'A', 3.0, 0],
+            [2.0, 'B', np.nan, 1],
+            [np.nan, 'A', 5.0, 0],
+            [4.0, 'C', 6.0, 1]
+        ], dtype=object)
+
         # Preprocess the features for prediction
-        features_preprocessed = self.jarvis.preprocess_data(raw_data, fit_preprocessor=False)[0]
+        features_preprocessed = self.jarvis.preprocess_data(raw_data_predict, fit_preprocessor=False)[0]
 
         # Make predictions on the preprocessed features
         predictions = self.jarvis.predict(features_preprocessed)
