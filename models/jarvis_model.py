@@ -11,21 +11,6 @@ import joblib
 class JarvisModel:
     def __init__(self):
         self.model = RandomForestClassifier()
-        self.preprocessor = None
-
-    def preprocess_data(self, raw_data, fit_preprocessor=False):
-        # Placeholder for data preprocessing logic
-        # For now, assume raw_data is a numpy array with features and labels
-        features = raw_data[:, :-1]
-        labels = raw_data[:, -1]
-
-        # Identify numerical and categorical columns
-        numerical_features = [i for i in range(features.shape[1]) if np.issubdtype(features[:, i].dtype, np.number)]
-        categorical_features = [i for i in range(features.shape[1]) if not np.issubdtype(features[:, i].dtype, np.number)]
-
-        # Convert categorical features to string type to ensure compatibility with OneHotEncoder
-        for i in categorical_features:
-            features[:, i] = features[:, i].astype(str)
 
         # Define preprocessing steps for numerical and categorical data
         numerical_transformer = Pipeline(steps=[
@@ -41,10 +26,28 @@ class JarvisModel:
         # Create a column transformer to apply the preprocessing steps to the appropriate columns
         self.preprocessor = ColumnTransformer(
             transformers=[
-                ('num', numerical_transformer, numerical_features),
-                ('cat', categorical_transformer, categorical_features)
+                ('num', numerical_transformer, []),
+                ('cat', categorical_transformer, [])
             ]
         )
+
+    def preprocess_data(self, raw_data, fit_preprocessor=False):
+        # Placeholder for data preprocessing logic
+        # For now, assume raw_data is a numpy array with features and labels
+        features = raw_data[:, :-1]
+        labels = raw_data[:, -1]
+
+        # Identify numerical and categorical columns
+        numerical_features = [i for i in range(features.shape[1]) if np.issubdtype(features[:, i].dtype, np.number)]
+        categorical_features = [i for i in range(features.shape[1]) if not np.issubdtype(features[:, i].dtype, np.number)]
+
+        # Convert categorical features to string type to ensure compatibility with OneHotEncoder
+        for i in categorical_features:
+            features[:, i] = features[:, i].astype(str)
+
+        # Update the column transformer with the correct feature indices
+        self.preprocessor.transformers[0] = ('num', self.preprocessor.transformers[0][1], numerical_features)
+        self.preprocessor.transformers[1] = ('cat', self.preprocessor.transformers[1][1], categorical_features)
 
         # Fit the preprocessor on the training data if specified
         if fit_preprocessor:
