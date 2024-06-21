@@ -1,4 +1,0 @@
-{
-  "flag_format": "flag{.*}",
-  "seeds": [12345]
-}
