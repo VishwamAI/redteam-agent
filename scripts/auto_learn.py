@@ -1,5 +1,5 @@
 import logging
-from cmgr_interface import CMGRInterface
+from .cmgr_interface import CMGRInterface
 from learning.learning_module import LearningModule
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
