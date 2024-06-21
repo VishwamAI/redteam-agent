@@ -55,7 +55,7 @@ class TestJarvisModel(unittest.TestCase):
         self.jarvis.train(features, labels)
 
         # Preprocess the features for prediction
-        features_preprocessed = self.jarvis.preprocess_data(raw_data)[0]
+        features_preprocessed = self.jarvis.preprocess_data(raw_data, fit_preprocessor=False)[0]
 
         # Make predictions on the preprocessed features
         predictions = self.jarvis.predict(features_preprocessed)
