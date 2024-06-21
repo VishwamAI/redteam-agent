@@ -16,10 +16,10 @@ class TestJarvisModel(unittest.TestCase):
     def test_preprocess_data(self):
         # Create a test dataset with numerical and categorical features, including missing values
         raw_data = np.array([
-            [1.0, 'A', 3.0],
-            [2.0, 'B', np.nan],
-            [np.nan, 'A', 5.0],
-            [4.0, 'C', 6.0]
+            [1.0, 'A', 3.0, 0],
+            [2.0, 'B', np.nan, 1],
+            [np.nan, 'A', 5.0, 0],
+            [4.0, 'C', 6.0, 1]
         ], dtype=object)
         features, labels = self.jarvis.preprocess_data(raw_data, fit_preprocessor=True)
 
