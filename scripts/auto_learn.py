@@ -51,28 +51,18 @@ def process_challenge(cmgr, challenge):
     logging.info(f"Processing challenge: {challenge_id}")
 
     try:
-        challenge_details = cmgr.get_challenge(challenge_id)
-        if not challenge_details:
-            logging.warning(f"Failed to retrieve challenge details for {challenge_id}")
-            return None, None
+        # Extract details directly from the challenge dictionary
+        name = challenge.get('name', '')
+        points = challenge.get('points', 0)
+        category = challenge.get('category', '')
 
-        logging.info(f"Challenge details for {challenge_id}: {challenge_details}")
-
-        description = challenge_details.get('description', '')
-        hints = ' '.join(challenge_details.get('hints', []))
-        points = challenge_details.get('points', 0)
-        category = challenge_details.get('category', '')
-
-        text_features = f"{description} {hints} {category}"
-        labels = np.array([1])  # Replace with actual labels if available
+        text_features = f"{name} {category}"
+        labels = np.array([1])  # Simulated labels
 
         return text_features, labels
 
     except KeyError as e:
         logging.error(f"KeyError: Missing key {e} in challenge {challenge_id}")
-        return None, None
-    except ConnectionError as e:
-        logging.error(f"ConnectionError: Failed to connect to CMGR server for challenge {challenge_id}: {e}")
         return None, None
     except Exception as e:
         logging.error(f"An unexpected error occurred while processing challenge {challenge_id}: {e}")
@@ -170,7 +160,12 @@ def combine_features(text_vectors, challenges):
 
 def main():
     cmgr, vectorizer = initialize_components()
-    challenges = list_challenges(cmgr)
+
+    # Load test dataset from JSON file
+    import json
+    with open('/home/ubuntu/VishwamAI/data/picoctf_challenges_test.json', 'r') as file:
+        challenges = json.load(file)
+
     if not challenges:
         return
 
