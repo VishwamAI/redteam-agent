@@ -68,8 +68,14 @@ def process_challenge(cmgr, challenge):
 
         return text_features, labels
 
+    except KeyError as e:
+        logging.error(f"KeyError: Missing key {e} in challenge {challenge_id}")
+        return None, None
+    except ConnectionError as e:
+        logging.error(f"ConnectionError: Failed to connect to CMGR server for challenge {challenge_id}: {e}")
+        return None, None
     except Exception as e:
-        logging.error(f"An error occurred while processing challenge {challenge_id}: {e}")
+        logging.error(f"An unexpected error occurred while processing challenge {challenge_id}: {e}")
         return None, None
 
 def fit_vectorizer(vectorizer, all_text_features):
