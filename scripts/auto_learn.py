@@ -11,15 +11,14 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 
 def initialize_components():
     """
-    Initialize the CMGRInterface, LearningModule, and TfidfVectorizer.
+    Initialize the CMGRInterface and TfidfVectorizer.
 
     Returns:
-        tuple: Initialized CMGRInterface, LearningModule, and TfidfVectorizer.
+        tuple: Initialized CMGRInterface and TfidfVectorizer.
     """
     cmgr = CMGRInterface()
-    learning_module = LearningModule()
     vectorizer = TfidfVectorizer()
-    return cmgr, learning_module, vectorizer
+    return cmgr, vectorizer
 
 def list_challenges(cmgr):
     """
