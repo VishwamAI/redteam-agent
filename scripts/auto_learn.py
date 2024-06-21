@@ -161,17 +161,16 @@ def combine_features(text_vectors, challenges):
         all_features.append(features)
     return np.vstack(all_features)
 
-def main():
-    cmgr, vectorizer = initialize_components()
+def update_knowledge_base(cmgr, vectorizer, learning_module, challenges):
+    """
+    Update the knowledge base with new data and retrain the model.
 
-    # Load test dataset from JSON file
-    import json
-    with open('/home/ubuntu/VishwamAI/data/picoctf_challenges_test.json', 'r') as file:
-        challenges = json.load(file)
-
-    if not challenges:
-        return
-
+    Args:
+        cmgr (CMGRInterface): The CMGRInterface instance.
+        vectorizer (TfidfVectorizer): The TfidfVectorizer instance.
+        learning_module (LearningModule): The LearningModule instance.
+        challenges (list): List of new challenges.
+    """
     all_text_features = []
     all_labels = []
 
@@ -190,23 +189,35 @@ def main():
     else:
         X_train, X_test, y_train, y_test = all_features, all_features, all_labels, all_labels
 
-    learning_module = LearningModule()
     learning_module.train(X_train, y_train)
-
-    model_path = "/home/ubuntu/VishwamAI/models/jarvis_model.pkl"
-    os.makedirs(os.path.dirname(model_path), exist_ok=True)
-    learning_module.save_model(model_path)
-
+    learning_module.save_model("/home/ubuntu/VishwamAI/models/jarvis_model.pkl")
     predictions = learning_module.predict(X_test)
     logging.info(f"Predictions: {predictions}")
 
-    # Example usage of the new functions
-    challenge_url = "https://mercury.picoctf.net/static/a5683698ac318b47bd060cb786859f23/flag"
-    file_path = "/home/ubuntu/VishwamAI/flag"
-    download_challenge_file(challenge_url, file_path)
-    flag = extract_flag(file_path)
-    if flag:
-        submit_flag(flag)
+def main():
+    cmgr, vectorizer = initialize_components()
+    learning_module = LearningModule()
+
+    while True:
+        # Load test dataset from JSON file
+        import json
+        with open('/home/ubuntu/VishwamAI/data/picoctf_challenges_test.json', 'r') as file:
+            challenges = json.load(file)
+
+        if challenges:
+            update_knowledge_base(cmgr, vectorizer, learning_module, challenges)
+
+        # Example usage of the new functions
+        challenge_url = "https://mercury.picoctf.net/static/a5683698ac318b47bd060cb786859f23/flag"
+        file_path = "/home/ubuntu/VishwamAI/flag"
+        download_challenge_file(challenge_url, file_path)
+        flag = extract_flag(file_path)
+        if flag:
+            submit_flag(flag)
+
+        # Sleep for a specified interval before checking for new challenges
+        import time
+        time.sleep(3600)  # Sleep for 1 hour
 
 if __name__ == "__main__":
     main()

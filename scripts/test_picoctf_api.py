@@ -1,5 +1,5 @@
 import logging
-from picoctf_api import PicoCTFAPI
+from .picoctf_api import PicoCTFAPI
 
 def test_picoctf_api():
     # Initialize PicoCTFAPI

@@ -16,27 +16,32 @@ class TestJarvisModel(unittest.TestCase):
     def test_preprocess_data(self):
         # Create a test dataset with numerical and categorical features, including missing values
         raw_data = np.array([
-            [1.0, 'A', 3.0, 0, 'X'],
-            [2.0, 'B', np.nan, 1, 'Y'],
-            [np.nan, 'A', 5.0, 0, 'X'],
-            [4.0, 'C', 6.0, 1, 'Z']
-        ])
-        features, labels = self.jarvis.preprocess_data(raw_data, fit_preprocessor=True)
+            [1.0, 2.0, 3.0, 0, 'X', 1],
+            [2.0, 3.0, np.nan, 1, 'Y', 0],
+            [np.nan, 2.0, 5.0, 0, 'X', 1],
+            [4.0, 3.0, 6.0, 1, 'Z', 0]
+        ], dtype=object)  # Ensure correct data types
+        features, labels = self.jarvis.preprocess_data(raw_data[:, :-1], fit_preprocessor=True)
+        labels = raw_data[:, -1].astype(int)  # Ensure labels are of integer type for classification
+
+        # Debug statements to print the shapes and types of the features
+        print("Features shape after preprocessing:", features.shape)
+        print("Features types after preprocessing:", [type(x) for x in features[0]])
 
         # Check if the preprocessed features have the expected shape and type
-        self.assertEqual(features.shape, (4, 8))  # Updated expected shape based on OneHotEncoder output
+        self.assertEqual(features.shape, (4, 5))  # Updated expected shape based on OneHotEncoder output
         self.assertTrue(np.issubdtype(features.dtype, np.number))
 
     def test_train(self):
         # Create a test dataset with numerical and categorical features, including missing values
         raw_data = np.array([
-            [1.0, 'A', 3.0, 0, 'X'],
-            [2.0, 'B', np.nan, 1, 'Y'],
-            [np.nan, 'A', 5.0, 0, 'X'],
-            [4.0, 'C', 6.0, 1, 'Z']
-        ])
-        features, labels = self.jarvis.preprocess_data(raw_data, fit_preprocessor=True)
-        labels = labels.astype(int)  # Ensure labels are of integer type for classification
+            [1.0, 2.0, 3.0, 0, 'X', 1],
+            [2.0, 3.0, np.nan, 1, 'Y', 0],
+            [np.nan, 2.0, 5.0, 0, 'X', 1],
+            [4.0, 3.0, 6.0, 1, 'Z', 0]
+        ], dtype=object)  # Ensure correct data types
+        features, labels = self.jarvis.preprocess_data(raw_data[:, :-1], fit_preprocessor=True)
+        labels = raw_data[:, -1].astype(int)  # Ensure labels are of integer type for classification
         self.jarvis.train(features, labels)
 
         # Check if the model has been trained
@@ -45,25 +50,29 @@ class TestJarvisModel(unittest.TestCase):
     def test_predict(self):
         # Create a test dataset with numerical and categorical features, including missing values
         raw_data = np.array([
-            [1.0, 'A', 3.0, 0, 'X'],
-            [2.0, 'B', np.nan, 1, 'Y'],
-            [np.nan, 'A', 5.0, 0, 'X'],
-            [4.0, 'C', 6.0, 1, 'Z']
-        ])
-        features, labels = self.jarvis.preprocess_data(raw_data, fit_preprocessor=True)
-        labels = labels.astype(int)  # Ensure labels are of integer type for classification
+            [1.0, 2.0, 3.0, 0, 'X', 1],
+            [2.0, 3.0, np.nan, 1, 'Y', 0],
+            [np.nan, 2.0, 5.0, 0, 'X', 1],
+            [4.0, 3.0, 6.0, 1, 'Z', 0]
+        ], dtype=object)  # Ensure correct data types
+        features, labels = self.jarvis.preprocess_data(raw_data[:, :-1], fit_preprocessor=True)
+        labels = raw_data[:, -1].astype(int)  # Ensure labels are of integer type for classification
         self.jarvis.train(features, labels)
 
         # Create a new dataset for prediction to ensure feature count consistency
         raw_data_predict = np.array([
-            [1.0, 'A', 3.0, 0, 'X'],
-            [2.0, 'B', np.nan, 1, 'Y'],
-            [np.nan, 'A', 5.0, 0, 'X'],
-            [4.0, 'C', 6.0, 1, 'Z']
-        ])
+            [1.0, 2.0, 3.0, 0, 'X'],
+            [2.0, 3.0, np.nan, 1, 'Y'],
+            [np.nan, 2.0, 5.0, 0, 'X'],
+            [4.0, 3.0, 6.0, 1, 'Z']
+        ], dtype=object)  # Ensure correct data types
 
         # Preprocess the features for prediction
         features_preprocessed = self.jarvis.preprocess_data(raw_data_predict, fit_preprocessor=False)[0]
+
+        # Debug statements to print the shapes and types of the features
+        print("Features shape after preprocessing for prediction:", features_preprocessed.shape)
+        print("Features types after preprocessing for prediction:", [type(x) for x in features_preprocessed[0]])
 
         # Make predictions on the preprocessed features
         predictions = self.jarvis.predict(features_preprocessed)

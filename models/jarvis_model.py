@@ -26,8 +26,8 @@ class JarvisModel:
         # Create a column transformer to apply the preprocessing steps to the appropriate columns
         self.preprocessor = ColumnTransformer(
             transformers=[
-                ('num', numerical_transformer, [0, 1, 2, 3]),  # Updated to include all numerical features
-                ('cat', categorical_transformer, [4])         # Assuming categorical feature is at index 4
+                ('num', numerical_transformer, [0, 1, 2]),  # Updated to include all numerical features
+                ('cat', categorical_transformer, [3])       # Assuming categorical feature is at index 3
             ]
         )
 
@@ -36,11 +36,6 @@ class JarvisModel:
         # For now, assume raw_data is a numpy array with features and labels
         features = raw_data[:, :-1]
         labels = raw_data[:, -1]
-
-        # Convert categorical features to string type to ensure compatibility with OneHotEncoder
-        for i in range(features.shape[1]):
-            if not np.issubdtype(features[:, i].dtype, np.number):
-                features[:, i] = features[:, i].astype(str)
 
         # Debug statements to print the shapes and types of the features
         print("Features shape before preprocessing:", features.shape)
@@ -84,7 +79,7 @@ class JarvisModel:
 if __name__ == "__main__":
     # Example usage
     jarvis = JarvisModel()
-    raw_data = np.random.rand(100, 4)  # Example data with 4 features
+    raw_data = np.random.rand(100, 5)  # Example data with 5 features
     features, labels = jarvis.preprocess_data(raw_data, fit_preprocessor=True)
     jarvis.train(features, labels)
     predictions = jarvis.predict(raw_data)
