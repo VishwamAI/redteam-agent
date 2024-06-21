@@ -57,7 +57,8 @@ def process_challenge(cmgr, challenge):
         hint = challenge.get('hint', '').strip()
         category = challenge.get('category', '').strip()
 
-        text_features = f"{name} {description} {hint} {category}".strip()
+        # Ensure all fields are included and properly concatenated
+        text_features = f"{name} {description} {hint} {category}".replace("  ", " ").strip()
         labels = np.array([1])  # Simulated labels
 
         return text_features, labels
