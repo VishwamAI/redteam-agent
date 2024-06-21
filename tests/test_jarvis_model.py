@@ -21,7 +21,7 @@ class TestJarvisModel(unittest.TestCase):
             [np.nan, 'A', 5.0],
             [4.0, 'C', 6.0]
         ], dtype=object)
-        features, labels = self.jarvis.preprocess_data(raw_data)
+        features, labels = self.jarvis.preprocess_data(raw_data, fit_preprocessor=True)
 
         # Check if the preprocessed features have the expected shape and type
         self.assertEqual(features.shape, (4, 7))  # Updated expected shape based on OneHotEncoder output
@@ -35,7 +35,7 @@ class TestJarvisModel(unittest.TestCase):
             [np.nan, 'A', 5.0, 0],
             [4.0, 'C', 6.0, 1]
         ], dtype=object)
-        features, labels = self.jarvis.preprocess_data(raw_data)
+        features, labels = self.jarvis.preprocess_data(raw_data, fit_preprocessor=True)
         labels = labels.astype(int)  # Ensure labels are of integer type for classification
         self.jarvis.train(features, labels)
 
@@ -50,7 +50,7 @@ class TestJarvisModel(unittest.TestCase):
             [np.nan, 'A', 5.0, 0],
             [4.0, 'C', 6.0, 1]
         ], dtype=object)
-        features, labels = self.jarvis.preprocess_data(raw_data)
+        features, labels = self.jarvis.preprocess_data(raw_data, fit_preprocessor=True)
         labels = labels.astype(int)  # Ensure labels are of integer type for classification
         self.jarvis.train(features, labels)
 
