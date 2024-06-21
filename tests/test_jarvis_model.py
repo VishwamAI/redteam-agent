@@ -24,10 +24,6 @@ class TestJarvisModel(unittest.TestCase):
         features, labels = self.jarvis.preprocess_data(raw_data[:, :-1], fit_preprocessor=True)
         labels = raw_data[:, -1].astype(int)  # Ensure labels are of integer type for classification
 
-        # Debug statements to print the shapes and types of the features
-        print("Features shape after preprocessing:", features.shape)
-        print("Features types after preprocessing:", [type(x) for x in features[0]])
-
         # Check if the preprocessed features have the expected shape and type
         self.assertEqual(features.shape, (4, 5))  # Updated expected shape based on OneHotEncoder output
         self.assertTrue(np.issubdtype(features.dtype, np.number))
@@ -69,10 +65,6 @@ class TestJarvisModel(unittest.TestCase):
 
         # Preprocess the features for prediction
         features_preprocessed = self.jarvis.preprocess_data(raw_data_predict, fit_preprocessor=False)[0]
-
-        # Debug statements to print the shapes and types of the features
-        print("Features shape after preprocessing for prediction:", features_preprocessed.shape)
-        print("Features types after preprocessing for prediction:", [type(x) for x in features_preprocessed[0]])
 
         # Make predictions on the preprocessed features
         predictions = self.jarvis.predict(features_preprocessed)
