@@ -1,5 +1,5 @@
 import logging
-from picoctf_interaction import PicoCTFInteraction
+from .picoctf_interaction import PicoCTFInteraction
 
 def test_list_challenges():
     # Initialize PicoCTFInteraction

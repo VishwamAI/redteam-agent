@@ -1,4 +1,26 @@
-from cmgr_interface import CMGRInterface
+from .cmgr_interface import CMGRInterface
+import pytest
+
+@pytest.fixture
+def cmgr():
+    base_url = "http://127.0.0.1:4200"
+    return CMGRInterface(base_url)
+
+@pytest.fixture
+def challenge_id():
+    return "cmgr/examples/aptitude-and-privileges"
+
+@pytest.fixture
+def build_id():
+    return "cmgr/examples/aptitude-and-privileges"
+
+@pytest.fixture
+def instance_id():
+    return "cmgr/examples/aptitude-and-privileges"
+
+@pytest.fixture
+def templating_info():
+    return {"flag_format": "FLAG{.*}", "seeds": [12345]}
 
 def test_list_challenges(cmgr):
     print("Testing list_challenges...")
