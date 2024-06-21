@@ -1,6 +1,6 @@
 import logging
 from .cmgr_interface import CMGRInterface
-from learning.learning_module import LearningModule
+from .learning.learning_module import LearningModule
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
