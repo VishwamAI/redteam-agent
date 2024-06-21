@@ -35,9 +35,12 @@ try:
     # Navigate to the picoCTF practice page
     driver.get("https://play.picoctf.org/practice")
 
-    # Wait for the Cloudflare challenge to be bypassed
-    WebDriverWait(driver, 60).until(
-        EC.presence_of_element_located((By.ID, "challenge-success-text"))
+    # Take a screenshot before waiting for the Cloudflare challenge to be bypassed
+    driver.save_screenshot("/home/ubuntu/screenshots/before_wait.png")
+
+    # Increase the wait time for the Cloudflare challenge to be bypassed
+    WebDriverWait(driver, 120).until(
+        EC.presence_of_element_located((By.XPATH, "//h2[text()='picoGym Practice Challenges']"))
     )
 
     # Interact with the page as needed

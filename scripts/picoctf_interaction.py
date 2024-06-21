@@ -135,6 +135,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Interact with picoCTF platform")
     parser.add_argument("--list-challenges", action="store_true", help="List available challenges")
     parser.add_argument("--login", nargs=2, metavar=("username", "password"), help="Login to picoCTF")
+    parser.add_argument("--category", type=str, help="Filter challenges by category")
     args = parser.parse_args()
 
     picoctf = PicoCTFInteraction()
@@ -144,7 +145,7 @@ if __name__ == "__main__":
         picoctf.login(username, password)
 
     if args.list_challenges:
-        challenges = picoctf.list_challenges()
+        challenges = picoctf.list_challenges(category=args.category)
         if challenges:
             for challenge in challenges:
                 print(challenge)
