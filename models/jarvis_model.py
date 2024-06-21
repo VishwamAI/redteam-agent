@@ -26,8 +26,8 @@ class JarvisModel:
         # Create a column transformer to apply the preprocessing steps to the appropriate columns
         self.preprocessor = ColumnTransformer(
             transformers=[
-                ('num', numerical_transformer, []),
-                ('cat', categorical_transformer, [])
+                ('num', numerical_transformer, [0, 2]),  # Assuming numerical features are at indices 0 and 2
+                ('cat', categorical_transformer, [1])   # Assuming categorical feature is at index 1
             ]
         )
 
@@ -67,7 +67,7 @@ class JarvisModel:
 
     def predict(self, raw_features):
         # Preprocess the raw features before making predictions
-        features_preprocessed, _ = self.preprocess_data(raw_features)
+        features_preprocessed, _ = self.preprocess_data(raw_features, fit_preprocessor=False)
         return self.model.predict(features_preprocessed)
 
     def save_model(self, model_path):
