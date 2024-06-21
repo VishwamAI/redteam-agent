@@ -14,8 +14,8 @@ class TestAutoLearn(unittest.TestCase):
         self.cmgr = MagicMock()
         self.vectorizer = MagicMock()
         self.challenges = [
-            {'id': 'challenge1', 'description': 'desc1', 'hints': ['hint1'], 'points': 10, 'category': 'cat1'},
-            {'id': 'challenge2', 'description': 'desc2', 'hints': ['hint2'], 'points': 20, 'category': 'cat2'}
+            {'id': 'challenge1', 'description': 'desc1', 'hint': 'hint1', 'points': 10, 'category': 'cat1'},
+            {'id': 'challenge2', 'description': 'desc2', 'hint': 'hint2', 'points': 20, 'category': 'cat2'}
         ]
 
     def test_initialize_components(self):
