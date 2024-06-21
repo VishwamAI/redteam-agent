@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - debug-loop-logging-fix
+      - fix-cloud-init-version
   pull_request:
     branches:
       - '*'
