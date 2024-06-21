@@ -55,7 +55,7 @@ class PicoCTFInteraction:
                 logging.info(f"Challenge {challenge_id} solved successfully.")
                 return np.array([[1]])
             else:
-                logging.error(f"Failed to solve challenge {challenge_id}.")
+                logging.error(f"Failed to solve challenge {challenge_id}. Result: {result}")
                 return np.array([[]])
         else:
             logging.error(f"Challenge {challenge_id} could not be retrieved.")
