@@ -85,3 +85,5 @@ For any questions or inquiries, please contact the project maintainer at [kasina
 - **Swagger Documentation**: The `swagger.yaml` file contains the REST API documentation for `cmgr`, detailing endpoints for managing challenges, builds, instances, and schemas.
 - **Endpoints and Methods**: The `build_challenge` method uses `/challenges/{challenge_id}`, POST request, status code 200. The `start_instance` method uses `/builds/{build_id}`, POST request, status code 201. The `run_solver` method uses `/instances/{instance_id}`, POST request, status code 204.
 - **CI/CD Integration**: The project includes a CI/CD pipeline using GitHub Actions, which automates the process of checking out the code, setting up Python, installing dependencies, linting with flake8, and running tests with pytest. The CI/CD configuration can be found in the `.github/workflows/ci.yml` file.
+
+<!-- Triggering a new build -->
