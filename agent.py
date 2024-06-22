@@ -2,7 +2,10 @@ import time
 import logging
 import threading
 import numpy as np  # Importing NumPy library
-from scripts.automation.engine_template import AutomationEngine, example_task, exploitation_task, lateral_movement_task, exfiltration_task
+from scripts.automation.engine_template import (
+    AutomationEngine, example_task, exploitation_task,
+    lateral_movement_task, exfiltration_task
+)
 from scripts.learning.learning_module import LearningModule
 from scripts.update_manager import UpdateManager
 from scripts.reporting_system import ReportingSystem
@@ -10,7 +13,11 @@ from scripts.picoctf_interaction import PicoCTFInteraction  # Importing PicoCTF 
 from scripts.nlu_pipeline import tokenize, named_entity_recognition, classify_intent  # Importing NLU pipeline functions
 
 # Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s', filename='/home/ubuntu/VishwamAI/logs/agent.log')
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    filename='/home/ubuntu/VishwamAI/logs/agent.log'
+)
 
 class RedTeamAgent:
     def __init__(self):
@@ -25,11 +32,21 @@ class RedTeamAgent:
 
     def initialize_tasks(self):
         # Replace the example targets with actual targets relevant to red team operations
-        self.automation_engine.add_task(example_task, "127.0.0.1")  # Example target, replace with actual target
-        self.automation_engine.add_task(exploitation_task, "127.0.0.1")  # Example target, replace with actual target
-        self.automation_engine.add_task(lateral_movement_task, "127.0.0.1")  # Example target, replace with actual target
-        self.automation_engine.add_task(exfiltration_task, "127.0.0.1")  # Example target, replace with actual target
-        self.automation_engine.add_task(self.picoctf_interaction.solve_challenge, "example_challenge_id")  # Example challenge, replace with actual challenge ID
+        self.automation_engine.add_task(
+            example_task, "127.0.0.1"
+        )  # Example target, replace with actual target
+        self.automation_engine.add_task(
+            exploitation_task, "127.0.0.1"
+        )  # Example target, replace with actual target
+        self.automation_engine.add_task(
+            lateral_movement_task, "127.0.0.1"
+        )  # Example target, replace with actual target
+        self.automation_engine.add_task(
+            exfiltration_task, "127.0.0.1"
+        )  # Example target, replace with actual target
+        self.automation_engine.add_task(
+            self.picoctf_interaction.solve_challenge, "example_challenge_id"
+        )  # Example challenge, replace with actual challenge ID
 
     def start(self):
         self.update_thread = threading.Thread(target=self.update_manager.run)
@@ -38,7 +55,9 @@ class RedTeamAgent:
         iteration_count = 0
         max_iterations = 10  # Set a maximum number of iterations for testing
         while self.running:
-            logging.info(f"Loop iteration {iteration_count} - self.running: {self.running}")
+            logging.info(
+                f"Loop iteration {iteration_count} - self.running: {self.running}"
+            )
             if iteration_count >= max_iterations:
                 logging.info("Reached maximum iterations, setting running flag to False.")
                 self.running = False
@@ -48,7 +67,9 @@ class RedTeamAgent:
             self.run_tasks()
             time.sleep(1)  # Sleep for a short duration to simulate continuous operation
             iteration_count += 1
-            logging.info(f"Iteration {iteration_count} completed - self.running: {self.running}")
+            logging.info(
+                f"Iteration {iteration_count} completed - self.running: {self.running}"
+            )
         logging.info(f"Loop has exited - self.running: {self.running}, iteration_count: {iteration_count}")
         self.stop()  # Ensure the stop method is called after the loop exits
 
@@ -84,11 +105,17 @@ class RedTeamAgent:
                     continue
                 if isinstance(result, np.ndarray) and result.ndim == 1:
                     result = result.reshape(1, -1)  # Ensure result is 2D
-                logging.info(f"Task {task_function.__name__} returned result with shape: {result.shape}")
+                logging.info(
+                    f"Task {task_function.__name__} returned result with shape: {result.shape}"
+                )
                 # Validate dimensions before appending
                 if collected_data and result.shape[1] != collected_data[0].shape[1]:
-                    logging.error(f"Task {task_function.__name__} returned result with incompatible dimensions: {result.shape}")
-                    self.reporting_system.log_activity(f"Task {task_function.__name__} returned result with incompatible dimensions: {result.shape}")
+                    logging.error(
+                        f"Task {task_function.__name__} returned result with incompatible dimensions: {result.shape}"
+                    )
+                    self.reporting_system.log_activity(
+                        f"Task {task_function.__name__} returned result with incompatible dimensions: {result.shape}"
+                    )
                     continue
                 collected_data.append(result)
             except Exception as e:
@@ -129,7 +156,7 @@ class RedTeamAgent:
                 "exploitation": (exploitation_task, "127.0.0.1"),
                 "lateral movement": (lateral_movement_task, "127.0.0.1"),
                 "exfiltration": (exfiltration_task, "127.0.0.1"),
-                "reporting": (self.reporting_system.generate_report, )
+                "reporting": (self.reporting_system.generate_report,)
             }
 
             # Determine actions based on the classified intent
@@ -166,12 +193,16 @@ class RedTeamAgent:
                 logging.info("Update thread joined successfully.")
         except Exception as e:
             logging.error(f"Error joining update thread: {e}")
-        logging.info(f"Stop method completed - self.running: {self.running}, update_manager.running: {self.update_manager.running}")
+        logging.info(
+            f"Stop method completed - self.running: {self.running}, update_manager.running: {self.update_manager.running}"
+        )
         self.learning_module.save_model("trained_model.pkl")
         self.reporting_system.log_activity("Agent stopped and model saved.")
         logging.info("Agent stopped and model saved.")
         report_file = self.reporting_system.generate_report()
-        logging.info(f"Report generated: {report_file}")
+        logging.info(
+            f"Report generated: {report_file}"
+        )
 
 if __name__ == "__main__":
     agent = RedTeamAgent()
