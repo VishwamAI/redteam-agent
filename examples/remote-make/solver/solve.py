@@ -3,8 +3,12 @@ import argparse
 import socket
 
 parser = argparse.ArgumentParser(description="solve script for 'BinEx101'")
-parser.add_argument("--host", default="challenge", help="the host for the instance")
-parser.add_argument("--port", type=int, default=5000, help="the port of the instance")
+parser.add_argument(
+    "--host", default="challenge", help="the host for the instance"
+)
+parser.add_argument(
+    "--port", type=int, default=5000, help="the port of the instance"
+)
 parser.add_argument(
     "--print",
     action="store_true",
@@ -15,7 +19,7 @@ args = parser.parse_args()
 
 def recv_until(sock, pattern):
     response = sock.recv(4096).decode()
-    while len(response) < len(pattern) or response[-len(pattern) :] != pattern:
+    while len(response) < len(pattern) or response[-len(pattern):] != pattern:
         response += sock.recv(4096).decode()
     return response
 
