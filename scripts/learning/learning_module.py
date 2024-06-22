@@ -69,7 +69,7 @@ if __name__ == "__main__":
     learning_module.save_model("trained_model.pkl")
     learning_module.load_model("trained_model.pkl")
     predictions = learning_module.predict(X[:5])
-    print(f"Predictions for the first 5 samples: {predictions}")
+    print(f"Predictions for the first 5 samples:\n{predictions}")
 
     # Example incremental training
     new_data = np.random.rand(20, 11)  # Example new data
