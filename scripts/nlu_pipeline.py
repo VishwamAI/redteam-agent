@@ -34,7 +34,8 @@ def named_entity_recognition(text):
 
 def classify_intent(text, candidate_labels):
     """
-    Classify the intent of the input text using Hugging Face zero-shot classification.
+    Classify the intent of the input text using Hugging Face zero-shot
+    classification.
     """
     result = intent_classifier(text, candidate_labels)
     return result
