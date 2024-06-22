@@ -48,8 +48,8 @@ class PicoCTFAPI:
         if response.status_code == 200:
             return response.json()
         else:
-            print(f"Failed to retrieve challenge {challenge_id} with status code {response.status_code}: "
-                  f"{response.text}")
+            print(f"Failed to retrieve challenge {challenge_id} with status code "
+                  f"{response.status_code}: {response.text}")
             return None
 
     def build_challenge(self, challenge_id):
@@ -58,8 +58,8 @@ class PicoCTFAPI:
         if response.status_code == 200:
             return response.json()
         else:
-            print(f"Failed to build challenge {challenge_id} with status code {response.status_code}: "
-                  f"{response.text}")
+            print(f"Failed to build challenge {challenge_id} with status code "
+                  f"{response.status_code}: {response.text}")
             return None
 
     def get_build(self, build_id):
@@ -68,8 +68,8 @@ class PicoCTFAPI:
         if response.status_code == 200:
             return response.json()
         else:
-            print(f"Failed to retrieve build {build_id} with status code {response.status_code}: "
-                  f"{response.text}")
+            print(f"Failed to retrieve build {build_id} with status code "
+                  f"{response.status_code}: {response.text}")
             return None
 
     def start_instance(self, build_id):
@@ -78,8 +78,8 @@ class PicoCTFAPI:
         if response.status_code == 200:
             return response.json()
         else:
-            print(f"Failed to start instance for build {build_id} with status code {response.status_code}: "
-                  f"{response.text}")
+            print(f"Failed to start instance for build {build_id} with status code "
+                  f"{response.status_code}: {response.text}")
             return None
 
     def get_instance(self, instance_id):
@@ -88,8 +88,8 @@ class PicoCTFAPI:
         if response.status_code == 200:
             return response.json()
         else:
-            print(f"Failed to retrieve instance {instance_id} with status code {response.status_code}: "
-                  f"{response.text}")
+            print(f"Failed to retrieve instance {instance_id} with status code "
+                  f"{response.status_code}: {response.text}")
             return None
 
     def run_solver(self, instance_id):
@@ -98,6 +98,6 @@ class PicoCTFAPI:
         if response.status_code == 200:
             return response.json()
         else:
-            print(f"Failed to run solver for instance {instance_id} with status code {response.status_code}: "
-                  f"{response.text}")
+            print(f"Failed to run solver for instance {instance_id} with status code "
+                  f"{response.status_code}: {response.text}")
             return None
