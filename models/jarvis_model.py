@@ -73,13 +73,15 @@ class JarvisModel:
     def save_model(self, model_path):
         joblib.dump({'model': self.model, 'preprocessor': self.preprocessor},
                     model_path)
-        print(f"Model saved to:\n{model_path}")
+        print(f"Model saved to:\n"
+              f"{model_path}")
 
     def load_model(self, model_path):
         data = joblib.load(model_path)
         self.model = data['model']
         self.preprocessor = data['preprocessor']
-        print(f"Model loaded from:\n{model_path}")
+        print(f"Model loaded from:\n"
+              f"{model_path}")
 
 
 if __name__ == "__main__":
@@ -89,6 +91,7 @@ if __name__ == "__main__":
     features, labels = jarvis.preprocess_data(raw_data, fit_preprocessor=True)
     jarvis.train(features, labels)
     predictions = jarvis.predict(raw_data)
-    print(f"Predictions:\n{predictions}")
+    print(f"Predictions:\n"
+          f"{predictions}")
     jarvis.save_model("jarvis_model.pkl")
     jarvis.load_model("jarvis_model.pkl")
