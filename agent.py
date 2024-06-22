@@ -224,7 +224,9 @@ class RedTeamAgent:
         logging.info("Stop method called. Setting running flag to False.")
         self.running = False
         self.update_manager.running = False
-        logging.info("Running flag set to False. Attempting to join update thread.")
+        logging.info(
+            "Running flag set to False. Attempting to join update thread."
+        )
         try:
             self.update_thread.join(timeout=5)  # Add a timeout to the join call
             if self.update_thread.is_alive():
