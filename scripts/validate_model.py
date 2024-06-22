@@ -6,6 +6,7 @@ from sklearn.metrics import precision_score, recall_score, f1_score
 # Configure logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
+
 def load_model(model_path):
     """
     Load the trained model from the specified path.
@@ -23,6 +24,7 @@ def load_model(model_path):
     except Exception as e:
         logging.error(f"Failed to load model from {model_path}: {e}")
         return None
+
 
 def validate_model(model, X_test, y_test):
     """
@@ -47,6 +49,7 @@ def validate_model(model, X_test, y_test):
     except Exception as e:
         logging.error(f"Failed to validate model: {e}")
 
+
 def main():
     model_path = "/home/ubuntu/VishwamAI/models/jarvis_model.pkl"
     model = load_model(model_path)
@@ -57,6 +60,7 @@ def main():
         y_test = np.random.randint(0, 2, 10)  # 10 binary labels
 
         validate_model(model, X_test, y_test)
+
 
 if __name__ == "__main__":
     main()
