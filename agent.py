@@ -143,12 +143,12 @@ class RedTeamAgent:
                 # Validate dimensions before appending
                 if collected_data and result.shape[1] != collected_data[0].shape[1]:
                     logging.error(
-                         f"Task {task_function.__name__} returned result "
-                         f"with incompatible dimensions: {result.shape}"
-                     )
+                        f"Task {task_function.__name__} returned result with "
+                        f"incompatible dimensions: {result.shape}"
+                    )
                     self.reporting_system.log_activity(
-                        f"Task {task_function.__name__} returned result "
-                        f"with incompatible dimensions: {result.shape}"
+                        f"Task {task_function.__name__} returned result with "
+                        f"incompatible dimensions: {result.shape}"
                     )
                     continue
                 collected_data.append(result)
@@ -274,5 +274,7 @@ if __name__ == "__main__":
 
 # TODO: Replace the example targets with actual targets relevant to red team
 # operations.
-# TODO: Update the data collection logic with actual data collection from red team operations.
-# TODO: Implement security measures to ensure the agent operates safely and securely.
+# TODO: Update the data collection logic with actual data collection from red
+# team operations.
+# TODO: Implement security measures to ensure the agent operates safely and
+# securely.
