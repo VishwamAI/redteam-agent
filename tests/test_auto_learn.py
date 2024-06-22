@@ -7,15 +7,33 @@ from unittest.mock import MagicMock
 # Add the parent directory to the Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from scripts.auto_learn import initialize_components, list_challenges, process_challenge, fit_vectorizer, combine_features
+from scripts.auto_learn import (
+    initialize_components,
+    list_challenges,
+    process_challenge,
+    fit_vectorizer,
+    combine_features
+)
 
 class TestAutoLearn(unittest.TestCase):
     def setUp(self):
         self.cmgr = MagicMock()
         self.vectorizer = MagicMock()
         self.challenges = [
-            {'id': 'challenge1', 'description': 'desc1', 'hint': 'hint1', 'points': 10, 'category': 'cat1'},
-            {'id': 'challenge2', 'description': 'desc2', 'hint': 'hint2', 'points': 20, 'category': 'cat2'}
+            {
+                'id': 'challenge1',
+                'description': 'desc1',
+                'hint': 'hint1',
+                'points': 10,
+                'category': 'cat1'
+            },
+            {
+                'id': 'challenge2',
+                'description': 'desc2',
+                'hint': 'hint2',
+                'points': 20,
+                'category': 'cat2'
+            }
         ]
 
     def test_initialize_components(self):
@@ -41,13 +59,17 @@ class TestAutoLearn(unittest.TestCase):
         self.vectorizer.fit_transform.return_value = np.array([[0.1, 0.2], [0.3, 0.4]])
         transformed_features = fit_vectorizer(self.vectorizer, text_features)
         self.vectorizer.fit_transform.assert_called_once_with(text_features)
-        self.assertTrue((transformed_features == np.array([[0.1, 0.2], [0.3, 0.4]])).all())
+        self.assertTrue(
+            (transformed_features == np.array([[0.1, 0.2], [0.3, 0.4]])).all()
+        )
 
     def test_combine_features(self):
         text_vectors = np.array([[0.1, 0.2], [0.3, 0.4]])
         combined_features = combine_features(text_vectors, self.challenges)
         self.assertEqual(combined_features.shape, (2, 3))
-        self.assertTrue((combined_features == np.array([[0.1, 0.2, 10], [0.3, 0.4, 20]])).all())
+        self.assertTrue(
+            (combined_features == np.array([[0.1, 0.2, 10], [0.3, 0.4, 20]])).all()
+        )
 
 if __name__ == "__main__":
     unittest.main()
