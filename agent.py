@@ -162,19 +162,20 @@ class RedTeamAgent:
                     f"{task_function.__name__}: {e}"
                 )
         if collected_data:
-            # Ensure collected data has at least one feature column
             if all(data.shape[1] == 0 for data in collected_data):
                 logging.error("Collected data has no features.")
                 self.reporting_system.log_activity(
                     "Collected data has no features."
                 )
                 return None
-            return np.vstack(collected_data)  # Stack collected data into a 2D array
+            # Stack collected data into a 2D array
+            return np.vstack(collected_data)
         return None
 
     def process_natural_language_input(self, input_text):
         """
-        Process natural language input using the NLU pipeline and determine actions.
+        Process natural language input using the NLU pipeline and determine
+        actions.
         """
         try:
             # Tokenize the input text
