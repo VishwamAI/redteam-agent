@@ -21,17 +21,25 @@ def test_list_challenges():
     category = "Cryptography"
     challenges = picoctf.list_challenges(category=category)
     if challenges:
-        logging.info(f"Retrieved {len(challenges)} challenges in category '{category}'.")
+        logging.info(
+            f"Retrieved {len(challenges)} challenges in category '{category}'."
+        )
     else:
-        logging.error(f"Failed to retrieve challenges in category '{category}'.")
+        logging.error(
+            f"Failed to retrieve challenges in category '{category}'."
+        )
 
     # Test with difficulty filter
     difficulty = "Easy"
     challenges = picoctf.list_challenges(difficulty=difficulty)
     if challenges:
-        logging.info(f"Retrieved {len(challenges)} challenges with difficulty '{difficulty}'.")
+        logging.info(
+            f"Retrieved {len(challenges)} challenges with difficulty '{difficulty}'."
+        )
     else:
-        logging.error(f"Failed to retrieve challenges with difficulty '{difficulty}'.")
+        logging.error(
+            f"Failed to retrieve challenges with difficulty '{difficulty}'."
+        )
 
     # Test with both category and difficulty filters
     challenges = picoctf.list_challenges(category=category, difficulty=difficulty)
