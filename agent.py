@@ -9,7 +9,8 @@ from scripts.automation.engine_template import (
 from scripts.learning.learning_module import LearningModule
 from scripts.update_manager import UpdateManager
 from scripts.reporting_system import ReportingSystem
-from scripts.picoctf_interaction import PicoCTFInteraction  # Importing PicoCTF interaction module
+from scripts.picoctf_interaction import PicoCTFInteraction  # Importing PicoCTF
+# interaction module
 from scripts.nlu_pipeline import (
     tokenize, named_entity_recognition, classify_intent
 )  # Importing NLU pipeline functions
@@ -205,7 +206,9 @@ class RedTeamAgent:
         try:
             self.update_thread.join(timeout=5)  # Add a timeout to the join call
             if self.update_thread.is_alive():
-                logging.error("Update thread did not terminate within the timeout period.")
+                logging.error(
+                    "Update thread did not terminate within the timeout period."
+                )
             else:
                 logging.info("Update thread joined successfully.")
         except Exception as e:
@@ -217,9 +220,7 @@ class RedTeamAgent:
         self.reporting_system.log_activity("Agent stopped and model saved.")
         logging.info("Agent stopped and model saved.")
         report_file = self.reporting_system.generate_report()
-        logging.info(
-            f"Report generated: {report_file}"
-        )
+        logging.info(f"Report generated: {report_file}")
 
 if __name__ == "__main__":
     agent = RedTeamAgent()
