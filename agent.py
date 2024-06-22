@@ -81,8 +81,7 @@ class RedTeamAgent:
                 logging.info("Running flag is False, exiting loop.")
                 break
             self.run_tasks()
-            time.sleep(1)  # Sleep for a short duration to simulate continuous
-            # operation
+            time.sleep(1)  # Sleep for a short duration to simulate continuous operation
             iteration_count += 1
             logging.info(
                 f"Iteration {iteration_count} completed - self.running: "
@@ -124,22 +123,22 @@ class RedTeamAgent:
                 result = task_function(*args, **kwargs)
                 if result is None:
                     logging.info(
-                         f"Task {task_function.__name__} returned None, "
-                         "skipping."
-                     )
+                        f"Task {task_function.__name__} returned None, "
+                        "skipping."
+                    )
                     continue
                 if isinstance(result, dict):
                     logging.info(
-                         f"Task {task_function.__name__} returned a "
-                         "dictionary, skipping shape check."
-                     )
+                        f"Task {task_function.__name__} returned a "
+                        "dictionary, skipping shape check."
+                    )
                     continue
                 if isinstance(result, np.ndarray) and result.ndim == 1:
                     result = result.reshape(1, -1)  # Ensure result is 2D
                 logging.info(
-                     f"Task {task_function.__name__} returned result with "
-                     f"shape: {result.shape}"
-                 )
+                    f"Task {task_function.__name__} returned result with "
+                    f"shape: {result.shape}"
+                )
                 # Validate dimensions before appending
                 if collected_data and result.shape[1] != collected_data[0].shape[1]:
                     logging.error(
@@ -154,9 +153,9 @@ class RedTeamAgent:
                 collected_data.append(result)
             except Exception as e:
                 logging.error(
-                     f"Error collecting data from task "
-                     f"{task_function.__name__}: {e}"
-                 )
+                    f"Error collecting data from task "
+                    f"{task_function.__name__}: {e}"
+                )
                 self.reporting_system.log_activity(
                     f"Error collecting data from task "
                     f"{task_function.__name__}: {e}"
@@ -245,9 +244,9 @@ class RedTeamAgent:
             self.update_thread.join(timeout=5)  # Add a timeout to the join
             if self.update_thread.is_alive():
                 logging.error(
-                     "Update thread did not terminate within the timeout "
-                     "period."
-                 )
+                    "Update thread did not terminate within the timeout "
+                    "period."
+                )
             else:
                 logging.info("Update thread joined successfully.")
         except Exception as e:
