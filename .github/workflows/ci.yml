@@ -51,7 +51,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install --no-build-isolation --only-binary :all: -r requirements.txt --verbose
+        pip install --no-build-isolation -r requirements.txt --verbose
 
     - name: Lint with flake8
       run: |
