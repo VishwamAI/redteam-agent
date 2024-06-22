@@ -1,7 +1,10 @@
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import precision_score
+from sklearn.metrics import recall_score
+from sklearn.metrics import f1_score
 import joblib
 
 
@@ -13,7 +16,9 @@ class LearningModule:
         """
         Train the model using the provided features and labels.
         """
-        X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+        X_train, X_test, y_train, y_test = train_test_split(
+            X, y, test_size=0.2, random_state=42
+        )
         self.model.fit(X_train, y_train)
         predictions = self.model.predict(X_test)
         accuracy = accuracy_score(y_test, predictions)
