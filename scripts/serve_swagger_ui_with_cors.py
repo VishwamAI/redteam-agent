@@ -16,11 +16,24 @@ def serve_static(path):
 def list_challenges():
     # Placeholder response for the /challenges endpoint
     challenges = [
-        {"id": 1, "name": "Challenge 1", "description": "Description of Challenge 1"},
-        {"id": 2, "name": "Challenge 2", "description": "Description of Challenge 2"},
-        {"id": 3, "name": "Challenge 3", "description": "Description of Challenge 3"}
+        {
+            "id": 1,
+            "name": "Challenge 1",
+            "description": "Description of Challenge 1"
+        },
+        {
+            "id": 2,
+            "name": "Challenge 2",
+            "description": "Description of Challenge 2"
+        },
+        {
+            "id": 3,
+            "name": "Challenge 3",
+            "description": "Description of Challenge 3"
+        }
     ]
     return jsonify(challenges)
+
 
 if __name__ == '__main__':
     app.run(port=8000)
