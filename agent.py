@@ -22,7 +22,9 @@ logging.basicConfig(
     filename='/home/ubuntu/VishwamAI/logs/agent.log'
 )
 
+
 class RedTeamAgent:
+
     def __init__(self):
         self.running = True
         self.reporting_system = ReportingSystem()
@@ -32,6 +34,7 @@ class RedTeamAgent:
         self.picoctf_interaction = PicoCTFInteraction()  # Initializing PicoCTF interaction
         self.initialize_tasks()
         self.reporting_system.log_activity("RedTeamAgent initialized.")
+
 
     def initialize_tasks(self):
         # Replace the example targets with actual targets relevant to red team operations
@@ -51,12 +54,15 @@ class RedTeamAgent:
             self.picoctf_interaction.solve_challenge, "example_challenge_id"
         )  # Example challenge, replace with actual challenge ID
 
+
     def start(self):
         self.update_thread = threading.Thread(target=self.update_manager.run)
         self.update_thread.start()
         self.reporting_system.log_activity("RedTeamAgent started.")
         iteration_count = 0
-        max_iterations = 10  # Set a maximum number of iterations for testing
+
+        # Set a maximum number of iterations for testing
+        max_iterations = 10
         while self.running:
             logging.info(
                 f"Loop iteration {iteration_count} - self.running: {self.running}"
@@ -80,6 +86,7 @@ class RedTeamAgent:
         )
         self.stop()  # Ensure the stop method is called after the loop exits
 
+
     def run_tasks(self):
         logging.info("Running automated tasks...")
         self.reporting_system.log_activity("Running automated tasks...")
@@ -96,6 +103,7 @@ class RedTeamAgent:
         except Exception as e:
             logging.error(f"Error running tasks: {e}")
             self.reporting_system.log_activity(f"Error running tasks: {e}")
+
 
     def collect_data(self):
         # Placeholder for data collection logic
@@ -145,6 +153,7 @@ class RedTeamAgent:
             return np.vstack(collected_data)  # Stack collected data into a 2D array
         return None
 
+
     def process_natural_language_input(self, input_text):
         """
         Process natural language input using the NLU pipeline and determine actions.
@@ -189,6 +198,7 @@ class RedTeamAgent:
             logging.error(f"Error processing natural language input: {e}")
             self.reporting_system.log_activity(f"Error processing natural language input: {e}")
 
+
     def list_challenges(self):
         try:
             challenges = self.picoctf_interaction.list_challenges()
@@ -197,6 +207,7 @@ class RedTeamAgent:
         except Exception as e:
             logging.error(f"Error listing challenges: {e}")
             self.reporting_system.log_activity(f"Error listing challenges: {e}")
+
 
     def stop(self):
         logging.info("Stop method called. Setting running flag to False.")
