@@ -1,3 +1,4 @@
+import json
 from pwnlib.tubes import ssh
 
 with open("metadata.json", "r") as f:
