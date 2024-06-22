@@ -55,7 +55,9 @@ class ReverseProxy:
             response.headers.extend(headers)
             return response
         except Exception as e:
-            print(f"Error serving swagger.json: {e}")
+            print(
+                "Error serving swagger.json: {}".format(e)
+            )
             abort(500)
 
 
