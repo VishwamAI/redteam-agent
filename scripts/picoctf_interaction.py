@@ -117,7 +117,10 @@ class PicoCTFInteraction:
         if response.status_code == 200:
             return response.text.strip()
         else:
-            logging.error(f"Failed to retrieve content for challenge: {response.status_code} - {response.text}")
+            logging.error(
+                f"Failed to retrieve content for challenge: {response.status_code} - "
+                f"{response.text}"
+            )
             return None
 
     def list_challenges(self, category=None, difficulty=None):
