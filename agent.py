@@ -36,7 +36,7 @@ class RedTeamAgent:
         self.automation_engine = AutomationEngine(self.reporting_system)
         self.learning_module = LearningModule()
         self.update_manager = UpdateManager()
-        self.picoctf_interaction = PicoCTFInteraction()  # Initializing PicoCTF interaction
+        self.picoctf_interaction = PicoCTFInteraction()  # Initializing PicoCTF
         self.initialize_tasks()
         self.reporting_system.log_activity("RedTeamAgent initialized.")
 
@@ -79,7 +79,8 @@ class RedTeamAgent:
                 logging.info("Running flag is False, exiting loop.")
                 break
             self.run_tasks()
-            time.sleep(1)  # Sleep for a short duration to simulate continuous operation
+            # Sleep for a short duration to simulate continuous operation
+            time.sleep(1)
             iteration_count += 1
             logging.info(
                 f"Iteration {iteration_count} completed - self.running: "
