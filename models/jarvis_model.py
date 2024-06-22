@@ -40,7 +40,8 @@ class JarvisModel:
 
         # Debug statements to print the shapes and types of the features
         print("Features shape before preprocessing:", features.shape)
-        print("Features types before preprocessing:", [type(x) for x in features[0]])
+        print("Features types before preprocessing:",
+              [type(x) for x in features[0]])
 
         # Fit the preprocessor on the training data if specified
         if fit_preprocessor:
