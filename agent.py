@@ -73,7 +73,8 @@ class RedTeamAgent:
             )
             if iteration_count >= max_iterations:
                 logging.info(
-                    "Reached maximum iterations, setting running flag to False."
+                    "Reached maximum iterations, setting running flag to "
+                    "False."
                 )
                 self.running = False
             if not self.running:
@@ -123,39 +124,42 @@ class RedTeamAgent:
                 result = task_function(*args, **kwargs)
                 if result is None:
                     logging.info(
-                         f"Task {task_function.__name__} returned None, skipping."
+                         f"Task {task_function.__name__} returned None, "
+                         "skipping."
                      )
                     continue
                 if isinstance(result, dict):
                     logging.info(
-                         f"Task {task_function.__name__} returned a dictionary, "
-                         f"skipping shape check."
+                         f"Task {task_function.__name__} returned a "
+                         "dictionary, skipping shape check."
                      )
                     continue
                 if isinstance(result, np.ndarray) and result.ndim == 1:
                     result = result.reshape(1, -1)  # Ensure result is 2D
                 logging.info(
-                     f"Task {task_function.__name__} returned result with shape: "
-                     f"{result.shape}"
+                     f"Task {task_function.__name__} returned result with "
+                     f"shape: {result.shape}"
                  )
                 # Validate dimensions before appending
                 if collected_data and result.shape[1] != collected_data[0].shape[1]:
                     logging.error(
-                         f"Task {task_function.__name__} returned result with "
-                         f"incompatible dimensions: {result.shape}"
+                         f"Task {task_function.__name__} returned result "
+                         f"with incompatible dimensions: {result.shape}"
                      )
                     self.reporting_system.log_activity(
-                        f"Task {task_function.__name__} returned result with "
-                        f"incompatible dimensions: {result.shape}"
+                        f"Task {task_function.__name__} returned result "
+                        f"with incompatible dimensions: {result.shape}"
                     )
                     continue
                 collected_data.append(result)
             except Exception as e:
                 logging.error(
-                     f"Error collecting data from task {task_function.__name__}: {e}"
+                     f"Error collecting data from task "
+                     f"{task_function.__name__}: {e}"
                  )
                 self.reporting_system.log_activity(
-                    f"Error collecting data from task {task_function.__name__}: {e}"
+                    f"Error collecting data from task "
+                    f"{task_function.__name__}: {e}"
                 )
         if collected_data:
             # Ensure collected data has at least one feature column
@@ -237,10 +241,11 @@ class RedTeamAgent:
             "Running flag set to False. Attempting to join update thread."
         )
         try:
-            self.update_thread.join(timeout=5)  # Add a timeout to the join call
+            self.update_thread.join(timeout=5)  # Add a timeout to the join
             if self.update_thread.is_alive():
                 logging.error(
-                     "Update thread did not terminate within the timeout period."
+                     "Update thread did not terminate within the timeout "
+                     "period."
                  )
             else:
                 logging.info("Update thread joined successfully.")
@@ -267,6 +272,7 @@ if __name__ == "__main__":
         agent.stop()
         logging.info("Agent stopped by user.")
 
-# TODO: Replace the example targets with actual targets relevant to red team operations.
+# TODO: Replace the example targets with actual targets relevant to red team
+# operations.
 # TODO: Update the data collection logic with actual data collection from red team operations.
 # TODO: Implement security measures to ensure the agent operates safely and securely.
