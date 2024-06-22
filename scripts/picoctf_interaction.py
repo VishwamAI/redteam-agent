@@ -49,7 +49,8 @@ class PicoCTFInteraction:
         response = self.session.post(submit_url, data=payload)
         if response.status_code == 200:
             logging.info(
-                f"Successfully submitted solution for challenge {challenge_id}."
+                f"Successfully submitted solution for challenge "
+                f"{challenge_id}."
             )
             return response.json()
         else:
@@ -80,7 +81,8 @@ class PicoCTFInteraction:
     def generate_solution(self, challenge):
         """
         Generate a solution for the given challenge.
-        This method should be implemented with the actual logic to solve the challenge.
+        This method should be implemented with the actual logic to solve
+        the challenge.
         """
         category = challenge.get("category", "General Skills")
         if category == "Cryptography":
@@ -119,7 +121,8 @@ class PicoCTFInteraction:
 
     def solve_general_skills_challenge(self, challenge):
         """
-        Solve a general skills challenge by retrieving a file or string from a server.
+        Solve a general skills challenge by retrieving a file or string
+        from a server.
         """
         challenge_url = challenge.get("url")
         response = self.session.get(challenge_url)
@@ -146,7 +149,8 @@ class PicoCTFInteraction:
                 ]
             if difficulty:
                 challenges = [
-                    ch for ch in challenges if ch.get("difficulty") == difficulty
+                    ch for ch in challenges if ch.get("difficulty") ==
+                    difficulty
                 ]
             return challenges
         else:
@@ -159,16 +163,24 @@ class PicoCTFInteraction:
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description="Interact with picoCTF platform")
-    parser.add_argument(
-        "--list-challenges", action="store_true", help="List available challenges"
+    parser = argparse.ArgumentParser(
+        description="Interact with picoCTF platform"
     )
     parser.add_argument(
-        "--login", nargs=2, metavar=("username", "password"),
+        "--list-challenges",
+        action="store_true",
+        help="List available challenges"
+    )
+    parser.add_argument(
+        "--login",
+        nargs=2,
+        metavar=("username", "password"),
         help="Login to picoCTF"
     )
     parser.add_argument(
-        "--category", type=str, help="Filter challenges by category"
+        "--category",
+        type=str,
+        help="Filter challenges by category"
     )
     args = parser.parse_args()
 
