@@ -31,7 +31,8 @@ class RedTeamAgent:
         self.automation_engine = AutomationEngine(self.reporting_system)
         self.learning_module = LearningModule()
         self.update_manager = UpdateManager()
-        self.picoctf_interaction = PicoCTFInteraction()  # Initializing PicoCTF interaction
+        self.picoctf_interaction = PicoCTFInteraction()  # Initializing PicoCTF
+        # interaction
         self.initialize_tasks()
         self.reporting_system.log_activity("RedTeamAgent initialized.")
 
