@@ -9,8 +9,7 @@ from scripts.automation.engine_template import (
 from scripts.learning.learning_module import LearningModule
 from scripts.update_manager import UpdateManager
 from scripts.reporting_system import ReportingSystem
-from scripts.picoctf_interaction import PicoCTFInteraction  # Importing PicoCTF
-# interaction module
+from scripts.picoctf_interaction import PicoCTFInteraction  # Importing PicoCTF interaction module
 from scripts.nlu_pipeline import (
     tokenize, named_entity_recognition, classify_intent
 )  # Importing NLU pipeline functions
