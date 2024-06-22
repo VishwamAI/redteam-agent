@@ -14,8 +14,8 @@ class CMGRDAPI:
             return response.json()
         else:
             print(
-                f"Failed to list challenges with status code {response.status_code}: "
-                f"{response.text}"
+                f"Failed to list challenges with status code "
+                f"{response.status_code}: {response.text}"
             )
             return None
 
@@ -50,8 +50,8 @@ class CMGRDAPI:
             return response.json()
         else:
             print(
-                f"Failed to retrieve build {build_id} with status code {response.status_code}: "
-                f"{response.text}"
+                f"Failed to retrieve build {build_id} with status code "
+                f"{response.status_code}: {response.text}"
             )
             return None
 
