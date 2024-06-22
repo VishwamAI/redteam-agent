@@ -7,7 +7,8 @@ class UpdateManager:
     def __init__(self):
         self.update_check_interval = 3600  # Check for updates every hour
         self.running = True
-        self.current_version = self.get_current_version()  # Get current version from config file
+        self.current_version = self.get_current_version()
+        # Get current version from config file
 
     def get_current_version(self):
         try:
@@ -23,7 +24,8 @@ class UpdateManager:
             logging.error(
                 f"Error reading version config file: {e}"
             )
-        return "1.0.0"  # Default version if config file is not found or an error occurs
+        return "1.0.0"
+        # Default version if config file is not found or an error occurs
 
     def check_for_updates(self):
         logging.info("Checking for updates...")
@@ -49,7 +51,8 @@ class UpdateManager:
                 check=True
             )
             logging.info("Updates applied successfully.")
-            self.update_version_config()  # Update the version in the config file
+            self.update_version_config()
+            # Update the version in the config file
         except subprocess.CalledProcessError as e:
             logging.error(
                 f"Error applying updates: {e}"
