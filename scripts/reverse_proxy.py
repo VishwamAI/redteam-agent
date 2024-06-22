@@ -6,6 +6,7 @@ from flask import Flask, send_from_directory, abort
 
 app = Flask(__name__)
 
+
 class ReverseProxy:
     def __init__(self, target_url):
         self.target_url = target_url

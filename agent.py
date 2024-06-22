@@ -36,14 +36,12 @@ class RedTeamAgent:
         self.automation_engine = AutomationEngine(self.reporting_system)
         self.learning_module = LearningModule()
         self.update_manager = UpdateManager()
-        self.picoctf_interaction = PicoCTFInteraction()  # Initializing PicoCTF
-        # interaction
+        self.picoctf_interaction = PicoCTFInteraction()  # Initializing PicoCTF interaction
         self.initialize_tasks()
         self.reporting_system.log_activity("RedTeamAgent initialized.")
 
     def initialize_tasks(self):
-        # Replace the example targets with actual targets relevant to red team
-        # operations
+        # Replace the example targets with actual targets relevant to red team operations
         self.automation_engine.add_task(
             example_task, "127.0.0.1"
         )  # Example target, replace with actual target
@@ -81,8 +79,7 @@ class RedTeamAgent:
                 logging.info("Running flag is False, exiting loop.")
                 break
             self.run_tasks()
-            time.sleep(1)  # Sleep for a short duration to simulate continuous
-            # operation
+            time.sleep(1)  # Sleep for a short duration to simulate continuous operation
             iteration_count += 1
             logging.info(
                 f"Iteration {iteration_count} completed - self.running: "
@@ -143,7 +140,6 @@ class RedTeamAgent:
                 # Validate dimensions before appending
                 if collected_data and result.shape[1] != collected_data[0].shape[1]:
                     logging.error(
-                        f"Task {task_function.__name__} returned result with "
                         f"incompatible dimensions: {result.shape}"
                     )
                     self.reporting_system.log_activity(
