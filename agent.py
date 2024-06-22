@@ -37,7 +37,8 @@ class RedTeamAgent:
         self.reporting_system.log_activity("RedTeamAgent initialized.")
 
     def initialize_tasks(self):
-        # Replace the example targets with actual targets relevant to red team operations
+        # Replace the example targets with actual targets relevant to red team
+        # operations
         self.automation_engine.add_task(
             example_task, "127.0.0.1"
         )  # Example target, replace with actual target
@@ -74,7 +75,8 @@ class RedTeamAgent:
                 logging.info("Running flag is False, exiting loop.")
                 break
             self.run_tasks()
-            time.sleep(1)  # Sleep for a short duration to simulate continuous operation
+            time.sleep(1)  # Sleep for a short duration to simulate continuous
+            # operation
             iteration_count += 1
             logging.info(
                 f"Iteration {iteration_count} completed - self.running: "
