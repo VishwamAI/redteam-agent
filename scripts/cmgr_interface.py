@@ -1,5 +1,6 @@
 import requests
 
+
 class CMGRInterface:
     def __init__(self, base_url="http://127.0.0.1:4200"):
         self.base_url = base_url
@@ -26,9 +27,8 @@ class CMGRInterface:
             return response.json()
         else:
             print(
-                "Failed to retrieve challenge {} with status code {}: {}".format(
-                    challenge_id, response.status_code, response.text
-                )
+                "Failed to retrieve challenge {} with status code {}: {}"
+                .format(challenge_id, response.status_code, response.text)
             )
             return None
 
@@ -65,9 +65,8 @@ class CMGRInterface:
             return response.json()
         else:
             print(
-                "Failed to start instance for build {} with status code {}: {}".format(
-                    build_id, response.status_code, response.text
-                )
+                "Failed to start instance for build {} with status code {}: {}"
+                .format(build_id, response.status_code, response.text)
             )
             return None
 
@@ -78,9 +77,8 @@ class CMGRInterface:
             return response.json()
         else:
             print(
-                "Failed to retrieve instance {} with status code {}: {}".format(
-                    instance_id, response.status_code, response.text
-                )
+                "Failed to retrieve instance {} with status code {}: {}"
+                .format(instance_id, response.status_code, response.text)
             )
             return None
 
@@ -91,8 +89,7 @@ class CMGRInterface:
             return {"message": "Solver ran successfully"}
         else:
             print(
-                "Failed to run solver for instance {} with status code {}: {}".format(
-                    instance_id, response.status_code, response.text
-                )
+                "Failed to run solver for instance {} with status code {}: {}"
+                .format(instance_id, response.status_code, response.text)
             )
             return None
