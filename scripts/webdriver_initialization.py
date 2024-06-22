@@ -24,8 +24,14 @@ def initialize_webdriver():
         service = Service('/usr/local/bin/chromedriver')
 
         # Use Xvfb to run Chrome in a virtual display environment
-        xvfb_command = ["xvfb-run", "--auto-servernum", "--server-args=-screen 0 1920x1080x24", "chromedriver"]
-        xvfb_process = subprocess.Popen(xvfb_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        xvfb_command = [
+            "xvfb-run", "--auto-servernum",
+            "--server-args=-screen 0 1920x1080x24",
+            "chromedriver"
+        ]
+        xvfb_process = subprocess.Popen(
+            xvfb_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE
+        )
 
         # Set the DISPLAY environment variable to use the Xvfb display
         os.environ["DISPLAY"] = ":99"
