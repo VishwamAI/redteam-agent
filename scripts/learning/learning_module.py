@@ -68,7 +68,8 @@ class LearningModule:
 
 if __name__ == "__main__":
     # Example usage
-    raw_data = np.random.rand(100, 11)  # Example raw data with 10 features and 1 label
+    # Example raw data with 10 features and 1 label
+    raw_data = np.random.rand(100, 11)
     raw_data[:, -1] = np.random.randint(0, 2, size=raw_data.shape[0])
     # Generate discrete labels (0 or 1)
     learning_module = LearningModule()
