@@ -34,6 +34,7 @@ class JarvisModel:
             ]
         )
 
+
     def preprocess_data(self, raw_data, fit_preprocessor=False):
         # Placeholder for data preprocessing logic
         # For now, assume raw_data is a numpy array with features and labels
@@ -70,17 +71,20 @@ class JarvisModel:
         accuracy = accuracy_score(y_test, predictions)
         print(f"Training accuracy: {accuracy}")
 
+
     def predict(self, raw_features):
         # Preprocess the raw features before making predictions
         features_preprocessed, _ = self.preprocess_data(
             raw_features, fit_preprocessor=False)
         return self.model.predict(features_preprocessed)
 
+
     def save_model(self, model_path):
         joblib.dump({'model': self.model, 'preprocessor': self.preprocessor},
                     model_path)
         print(f"Model saved to:\n"
               f"{model_path}")
+
 
     def load_model(self, model_path):
         data = joblib.load(model_path)
