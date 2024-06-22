@@ -52,7 +52,6 @@ jobs:
     - name: Install dependencies
       run: |
         pip install --no-build-isolation -r requirements.txt --verbose || true
-        pip install PyGObject==3.48.2 --no-build-isolation --verbose
 
     - name: Lint with flake8
       run: |
