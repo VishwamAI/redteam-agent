@@ -4,6 +4,7 @@ import json
 import threading
 from datetime import datetime
 
+
 class ReportingSystem:
     def __init__(self, log_dir="logs"):
         self.log_dir = log_dir
@@ -47,6 +48,7 @@ class ReportingSystem:
             with open(report_file, "w") as f:
                 json.dump(report, f, indent=4)
         return report_file
+
 
 if __name__ == "__main__":
     reporting_system = ReportingSystem()
