@@ -23,13 +23,13 @@ class PicoCTFAPI:
                 if response.status_code == 200:
                     print("Login successful")
                 else:
-                    print(f"Login failed with status code {response.status_code}: "
-                          f"{response.text}")
+                    print(f"Login failed with status code "
+                          f"{response.status_code}: {response.text}")
             else:
                 print("CSRF token not found in cookies")
         else:
-            print(f"Failed to retrieve login page with status code {response.status_code}: "
-                  f"{response.text}")
+            print(f"Failed to retrieve login page with status code "
+                  f"{response.status_code}: {response.text}")
 
     def list_challenges(self, tags=None):
         challenges_url = f"{self.base_url}/challenges"
@@ -38,8 +38,8 @@ class PicoCTFAPI:
         if response.status_code == 200:
             return response.json()
         else:
-            print(f"Failed to list challenges with status code {response.status_code}: "
-                  f"{response.text}")
+            print(f"Failed to list challenges with status code "
+                  f"{response.status_code}: {response.text}")
             return None
 
     def get_challenge(self, challenge_id):
