@@ -40,10 +40,15 @@ class PicoCTFInteraction:
         }
         response = self.session.post(submit_url, data=payload)
         if response.status_code == 200:
-            logging.info(f"Successfully submitted solution for challenge {challenge_id}.")
+            logging.info(
+                f"Successfully submitted solution for challenge {challenge_id}."
+            )
             return response.json()
         else:
-            logging.error(f"Failed to submit solution for challenge {challenge_id}: {response.status_code} - {response.text}")
+            logging.error(
+                f"Failed to submit solution for challenge {challenge_id}: "
+                f"{response.status_code} - {response.text}"
+            )
             return None
 
     def solve_challenge(self, challenge_id):
