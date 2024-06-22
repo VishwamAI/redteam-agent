@@ -47,13 +47,17 @@ class UpdateManager:
     def update_version_config(self):
         try:
             with open("/home/ubuntu/VishwamAI/config/version.config", "w") as file:
-                file.write(f"version={self.current_version}")
+                file.write(
+                    f"version={self.current_version}"
+                )
         except Exception as e:
             logging.error(f"Error updating version config file: {e}")
 
     def run(self):
         while self.running:
-            logging.info("UpdateManager running state: {}".format(self.running))
+            logging.info(
+                "UpdateManager running state: {}".format(self.running)
+            )
             if self.check_for_updates():
                 self.apply_updates()
             for _ in range(self.update_check_interval):
