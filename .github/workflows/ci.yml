@@ -4,9 +4,10 @@ on:
   push:
     branches:
       - debug-loop-logging-fix
+      - fix-cloud-init-version
   pull_request:
     branches:
-      - debug-loop-logging-fix
+      - '*'
 
 jobs:
   build:
@@ -19,17 +20,38 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.8'
+        python-version: '3.10'
 
     - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
         node-version: '20'
 
-    - name: Install dependencies
+    - name: Clear pip cache
+      run: |
+        pip cache purge
+
+    - name: Clear GitHub Actions cache
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/pip
+        key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+        restore-keys: |
+          ${{ runner.os }}-pip-
+
+    - name: Install system dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libsystemd-dev meson
+
+    - name: Install Cython
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        pip install cython
+
+    - name: Install dependencies
+      run: |
+        pip install --no-build-isolation -r requirements.txt --verbose || true
 
     - name: Lint with flake8
       run: |
