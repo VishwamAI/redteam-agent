@@ -13,7 +13,9 @@ def test_list_challenges():
     # Test with no filters
     challenges = picoctf.list_challenges()
     if challenges:
-        logging.info(f"Retrieved {len(challenges)} challenges with no filters.")
+        logging.info(
+            f"Retrieved {len(challenges)} challenges with no filters."
+        )
     else:
         logging.error("Failed to retrieve challenges with no filters.")
 
