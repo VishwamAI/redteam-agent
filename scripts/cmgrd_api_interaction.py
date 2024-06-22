@@ -66,9 +66,8 @@ class CMGRDAPI:
             return response.json()
         else:
             print(
-                "Failed to start instance for build {} with status code {}: {}".format(
-                    build_id, response.status_code, response.text
-                )
+                "Failed to start instance for build {} with status code {}: {}"
+                .format(build_id, response.status_code, response.text)
             )
             return None
 
@@ -92,9 +91,8 @@ class CMGRDAPI:
             return {"message": "Solver ran correctly"}
         else:
             print(
-                "Failed to run solver for instance {} with status code {}: {}".format(
-                    instance_id, response.status_code, response.text
-                )
+                "Failed to run solver for instance {} with status code {}: {}"
+                .format(instance_id, response.status_code, response.text)
             )
             return None
 
