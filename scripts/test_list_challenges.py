@@ -1,6 +1,7 @@
 import logging
 from .picoctf_interaction import PicoCTFInteraction
 
+
 def test_list_challenges():
     # Initialize PicoCTFInteraction
     picoctf = PicoCTFInteraction()
@@ -36,7 +37,8 @@ def test_list_challenges():
     challenges = picoctf.list_challenges(difficulty=difficulty)
     if challenges:
         logging.info(
-            f"Retrieved {len(challenges)} challenges with difficulty '{difficulty}'."
+            f"Retrieved {len(challenges)} challenges with difficulty "
+            f"'{difficulty}'."
         )
     else:
         logging.error(
