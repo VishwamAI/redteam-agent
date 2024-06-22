@@ -25,7 +25,8 @@ def test_list_challenges():
     challenges = picoctf.list_challenges(category=category)
     if challenges:
         logging.info(
-            f"Retrieved {len(challenges)} challenges in category '{category}'."
+            f"Retrieved {len(challenges)} challenges in category "
+            f"'{category}'."
         )
     else:
         logging.error(
@@ -49,8 +50,8 @@ def test_list_challenges():
     challenges = picoctf.list_challenges(category=category, difficulty=difficulty)
     if challenges:
         logging.info(
-            f"Retrieved {len(challenges)} challenges in category '{category}' "
-            f"with difficulty '{difficulty}'."
+            f"Retrieved {len(challenges)} challenges in category "
+            f"'{category}' with difficulty '{difficulty}'."
         )
     else:
         logging.error(

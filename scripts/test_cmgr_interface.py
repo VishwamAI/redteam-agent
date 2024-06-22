@@ -84,8 +84,15 @@ if __name__ == "__main__":
 
     test_list_challenges(cmgr)
     test_get_challenge(cmgr, "cmgr/examples/aptitude-and-privileges")  # Using a valid challenge ID
-    templating_info = {"flag_format": "FLAG{.*}", "seeds": [12345]}  # Updated templating info
-    test_build_challenge(cmgr, "cmgr/examples/aptitude-and-privileges", templating_info)  # Using a valid challenge ID and updated templating info
+    templating_info = {
+        "flag_format": "FLAG{.*}",
+        "seeds": [12345]
+    }  # Updated templating info
+    test_build_challenge(
+        cmgr,
+        "cmgr/examples/aptitude-and-privileges",
+        templating_info
+    )  # Using a valid challenge ID and updated templating info
     # Commenting out build and instance tests for now as they require valid IDs
     # test_get_build(cmgr, "cmgr/examples/aptitude-and-privileges")
     # test_start_instance(cmgr, "cmgr/examples/aptitude-and-privileges")

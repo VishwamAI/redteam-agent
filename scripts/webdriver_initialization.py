@@ -4,6 +4,7 @@ from selenium.webdriver.chrome.options import Options
 import subprocess
 import os
 
+
 def initialize_webdriver():
     try:
         # Set up Chrome options for headless mode
