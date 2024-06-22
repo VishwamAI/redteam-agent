@@ -10,7 +10,10 @@ import json
 import time
 
 # Configure logging
-logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s - %(levelname)s - %(message)s')
+
 
 def initialize_components():
     """
@@ -22,6 +25,7 @@ def initialize_components():
     cmgr = CMGRInterface()
     vectorizer = TfidfVectorizer()
     return cmgr, vectorizer
+
 
 def list_challenges(cmgr):
     """
@@ -37,6 +41,7 @@ def list_challenges(cmgr):
     if not challenges:
         logging.info("No challenges available.")
     return challenges
+
 
 def process_challenge(cmgr, challenge):
     """
@@ -60,7 +65,8 @@ def process_challenge(cmgr, challenge):
         category = challenge.get('category', '').strip()
 
         # Ensure all fields are included and properly concatenated
-        text_features = f"{name} {description} {hint} {category}".replace("  ", " ").strip()
+        text_features = f"{name} {description} {hint} {category}".replace(
+            "  ", " ").strip()
         labels = np.array([1])  # Simulated labels
 
         return text_features, labels
@@ -69,7 +75,8 @@ def process_challenge(cmgr, challenge):
         logging.error(f"KeyError: Missing key {e} in challenge {challenge_id}")
         return None, None
     except Exception as e:
-        logging.error(f"An unexpected error occurred while processing challenge {challenge_id}: {e}")
+        logging.error(
+            f"An unexpected error occurred while processing challenge {challenge_id}: {e}")
         return None, None
 
 
@@ -90,6 +97,7 @@ def download_challenge_file(url, file_path):
     except requests.RequestException as e:
         logging.error(f"Failed to download challenge file from {url}: {e}")
 
+
 def extract_flag(file_path):
     """
     Extract the flag from the downloaded challenge file.
@@ -108,6 +116,7 @@ def extract_flag(file_path):
     except Exception as e:
         logging.error(f"Failed to extract flag from {file_path}: {e}")
         return None
+
 
 def submit_flag(flag):
     """
@@ -131,6 +140,7 @@ def submit_flag(flag):
     except requests.RequestException as e:
         logging.error(f"Failed to submit flag: {e}")
 
+
 def fit_vectorizer(vectorizer, all_text_features):
     """
     Fit the TfidfVectorizer on all collected text features.
@@ -143,6 +153,7 @@ def fit_vectorizer(vectorizer, all_text_features):
         np.ndarray: Transformed text features.
     """
     return vectorizer.fit_transform(all_text_features)
+
 
 def combine_features(text_vectors, challenges):
     """
@@ -162,6 +173,7 @@ def combine_features(text_vectors, challenges):
         features = np.hstack((text_vector, np.array([points])))
         all_features.append(features)
     return np.vstack(all_features)
+
 
 def update_knowledge_base(cmgr, vectorizer, learning_module, challenges):
     """
@@ -187,14 +199,17 @@ def update_knowledge_base(cmgr, vectorizer, learning_module, challenges):
     all_labels = np.hstack(all_labels)
 
     if all_features.shape[0] > 1:
-        X_train, X_test, y_train, y_test = train_test_split(all_features, all_labels, test_size=0.2)
+        X_train, X_test, y_train, y_test = train_test_split(
+            all_features, all_labels, test_size=0.2)
     else:
         X_train, X_test, y_train, y_test = all_features, all_features, all_labels, all_labels
 
     learning_module.train(X_train, y_train)
-    learning_module.save_model("/home/ubuntu/VishwamAI/models/jarvis_model.pkl")
+    learning_module.save_model(
+        "/home/ubuntu/VishwamAI/models/jarvis_model.pkl")
     predictions = learning_module.predict(X_test)
     logging.info(f"Predictions: {predictions}")
+
 
 def main():
     cmgr, vectorizer = initialize_components()
@@ -207,7 +222,8 @@ def main():
             challenges = json.load(file)
 
         if challenges:
-            update_knowledge_base(cmgr, vectorizer, learning_module, challenges)
+            update_knowledge_base(
+                cmgr, vectorizer, learning_module, challenges)
 
         # Example usage of the new functions
         challenge_url = "https://mercury.picoctf.net/static/a5683698ac318b47bd060cb786859f23/flag"
@@ -220,6 +236,7 @@ def main():
         # Sleep for a specified interval before checking for new challenges
         import time
         time.sleep(3600)  # Sleep for 1 hour
+
 
 if __name__ == "__main__":
     main()

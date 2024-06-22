@@ -1,5 +1,6 @@
 import requests
 
+
 class CMGRAPI:
     def __init__(self, base_url):
         self.base_url = base_url
@@ -89,6 +90,7 @@ class CMGRAPI:
                 f"{response.status_code}: {response.text}"
             )
             return None
+
 
 if __name__ == "__main__":
     base_url = "http://localhost:4200/api"

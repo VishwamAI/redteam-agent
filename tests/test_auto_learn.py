@@ -1,3 +1,10 @@
+from scripts.auto_learn import (
+    initialize_components,
+    list_challenges,
+    process_challenge,
+    fit_vectorizer,
+    combine_features
+)
 import unittest
 import sys
 import os
@@ -7,13 +14,6 @@ from unittest.mock import MagicMock
 # Add the parent directory to the Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from scripts.auto_learn import (
-    initialize_components,
-    list_challenges,
-    process_challenge,
-    fit_vectorizer,
-    combine_features
-)
 
 class TestAutoLearn(unittest.TestCase):
     def setUp(self):
@@ -56,7 +56,8 @@ class TestAutoLearn(unittest.TestCase):
 
     def test_fit_vectorizer(self):
         text_features = ['desc1 hint1 cat1', 'desc2 hint2 cat2']
-        self.vectorizer.fit_transform.return_value = np.array([[0.1, 0.2], [0.3, 0.4]])
+        self.vectorizer.fit_transform.return_value = np.array(
+            [[0.1, 0.2], [0.3, 0.4]])
         transformed_features = fit_vectorizer(self.vectorizer, text_features)
         self.vectorizer.fit_transform.assert_called_once_with(text_features)
         self.assertTrue(
@@ -68,8 +69,10 @@ class TestAutoLearn(unittest.TestCase):
         combined_features = combine_features(text_vectors, self.challenges)
         self.assertEqual(combined_features.shape, (2, 3))
         self.assertTrue(
-            (combined_features == np.array([[0.1, 0.2, 10], [0.3, 0.4, 20]])).all()
+            (combined_features == np.array(
+                [[0.1, 0.2, 10], [0.3, 0.4, 20]])).all()
         )
+
 
 if __name__ == "__main__":
     unittest.main()

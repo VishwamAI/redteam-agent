@@ -2,6 +2,7 @@ import subprocess
 import logging
 import numpy as np
 
+
 class AutomationEngine:
     def __init__(self, reporting_system):
         self.tasks = []
@@ -20,6 +21,7 @@ class AutomationEngine:
                 logging.error(error_message)
                 self.reporting_system.log_activity(error_message)
 
+
 def example_task(target):
     """
     Example task function that performs network reconnaissance using nmap.
@@ -36,6 +38,7 @@ def example_task(target):
         print(f"Error during reconnaissance: {e}")
         return np.array([[0, 0, 0, 0, 1]])
 
+
 def exploitation_task(target):
     """
     Placeholder task function for exploitation.
@@ -50,6 +53,7 @@ def exploitation_task(target):
     except Exception as e:
         print(f"Error during exploitation: {e}")
         return np.array([[0, 0, 0, 0, 1]])
+
 
 def lateral_movement_task(target):
     """
@@ -66,6 +70,7 @@ def lateral_movement_task(target):
         print(f"Error during lateral movement: {e}")
         return np.array([[0, 0, 0, 0, 1]])
 
+
 def exfiltration_task(target):
     """
     Placeholder task function for exfiltration.
@@ -81,18 +86,24 @@ def exfiltration_task(target):
         print(f"Error during exfiltration: {e}")
         return np.array([[0, 0, 0, 0, 1]])
 
+
 if __name__ == "__main__":
     import sys
     sys.path.append('scripts')
     from reporting_system import ReportingSystem
     reporting_system = ReportingSystem()
     engine = AutomationEngine(reporting_system)
-    engine.add_task(example_task, "127.0.0.1")  # Example target, replace with actual target
-    engine.add_task(exploitation_task, "127.0.0.1")  # Example target, replace with actual target
-    engine.add_task(lateral_movement_task, "127.0.0.1")  # Example target, replace with actual target
-    engine.add_task(exfiltration_task, "127.0.0.1")  # Example target, replace with actual target
+    # Example target, replace with actual target
+    engine.add_task(example_task, "127.0.0.1")
+    # Example target, replace with actual target
+    engine.add_task(exploitation_task, "127.0.0.1")
+    # Example target, replace with actual target
+    engine.add_task(lateral_movement_task, "127.0.0.1")
+    # Example target, replace with actual target
+    engine.add_task(exfiltration_task, "127.0.0.1")
     engine.run_tasks()
 # TODO: Implement actual network reconnaissance logic replacing the example_task function.
 # TODO: Implement actual exploitation logic replacing the exploitation_task function.
 # TODO: Implement actual lateral movement logic replacing the lateral_movement_task function.
-# TODO: Implement actual data exfiltration logic replacing the exfiltration_task function.
+# TODO: Implement actual data exfiltration logic replacing the
+# exfiltration_task function.

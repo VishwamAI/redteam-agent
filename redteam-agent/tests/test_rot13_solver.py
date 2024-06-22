@@ -1,3 +1,4 @@
+from scripts.rot13_solver import rot13_decrypt
 import unittest
 import sys
 import os
@@ -5,7 +6,6 @@ import os
 # Add the parent directory to the Python path
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-from scripts.rot13_solver import rot13_decrypt
 
 class TestRot13Solver(unittest.TestCase):
     def test_rot13_decrypt(self):
@@ -25,7 +25,11 @@ class TestRot13Solver(unittest.TestCase):
         self.assertEqual(rot13_decrypt(""), "")
 
         # Test with the provided encoded message
-        self.assertEqual(rot13_decrypt("cvpbPGS{arkg_gvzr_V'yy_gel_2_ebhaqf_bs_ebg13_uJdSftmh}"), "picoCTF{next_time_I'll_try_2_rounds_of_rot13_hWqFsgzu}")
+        self.assertEqual(
+            rot13_decrypt(
+                "cvpbPGS{arkg_gvzr_V'yy_gel_2_ebhaqf_bs_ebg13_uJdSftmh}"),
+            "picoCTF{next_time_I'll_try_2_rounds_of_rot13_hWqFsgzu}")
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -96,7 +96,9 @@ if __name__ == "__main__":
     cmgr_instance = CMGRInterface(base_url)
 
     test_list_challenges(cmgr_instance)
-    test_get_challenge(cmgr_instance, "cmgr/examples/aptitude-and-privileges")  # Valid ID
+    test_get_challenge(
+        cmgr_instance,
+        "cmgr/examples/aptitude-and-privileges")  # Valid ID
     test_build_challenge(
         cmgr_instance,
         "cmgr/examples/aptitude-and-privileges",
