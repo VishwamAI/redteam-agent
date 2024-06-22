@@ -36,7 +36,8 @@ class PicoCTFInteraction:
         else:
             logging.error(
                 f"Failed to retrieve challenge {challenge_id}: "
-                f"{response.status_code} - {response.text}"
+                f"{response.status_code} - "
+                f"{response.text}"
             )
             return None
 
@@ -54,7 +55,8 @@ class PicoCTFInteraction:
         else:
             logging.error(
                 f"Failed to submit solution for challenge {challenge_id}: "
-                f"{response.status_code} - {response.text}"
+                f"{response.status_code} - "
+                f"{response.text}"
             )
             return None
 
@@ -126,7 +128,8 @@ class PicoCTFInteraction:
         else:
             logging.error(
                 f"Failed to retrieve content for challenge: "
-                f"{response.status_code} - {response.text}"
+                f"{response.status_code} - "
+                f"{response.text}"
             )
             return None
 
@@ -149,7 +152,8 @@ class PicoCTFInteraction:
         else:
             logging.error(
                 f"Failed to retrieve list of challenges: "
-                f"{response.status_code} - {response.text}"
+                f"{response.status_code} - "
+                f"{response.text}"
             )
             return None
 
