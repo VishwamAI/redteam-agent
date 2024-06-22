@@ -22,7 +22,10 @@ class PicoCTFInteraction:
         if response.status_code == 200:
             logging.info("Successfully logged in to picoCTF.")
         else:
-            logging.error(f"Failed to log in to picoCTF: {response.status_code} - {response.text}")
+            logging.error(
+                f"Failed to log in to picoCTF: {response.status_code} - "
+                f"{response.text}"
+            )
 
     def get_challenge(self, challenge_id):
         challenge_url = f"{self.base_url}/challenges/{challenge_id}"
@@ -31,7 +34,10 @@ class PicoCTFInteraction:
             logging.info(f"Successfully retrieved challenge {challenge_id}.")
             return response.json()
         else:
-            logging.error(f"Failed to retrieve challenge {challenge_id}: {response.status_code} - {response.text}")
+            logging.error(
+                f"Failed to retrieve challenge {challenge_id}: {response.status_code} - "
+                f"{response.text}"
+            )
             return None
 
     def submit_solution(self, challenge_id, solution):
@@ -132,16 +138,23 @@ class PicoCTFInteraction:
             challenges = response.json()
             # Filter challenges based on category and difficulty if specified
             if category:
-                challenges = [ch for ch in challenges if ch.get("category") == category]
+                challenges = [
+                    ch for ch in challenges if ch.get("category") == category
+                ]
             if difficulty:
-                challenges = [ch for ch in challenges if ch.get("difficulty") == difficulty]
+                challenges = [
+                    ch for ch in challenges if ch.get("difficulty") == difficulty
+                ]
             return challenges
         else:
-            logging.error(f"Failed to retrieve list of challenges: {response.status_code} - {response.text}")
+            logging.error(
+                f"Failed to retrieve list of challenges: {response.status_code} - "
+                f"{response.text}"
+            )
             return None
 
-if __name__ == "__main__":
 
+if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Interact with picoCTF platform")
     parser.add_argument(
         "--list-challenges", action="store_true", help="List available challenges"
