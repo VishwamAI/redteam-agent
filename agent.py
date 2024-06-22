@@ -140,6 +140,7 @@ class RedTeamAgent:
                     f"shape: {result.shape}"
                 )
                 # Validate dimensions before appending
+                # Validate dimensions before appending
                 if collected_data and result.shape[1] != collected_data[0].shape[1]:
                     logging.error(
                         f"incompatible dimensions: {result.shape}"
