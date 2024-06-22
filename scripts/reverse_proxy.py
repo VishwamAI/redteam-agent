@@ -56,16 +56,13 @@ class ReverseProxy:
             abort(500)
 
 @app.route('/api/swagger.json')
-
-
 def serve_swagger():
     return reverse_proxy.serve_swagger_json()
-
 
 if __name__ == '__main__':
     target_url = 'http://localhost:4200'
     reverse_proxy = ReverseProxy(target_url)
     app.wsgi_app = ProxyFix(
-        app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_port=1, x_prefix=1
+        app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_port=1
     )
     run_simple('localhost', 5000, reverse_proxy)
