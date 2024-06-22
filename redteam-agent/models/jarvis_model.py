@@ -55,7 +55,9 @@ class JarvisModel:
         return features_preprocessed, labels
 
     def train(self, features, labels):
-        X_train, X_test, y_train, y_test = train_test_split(features, labels, test_size=0.2, random_state=42)
+        X_train, X_test, y_train, y_test = train_test_split(
+            features, labels, test_size=0.2, random_state=42
+        )
         self.model.fit(X_train, y_train)
         predictions = self.model.predict(X_test)
         accuracy = accuracy_score(y_test, predictions)
@@ -63,11 +65,15 @@ class JarvisModel:
 
     def predict(self, raw_features):
         # Preprocess the raw features before making predictions
-        features_preprocessed, _ = self.preprocess_data(raw_features, fit_preprocessor=False)
+        features_preprocessed, _ = self.preprocess_data(
+            raw_features, fit_preprocessor=False
+        )
         return self.model.predict(features_preprocessed)
 
     def save_model(self, model_path):
-        joblib.dump({'model': self.model, 'preprocessor': self.preprocessor}, model_path)
+        joblib.dump(
+            {'model': self.model, 'preprocessor': self.preprocessor}, model_path
+        )
         print(f"Model saved to {model_path}")
 
     def load_model(self, model_path):

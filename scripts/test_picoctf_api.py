@@ -1,6 +1,7 @@
 import logging
 from .picoctf_api import PicoCTFAPI
 
+
 def test_picoctf_api():
     # Initialize PicoCTFAPI
     base_url = "https://play.picoctf.org"
@@ -75,6 +76,7 @@ def test_picoctf_api():
             logging.info(f"Ran solver for instance {instance_id}.")
         else:
             logging.error(f"Failed to run solver for instance {instance_id}.")
+
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)

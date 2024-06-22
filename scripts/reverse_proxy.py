@@ -6,6 +6,7 @@ from flask import Flask, send_from_directory, abort
 
 app = Flask(__name__)
 
+
 class ReverseProxy:
     def __init__(self, target_url):
         self.target_url = target_url
@@ -38,7 +39,9 @@ class ReverseProxy:
             ('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE'),
             ('Access-Control-Allow-Headers', 'Content-Type')
         ]
-        headers.extend([(name, value) for name, value in response.raw.headers.items()])
+        headers.extend([
+            (name, value) for name, value in response.raw.headers.items()
+        ])
         return Response(response.content, response.status_code, headers)
 
     def serve_swagger_json(self):
@@ -55,12 +58,16 @@ class ReverseProxy:
             print(f"Error serving swagger.json: {e}")
             abort(500)
 
+
 @app.route('/api/swagger.json')
 def serve_swagger():
     return reverse_proxy.serve_swagger_json()
 
+
 if __name__ == '__main__':
     target_url = 'http://localhost:4200'
     reverse_proxy = ReverseProxy(target_url)
-    app.wsgi_app = ProxyFix(app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_port=1, x_prefix=1)
+    app.wsgi_app = ProxyFix(
+        app.wsgi_app, x_for=1, x_proto=1, x_host=1, x_port=1
+    )
     run_simple('localhost', 5000, reverse_proxy)

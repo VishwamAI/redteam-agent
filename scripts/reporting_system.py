@@ -4,6 +4,7 @@ import json
 import threading
 from datetime import datetime
 
+
 class ReportingSystem:
     def __init__(self, log_dir="logs"):
         self.log_dir = log_dir
@@ -40,14 +41,20 @@ class ReportingSystem:
             with open(self.log_file, "r") as f:
                 for line in f:
                     report["activities"].append(line.strip())
-            report_file = os.path.join(self.log_dir, f"report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json")
+            report_file = os.path.join(
+                self.log_dir,
+                f"report_{datetime.now().strftime('%Y%m%d_%H%M%S')}.json"
+            )
             with open(report_file, "w") as f:
                 json.dump(report, f, indent=4)
         return report_file
 
+
 if __name__ == "__main__":
     reporting_system = ReportingSystem()
     reporting_system.log_activity("Agent started.")
-    reporting_system.log_activity("Performed reconnaissance on target 127.0.0.1.")
+    reporting_system.log_activity(
+        "Performed reconnaissance on target 127.0.0.1."
+    )
     report_file = reporting_system.generate_report()
     print(f"Report generated: {report_file}")
