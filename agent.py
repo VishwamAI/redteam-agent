@@ -41,7 +41,8 @@ class RedTeamAgent:
         self.reporting_system.log_activity("RedTeamAgent initialized.")
 
     def initialize_tasks(self):
-        # Replace the example targets with actual targets relevant to red team operations
+        # Replace the example targets with actual targets relevant to red team
+        # operations
         self.automation_engine.add_task(
             example_task, "127.0.0.1"
         )  # Example target, replace with actual target
