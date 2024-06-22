@@ -1,7 +1,7 @@
 import logging
 import subprocess
 import time
-import requests
+
 
 class UpdateManager:
     def __init__(self):
@@ -11,14 +11,18 @@ class UpdateManager:
 
     def get_current_version(self):
         try:
-            with open("/home/ubuntu/VishwamAI/config/version.config", "r") as file:
+            with open(
+                "/home/ubuntu/VishwamAI/config/version.config", "r"
+            ) as file:
                 for line in file:
                     if line.startswith("version="):
                         return line.strip().split("=")[1]
         except FileNotFoundError:
             logging.error("Version config file not found.")
         except Exception as e:
-            logging.error(f"Error reading version config file: {e}")
+            logging.error(
+                f"Error reading version config file: {e}"
+            )
         return "1.0.0"  # Default version if config file is not found or an error occurs
 
     def check_for_updates(self):
@@ -28,13 +32,18 @@ class UpdateManager:
             logging.info("Simulated update check: No new updates found.")
             return False
         except Exception as e:
-            logging.error(f"Error during simulated update check: {e}")
+            logging.error(
+                f"Error during simulated update check: {e}"
+            )
             return False
 
     def apply_updates(self):
         logging.info("Applying updates...")
         try:
-            subprocess.run(["git", "pull"], check=True)
+            subprocess.run(
+                ["git", "pull"],
+                check=True
+            )
             subprocess.run(
                 ["./venv/bin/pip", "install", "-r", "requirements.txt"],
                 check=True
@@ -42,16 +51,22 @@ class UpdateManager:
             logging.info("Updates applied successfully.")
             self.update_version_config()  # Update the version in the config file
         except subprocess.CalledProcessError as e:
-            logging.error(f"Error applying updates: {e}")
+            logging.error(
+                f"Error applying updates: {e}"
+            )
 
     def update_version_config(self):
         try:
-            with open("/home/ubuntu/VishwamAI/config/version.config", "w") as file:
+            with open(
+                "/home/ubuntu/VishwamAI/config/version.config", "w"
+            ) as file:
                 file.write(
                     f"version={self.current_version}"
                 )
         except Exception as e:
-            logging.error(f"Error updating version config file: {e}")
+            logging.error(
+                f"Error updating version config file: {e}"
+            )
 
     def run(self):
         while self.running:
