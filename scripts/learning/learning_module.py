@@ -4,6 +4,7 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 import joblib
 
+
 class LearningModule:
     def __init__(self):
         self.model = RandomForestClassifier()
@@ -58,6 +59,7 @@ class LearningModule:
         X, y = self.preprocess_data(new_data)
         self.model.fit(X, y)
         print("Incremental training completed.")
+
 
 if __name__ == "__main__":
     # Example usage
