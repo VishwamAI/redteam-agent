@@ -42,12 +42,16 @@ jobs:
     - name: Install system dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y libsystemd-dev
+        sudo apt-get install -y libsystemd-dev meson
 
     - name: Install Cython
       run: |
         python -m pip install --upgrade pip
         pip install cython
+
+    - name: Install mesonpy
+      run: |
+        pip install mesonpy
 
     - name: Install dependencies
       run: |
