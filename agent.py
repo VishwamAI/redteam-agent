@@ -9,7 +9,9 @@ from scripts.automation.engine_template import (
 from scripts.learning.learning_module import LearningModule
 from scripts.update_manager import UpdateManager
 from scripts.reporting_system import ReportingSystem
-from scripts.picoctf_interaction import PicoCTFInteraction  # Importing PicoCTF interaction module
+from scripts.picoctf_interaction import (
+    PicoCTFInteraction
+)  # Importing PicoCTF interaction module
 from scripts.nlu_pipeline import (
     tokenize, named_entity_recognition, classify_intent
 )  # Importing NLU pipeline functions
@@ -93,7 +95,9 @@ class RedTeamAgent:
             # Example of using the learning module with dummy data
             raw_data = self.collect_data()
             if raw_data is not None:
-                logging.info("Starting incremental training with collected data.")
+                logging.info(
+                    "Starting incremental training with collected data."
+                )
                 self.learning_module.incremental_train(raw_data)
                 logging.info("Incremental training completed.")
         except Exception as e:
