@@ -1,5 +1,6 @@
 import requests
 
+
 class CMGRDAPI:
     def __init__(self, base_url):
         self.base_url = base_url
@@ -25,8 +26,8 @@ class CMGRDAPI:
             return response.json()
         else:
             print(
-                f"Failed to retrieve challenge {challenge_id} with status code {response.status_code}: "
-                f"{response.text}"
+                f"Failed to retrieve challenge {challenge_id} with status code "
+                f"{response.status_code}: {response.text}"
             )
             return None
 
@@ -37,8 +38,8 @@ class CMGRDAPI:
             return response.json()
         else:
             print(
-                f"Failed to build challenge {challenge_id} with status code {response.status_code}: "
-                f"{response.text}"
+                f"Failed to build challenge {challenge_id} with status code "
+                f"{response.status_code}: {response.text}"
             )
             return None
 
@@ -61,8 +62,8 @@ class CMGRDAPI:
             return response.json()
         else:
             print(
-                f"Failed to start instance for build {build_id} with status code {response.status_code}: "
-                f"{response.text}"
+                f"Failed to start instance for build {build_id} with status code "
+                f"{response.status_code}: {response.text}"
             )
             return None
 
@@ -73,8 +74,8 @@ class CMGRDAPI:
             return response.json()
         else:
             print(
-                f"Failed to retrieve instance {instance_id} with status code {response.status_code}: "
-                f"{response.text}"
+                f"Failed to retrieve instance {instance_id} with status code "
+                f"{response.status_code}: {response.text}"
             )
             return None
 
@@ -85,10 +86,11 @@ class CMGRDAPI:
             return {"message": "Solver ran correctly"}
         else:
             print(
-                f"Failed to run solver for instance {instance_id} with status code {response.status_code}: "
-                f"{response.text}"
+                f"Failed to run solver for instance {instance_id} with status code "
+                f"{response.status_code}: {response.text}"
             )
             return None
+
 
 if __name__ == "__main__":
     base_url = "http://localhost:4200/api"
