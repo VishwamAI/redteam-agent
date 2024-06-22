@@ -62,6 +62,7 @@ class UpdateManager:
                 time.sleep(1)
         logging.info("UpdateManager has stopped running.")
 
+
 if __name__ == "__main__":
     update_manager = UpdateManager()
     update_manager.run()
