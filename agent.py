@@ -25,7 +25,6 @@ logging.basicConfig(
 
 
 class RedTeamAgent:
-
     def __init__(self):
         self.running = True
         self.reporting_system = ReportingSystem()
@@ -59,12 +58,11 @@ class RedTeamAgent:
         self.update_thread.start()
         self.reporting_system.log_activity("RedTeamAgent started.")
         iteration_count = 0
-
-        # Set a maximum number of iterations for testing
-        max_iterations = 10
+        max_iterations = 10  # Set a maximum number of iterations for testing
         while self.running:
             logging.info(
-                f"Loop iteration {iteration_count} - self.running: {self.running}"
+                f"Loop iteration {iteration_count} - self.running: "
+                f"{self.running}"
             )
             if iteration_count >= max_iterations:
                 logging.info(
@@ -78,10 +76,12 @@ class RedTeamAgent:
             time.sleep(1)  # Sleep for a short duration to simulate continuous operation
             iteration_count += 1
             logging.info(
-                f"Iteration {iteration_count} completed - self.running: {self.running}"
+                f"Iteration {iteration_count} completed - self.running: "
+                f"{self.running}"
             )
         logging.info(
-            f"Loop has exited - self.running: {self.running}, iteration_count: {iteration_count}"
+            f"Loop has exited - self.running: {self.running}, "
+            f"iteration_count: {iteration_count}"
         )
         self.stop()  # Ensure the stop method is called after the loop exits
 
@@ -102,7 +102,9 @@ class RedTeamAgent:
                 logging.info("Incremental training completed.")
         except Exception as e:
             logging.error(f"Error running tasks: {e}")
-            self.reporting_system.log_activity(f"Error running tasks: {e}")
+            self.reporting_system.log_activity(
+                f"Error running tasks: {e}"
+            )
 
     def collect_data(self):
         # Placeholder for data collection logic
@@ -118,21 +120,25 @@ class RedTeamAgent:
                     continue
                 if isinstance(result, dict):
                     logging.info(
-                        f"Task {task_function.__name__} returned a dictionary, skipping shape check."
+                        f"Task {task_function.__name__} returned a dictionary, "
+                        f"skipping shape check."
                     )
                     continue
                 if isinstance(result, np.ndarray) and result.ndim == 1:
                     result = result.reshape(1, -1)  # Ensure result is 2D
                 logging.info(
-                    f"Task {task_function.__name__} returned result with shape: {result.shape}"
+                    f"Task {task_function.__name__} returned result with shape: "
+                    f"{result.shape}"
                 )
                 # Validate dimensions before appending
                 if collected_data and result.shape[1] != collected_data[0].shape[1]:
                     logging.error(
-                        f"Task {task_function.__name__} returned result with incompatible dimensions: {result.shape}"
+                        f"Task {task_function.__name__} returned result with "
+                        f"incompatible dimensions: {result.shape}"
                     )
                     self.reporting_system.log_activity(
-                        f"Task {task_function.__name__} returned result with incompatible dimensions: {result.shape}"
+                        f"Task {task_function.__name__} returned result with "
+                        f"incompatible dimensions: {result.shape}"
                     )
                     continue
                 collected_data.append(result)
@@ -204,11 +210,11 @@ class RedTeamAgent:
         try:
             challenges = self.picoctf_interaction.list_challenges()
             logging.info(f"Available challenges: {challenges}")
-            self.reporting_system.log_activity(f"Available challenges: {challenges}")
-        except Exception as e:
-            logging.error(
-                f"Error listing challenges: {e}"
+            self.reporting_system.log_activity(
+                f"Available challenges: {challenges}"
             )
+        except Exception as e:
+            logging.error(f"Error listing challenges: {e}")
             self.reporting_system.log_activity(
                 f"Error listing challenges: {e}"
             )
@@ -229,7 +235,8 @@ class RedTeamAgent:
         except Exception as e:
             logging.error(f"Error joining update thread: {e}")
         logging.info(
-            f"Stop method completed - self.running: {self.running}, update_manager.running: {self.update_manager.running}"
+            f"Stop method completed - self.running: {self.running}, "
+            f"update_manager.running: {self.update_manager.running}"
         )
         self.learning_module.save_model("trained_model.pkl")
         self.reporting_system.log_activity("Agent stopped and model saved.")
@@ -239,6 +246,7 @@ class RedTeamAgent:
             f"Report generated: {report_file}"
         )
 
+
 if __name__ == "__main__":
     agent = RedTeamAgent()
     try:
@@ -246,6 +254,7 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         agent.stop()
         logging.info("Agent stopped by user.")
+
 # TODO: Replace the example targets with actual targets relevant to red team operations.
 # TODO: Update the data collection logic with actual data collection from red team operations.
 # TODO: Implement security measures to ensure the agent operates safely and securely.
