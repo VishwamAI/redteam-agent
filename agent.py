@@ -31,7 +31,8 @@ class RedTeamAgent:
         self.automation_engine = AutomationEngine(self.reporting_system)
         self.learning_module = LearningModule()
         self.update_manager = UpdateManager()
-        self.picoctf_interaction = PicoCTFInteraction()  # Initializing PicoCTF interaction
+        self.picoctf_interaction = PicoCTFInteraction()  # Initializing PicoCTF
+        # interaction
         self.initialize_tasks()
         self.reporting_system.log_activity("RedTeamAgent initialized.")
 
@@ -195,8 +196,12 @@ class RedTeamAgent:
                 logging.warning(f"Unrecognized intent: {top_intent}")
 
         except Exception as e:
-            logging.error(f"Error processing natural language input: {e}")
-            self.reporting_system.log_activity(f"Error processing natural language input: {e}")
+            logging.error(
+                f"Error processing natural language input: {e}"
+            )
+            self.reporting_system.log_activity(
+                f"Error processing natural language input: {e}"
+            )
 
 
     def list_challenges(self):
@@ -205,8 +210,13 @@ class RedTeamAgent:
             logging.info(f"Available challenges: {challenges}")
             self.reporting_system.log_activity(f"Available challenges: {challenges}")
         except Exception as e:
-            logging.error(f"Error listing challenges: {e}")
-            self.reporting_system.log_activity(f"Error listing challenges: {e}")
+            logging.error(
+                f"Error listing challenges: {e}"
+            )
+            self.reporting_system.log_activity(
+                f"Error listing challenges: {e}"
+            )
+
 
 
     def stop(self):
@@ -231,7 +241,9 @@ class RedTeamAgent:
         self.reporting_system.log_activity("Agent stopped and model saved.")
         logging.info("Agent stopped and model saved.")
         report_file = self.reporting_system.generate_report()
-        logging.info(f"Report generated: {report_file}")
+        logging.info(
+            f"Report generated: {report_file}"
+        )
 
 if __name__ == "__main__":
     agent = RedTeamAgent()
