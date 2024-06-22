@@ -35,7 +35,10 @@ class UpdateManager:
         logging.info("Applying updates...")
         try:
             subprocess.run(["git", "pull"], check=True)
-            subprocess.run(["./venv/bin/pip", "install", "-r", "requirements.txt"], check=True)
+            subprocess.run(
+                ["./venv/bin/pip", "install", "-r", "requirements.txt"],
+                check=True
+            )
             logging.info("Updates applied successfully.")
             self.update_version_config()  # Update the version in the config file
         except subprocess.CalledProcessError as e:
