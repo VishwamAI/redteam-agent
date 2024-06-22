@@ -49,10 +49,6 @@ jobs:
         python -m pip install --upgrade pip
         pip install cython
 
-    - name: Install mesonpy
-      run: |
-        pip install mesonpy
-
     - name: Install dependencies
       run: |
         pip install --no-build-isolation -r requirements.txt --verbose
