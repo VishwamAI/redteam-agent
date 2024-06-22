@@ -46,6 +46,7 @@ def test_list_challenges():
             f"with difficulty '{difficulty}'."
         )
 
+
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     test_list_challenges()
