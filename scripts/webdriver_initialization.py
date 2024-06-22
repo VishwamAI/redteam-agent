@@ -1,9 +1,6 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 import subprocess
 import os
 
@@ -43,6 +40,7 @@ def initialize_webdriver():
         print(f"Error initializing WebDriver: {e}")
         return None, None
 
+
 def main():
     driver, xvfb_process = initialize_webdriver()
     if driver:
@@ -58,6 +56,7 @@ def main():
             driver.quit()
             # Terminate the Xvfb process
             xvfb_process.terminate()
+
 
 if __name__ == "__main__":
     main()
