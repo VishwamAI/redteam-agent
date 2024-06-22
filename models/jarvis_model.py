@@ -39,7 +39,8 @@ class JarvisModel:
         labels = raw_data[:, -1]
 
         # Debug statements to print the shapes and types of the features
-        print("Features shape before preprocessing:", features.shape)
+        print("Features shape before preprocessing:",
+              features.shape)
         print("Features types before preprocessing:",
               [type(x) for x in features[0]])
 
@@ -51,8 +52,10 @@ class JarvisModel:
         features_preprocessed = self.preprocessor.transform(features)
 
         # Debug statement to print the shape of the preprocessed features
-        print("Features shape after preprocessing:", features_preprocessed.shape)
-        print("Preprocessed features:", features_preprocessed)
+        print("Features shape after preprocessing:",
+              features_preprocessed.shape)
+        print("Preprocessed features:",
+              features_preprocessed)
 
         return features_preprocessed, labels
 
