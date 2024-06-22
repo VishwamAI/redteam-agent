@@ -38,7 +38,9 @@ class ReverseProxy:
             ('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE'),
             ('Access-Control-Allow-Headers', 'Content-Type')
         ]
-        headers.extend([(name, value) for name, value in response.raw.headers.items()])
+        headers.extend([
+            (name, value) for name, value in response.raw.headers.items()
+        ])
         return Response(response.content, response.status_code, headers)
 
     def serve_swagger_json(self):
@@ -55,9 +57,11 @@ class ReverseProxy:
             print(f"Error serving swagger.json: {e}")
             abort(500)
 
+
 @app.route('/api/swagger.json')
 def serve_swagger():
     return reverse_proxy.serve_swagger_json()
+
 
 if __name__ == '__main__':
     target_url = 'http://localhost:4200'
