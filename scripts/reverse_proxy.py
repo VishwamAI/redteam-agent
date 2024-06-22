@@ -56,6 +56,8 @@ class ReverseProxy:
             abort(500)
 
 @app.route('/api/swagger.json')
+
+
 def serve_swagger():
     return reverse_proxy.serve_swagger_json()
 
