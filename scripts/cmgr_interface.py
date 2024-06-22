@@ -13,8 +13,9 @@ class CMGRInterface:
             return response.json()
         else:
             print(
-                f"Failed to list challenges with status code "
-                f"{response.status_code}: {response.text}"
+                "Failed to list challenges with status code {}: {}".format(
+                    response.status_code, response.text
+                )
             )
             return None
 
@@ -25,8 +26,9 @@ class CMGRInterface:
             return response.json()
         else:
             print(
-                f"Failed to retrieve challenge {challenge_id} with status code "
-                f"{response.status_code}: {response.text}"
+                "Failed to retrieve challenge {} with status code {}: {}".format(
+                    challenge_id, response.status_code, response.text
+                )
             )
             return None
 
@@ -37,8 +39,9 @@ class CMGRInterface:
             return response.json()
         else:
             print(
-                f"Failed to build challenge {challenge_id} with status code "
-                f"{response.status_code}: {response.text}"
+                "Failed to build challenge {} with status code {}: {}".format(
+                    challenge_id, response.status_code, response.text
+                )
             )
             return None
 
@@ -49,8 +52,9 @@ class CMGRInterface:
             return response.json()
         else:
             print(
-                f"Failed to retrieve build {build_id} with status code "
-                f"{response.status_code}: {response.text}"
+                "Failed to retrieve build {} with status code {}: {}".format(
+                    build_id, response.status_code, response.text
+                )
             )
             return None
 
@@ -61,8 +65,9 @@ class CMGRInterface:
             return response.json()
         else:
             print(
-                f"Failed to start instance for build {build_id} with status code "
-                f"{response.status_code}: {response.text}"
+                "Failed to start instance for build {} with status code {}: {}".format(
+                    build_id, response.status_code, response.text
+                )
             )
             return None
 
@@ -73,8 +78,9 @@ class CMGRInterface:
             return response.json()
         else:
             print(
-                f"Failed to retrieve instance {instance_id} with status code "
-                f"{response.status_code}: {response.text}"
+                "Failed to retrieve instance {} with status code {}: {}".format(
+                    instance_id, response.status_code, response.text
+                )
             )
             return None
 
@@ -85,7 +91,8 @@ class CMGRInterface:
             return {"message": "Solver ran successfully"}
         else:
             print(
-                f"Failed to run solver for instance {instance_id} with status code "
-                f"{response.status_code}: {response.text}"
+                "Failed to run solver for instance {} with status code {}: {}".format(
+                    instance_id, response.status_code, response.text
+                )
             )
             return None
