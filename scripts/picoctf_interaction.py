@@ -3,6 +3,7 @@ import logging
 import argparse
 import numpy as np
 
+
 class PicoCTFInteraction:
     def __init__(self):
         self.base_url = "https://play.picoctf.org"
@@ -140,6 +141,7 @@ class PicoCTFInteraction:
             return None
 
 if __name__ == "__main__":
+
     parser = argparse.ArgumentParser(description="Interact with picoCTF platform")
     parser.add_argument(
         "--list-challenges", action="store_true", help="List available challenges"
