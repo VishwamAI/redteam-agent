@@ -10,7 +10,9 @@ from scripts.learning.learning_module import LearningModule
 from scripts.update_manager import UpdateManager
 from scripts.reporting_system import ReportingSystem
 from scripts.picoctf_interaction import PicoCTFInteraction  # Importing PicoCTF interaction module
-from scripts.nlu_pipeline import tokenize, named_entity_recognition, classify_intent  # Importing NLU pipeline functions
+from scripts.nlu_pipeline import (
+    tokenize, named_entity_recognition, classify_intent
+)  # Importing NLU pipeline functions
 
 # Configure logging
 logging.basicConfig(
@@ -59,7 +61,9 @@ class RedTeamAgent:
                 f"Loop iteration {iteration_count} - self.running: {self.running}"
             )
             if iteration_count >= max_iterations:
-                logging.info("Reached maximum iterations, setting running flag to False.")
+                logging.info(
+                    "Reached maximum iterations, setting running flag to False."
+                )
                 self.running = False
             if not self.running:
                 logging.info("Running flag is False, exiting loop.")
@@ -70,7 +74,9 @@ class RedTeamAgent:
             logging.info(
                 f"Iteration {iteration_count} completed - self.running: {self.running}"
             )
-        logging.info(f"Loop has exited - self.running: {self.running}, iteration_count: {iteration_count}")
+        logging.info(
+            f"Loop has exited - self.running: {self.running}, iteration_count: {iteration_count}"
+        )
         self.stop()  # Ensure the stop method is called after the loop exits
 
     def run_tasks(self):
@@ -98,10 +104,14 @@ class RedTeamAgent:
             try:
                 result = task_function(*args, **kwargs)
                 if result is None:
-                    logging.info(f"Task {task_function.__name__} returned None, skipping.")
+                    logging.info(
+                        f"Task {task_function.__name__} returned None, skipping."
+                    )
                     continue
                 if isinstance(result, dict):
-                    logging.info(f"Task {task_function.__name__} returned a dictionary, skipping shape check.")
+                    logging.info(
+                        f"Task {task_function.__name__} returned a dictionary, skipping shape check."
+                    )
                     continue
                 if isinstance(result, np.ndarray) and result.ndim == 1:
                     result = result.reshape(1, -1)  # Ensure result is 2D
@@ -119,8 +129,12 @@ class RedTeamAgent:
                     continue
                 collected_data.append(result)
             except Exception as e:
-                logging.error(f"Error collecting data from task {task_function.__name__}: {e}")
-                self.reporting_system.log_activity(f"Error collecting data from task {task_function.__name__}: {e}")
+                logging.error(
+                    f"Error collecting data from task {task_function.__name__}: {e}"
+                )
+                self.reporting_system.log_activity(
+                    f"Error collecting data from task {task_function.__name__}: {e}"
+                )
         if collected_data:
             # Ensure collected data has at least one feature column
             if all(data.shape[1] == 0 for data in collected_data):
@@ -144,7 +158,10 @@ class RedTeamAgent:
             logging.info(f"Entities: {entities}")
 
             # Define candidate labels for intent classification
-            candidate_labels = ["reconnaissance", "exploitation", "lateral movement", "exfiltration", "reporting"]
+            candidate_labels = [
+                "reconnaissance", "exploitation", "lateral movement",
+                "exfiltration", "reporting"
+            ]
 
             # Classify the intent of the input text
             intent = classify_intent(input_text, candidate_labels)
