@@ -80,7 +80,7 @@ langcodes==3.4.0
 language_data==1.2.0
 launchpadlib==1.10.16
 # lazr.restfulclient==0.14.4
-lazr.uri==1.0.6
+# lazr.uri==1.0.6
 libclang==18.1.1
 marisa-trie==1.2.0
 Markdown==3.6
