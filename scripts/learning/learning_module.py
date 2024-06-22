@@ -20,8 +20,8 @@ class LearningModule:
         precision = precision_score(y_test, predictions, average='weighted')
         recall = recall_score(y_test, predictions, average='weighted')
         f1 = f1_score(y_test, predictions, average='weighted')
-        print(f"Training completed. Model accuracy: {accuracy},\n"
-              f"Precision: {precision}, Recall: {recall}, F1 Score: {f1}")
+        print(f"Training completed. Model accuracy: {accuracy},")
+        print(f"Precision: {precision}, Recall: {recall}, F1 Score: {f1}")
 
     def predict(self, X):
         """
@@ -34,8 +34,7 @@ class LearningModule:
         Save the trained model to a file.
         """
         joblib.dump(self.model, file_path)
-        print(f"Model saved to:\n"
-              f"{file_path}")
+        print(f"Model saved to: {file_path}")
 
     def load_model(self, file_path):
         """
@@ -73,8 +72,8 @@ if __name__ == "__main__":
     learning_module.save_model("trained_model.pkl")
     learning_module.load_model("trained_model.pkl")
     predictions = learning_module.predict(X[:5])
-    print(f"Predictions for the first 5 samples:\n"
-          f"{predictions}")
+    print(f"Predictions for the first 5 samples:")
+    print(f"{predictions}")
 
     # Example incremental training
     new_data = np.random.rand(20, 11)  # Example new data
