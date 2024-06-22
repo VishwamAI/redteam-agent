@@ -65,7 +65,8 @@ class LearningModule:
 if __name__ == "__main__":
     # Example usage
     raw_data = np.random.rand(100, 11)  # Example raw data with 10 features and 1 label
-    raw_data[:, -1] = np.random.randint(0, 2, size=raw_data.shape[0])  # Generate discrete labels (0 or 1)
+    raw_data[:, -1] = np.random.randint(0, 2, size=raw_data.shape[0])
+    # Generate discrete labels (0 or 1)
     learning_module = LearningModule()
     X, y = learning_module.preprocess_data(raw_data)
     learning_module.train(X, y)
@@ -77,5 +78,6 @@ if __name__ == "__main__":
 
     # Example incremental training
     new_data = np.random.rand(20, 11)  # Example new data
-    new_data[:, -1] = np.random.randint(0, 2, size=new_data.shape[0])  # Generate discrete labels (0 or 1)
+    new_data[:, -1] = np.random.randint(0, 2, size=new_data.shape[0])
+    # Generate discrete labels (0 or 1)
     learning_module.incremental_train(new_data)
