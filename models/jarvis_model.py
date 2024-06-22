@@ -20,15 +20,17 @@ class JarvisModel:
         ])
 
         categorical_transformer = Pipeline(steps=[
-            ('imputer', SimpleImputer(strategy='constant', fill_value='missing')),
+            ('imputer', SimpleImputer(strategy='constant',
+                                      fill_value='missing')),
             ('onehot', OneHotEncoder(handle_unknown='ignore'))
         ])
 
-        # Create a column transformer to apply the preprocessing steps to the appropriate columns
+        # Create a column transformer to apply the preprocessing steps
+        # to the appropriate columns
         self.preprocessor = ColumnTransformer(
             transformers=[
-                ('num', numerical_transformer, [0, 1, 2]),  # Updated to include all numerical features
-                ('cat', categorical_transformer, [3])       # Assuming categorical feature is at index 3
+                ('num', numerical_transformer, [0, 1, 2]),
+                ('cat', categorical_transformer, [3])
             ]
         )
 
@@ -58,6 +60,7 @@ class JarvisModel:
               features_preprocessed)
 
         return features_preprocessed, labels
+
 
     def train(self, features, labels):
         X_train, X_test, y_train, y_test = train_test_split(
