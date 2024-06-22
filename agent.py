@@ -81,7 +81,8 @@ class RedTeamAgent:
                 logging.info("Running flag is False, exiting loop.")
                 break
             self.run_tasks()
-            time.sleep(1)  # Sleep for a short duration to simulate continuous operation
+            time.sleep(1)  # Sleep for a short duration to simulate continuous
+            # operation
             iteration_count += 1
             logging.info(
                 f"Iteration {iteration_count} completed - self.running: "
