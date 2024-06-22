@@ -30,11 +30,9 @@ class RedTeamAgent:
         self.automation_engine = AutomationEngine(self.reporting_system)
         self.learning_module = LearningModule()
         self.update_manager = UpdateManager()
-        self.picoctf_interaction = PicoCTFInteraction()  # Initializing PicoCTF
-        # interaction
+        self.picoctf_interaction = PicoCTFInteraction()  # Initializing PicoCTF interaction
         self.initialize_tasks()
         self.reporting_system.log_activity("RedTeamAgent initialized.")
-
 
     def initialize_tasks(self):
         # Replace the example targets with actual targets relevant to red team operations
@@ -53,7 +51,6 @@ class RedTeamAgent:
         self.automation_engine.add_task(
             self.picoctf_interaction.solve_challenge, "example_challenge_id"
         )  # Example challenge, replace with actual challenge ID
-
 
     def start(self):
         self.update_thread = threading.Thread(target=self.update_manager.run)
@@ -86,7 +83,6 @@ class RedTeamAgent:
         )
         self.stop()  # Ensure the stop method is called after the loop exits
 
-
     def run_tasks(self):
         logging.info("Running automated tasks...")
         self.reporting_system.log_activity("Running automated tasks...")
@@ -103,7 +99,6 @@ class RedTeamAgent:
         except Exception as e:
             logging.error(f"Error running tasks: {e}")
             self.reporting_system.log_activity(f"Error running tasks: {e}")
-
 
     def collect_data(self):
         # Placeholder for data collection logic
@@ -153,7 +148,6 @@ class RedTeamAgent:
             return np.vstack(collected_data)  # Stack collected data into a 2D array
         return None
 
-
     def process_natural_language_input(self, input_text):
         """
         Process natural language input using the NLU pipeline and determine actions.
@@ -202,7 +196,6 @@ class RedTeamAgent:
                 f"Error processing natural language input: {e}"
             )
 
-
     def list_challenges(self):
         try:
             challenges = self.picoctf_interaction.list_challenges()
@@ -215,8 +208,6 @@ class RedTeamAgent:
             self.reporting_system.log_activity(
                 f"Error listing challenges: {e}"
             )
-
-
 
     def stop(self):
         logging.info("Stop method called. Setting running flag to False.")
