@@ -3,8 +3,11 @@ import logging
 import threading
 import numpy as np  # Importing NumPy library
 from scripts.automation.engine_template import (
-    AutomationEngine, example_task, exploitation_task,
-    lateral_movement_task, exfiltration_task
+    AutomationEngine,
+    example_task,
+    exploitation_task,
+    lateral_movement_task,
+    exfiltration_task
 )
 from scripts.learning.learning_module import LearningModule
 from scripts.update_manager import UpdateManager
@@ -13,7 +16,9 @@ from scripts.picoctf_interaction import (
     PicoCTFInteraction
 )  # Importing PicoCTF interaction module
 from scripts.nlu_pipeline import (
-    tokenize, named_entity_recognition, classify_intent
+    tokenize,
+    named_entity_recognition,
+    classify_intent
 )  # Importing NLU pipeline functions
 
 # Configure logging
@@ -156,7 +161,9 @@ class RedTeamAgent:
             # Ensure collected data has at least one feature column
             if all(data.shape[1] == 0 for data in collected_data):
                 logging.error("Collected data has no features.")
-                self.reporting_system.log_activity("Collected data has no features.")
+                self.reporting_system.log_activity(
+                    "Collected data has no features."
+                )
                 return None
             return np.vstack(collected_data)  # Stack collected data into a 2D array
         return None
