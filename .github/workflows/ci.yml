@@ -51,7 +51,7 @@ jobs:
 
     - name: Install dependencies
       run: |
-        pip install --no-build-isolation -r requirements.txt --verbose || true
+        pip install --no-build-isolation -r requirements.txt --verbose
 
     - name: Print flake8 configuration
       run: |
