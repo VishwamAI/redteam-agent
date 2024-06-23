@@ -69,7 +69,7 @@ jobs:
       run: |
         pip install flake8==3.9.2
         pip install mccabe==0.6.1
-        pip install pycodestyle==2.4.0
+        pip install pycodestyle==2.12.0
         pip install pyflakes==2.0.0
 
     - name: Print flake8 configuration before linting
