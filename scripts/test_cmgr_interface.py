@@ -109,6 +109,7 @@ if __name__ == "__main__":
     )  # Valid ID and updated templating info
     # Commenting out build and instance tests for now as they require valid IDs
     # test_get_build(cmgr_instance, "cmgr/examples/aptitude-and-privileges")
-    # test_start_instance(cmgr_instance, "cmgr/examples/aptitude-and-privileges")
+    # test_start_instance(cmgr_instance,
+    #                     "cmgr/examples/aptitude-and-privileges")
     # test_get_instance(cmgr_instance, "cmgr/examples/aptitude-and-privileges")
     # test_run_solver(cmgr_instance, "cmgr/examples/aptitude-and-privileges")
