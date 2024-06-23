@@ -31,9 +31,9 @@ class LearningModule:
         f1 = f1_score(
             y_test, predictions, average='weighted'
         )
-        print(f"Training completed. Model accuracy: {accuracy},")
-        print(f"Precision: {precision},")
-        print(f"Recall: {recall},")
+        print(f"Training completed. Model accuracy: {accuracy}")
+        print(f"Precision: {precision}")
+        print(f"Recall: {recall}")
         print(f"F1 Score: {f1}")
 
     def predict(self, X):
