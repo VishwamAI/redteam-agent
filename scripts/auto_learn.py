@@ -4,10 +4,7 @@ from .learning.learning_module import LearningModule
 import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.model_selection import train_test_split
-import os
 import requests
-import json
-import time
 
 # Configure logging
 logging.basicConfig(
