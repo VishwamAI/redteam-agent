@@ -11,7 +11,8 @@ class LearningModule:
         precision = precision_score(y_test, predictions, average="weighted")
         recall = recall_score(y_test, predictions, average="weighted")
         f1 = f1_score(y_test, predictions, average="weighted")
-        print(f"Training completed. Model accuracy: {accuracy:.2f}")
+        print(f"Training completed. Model accuracy: "
+              f"{accuracy:.2f}")
         print(f"Precision: {precision:.2f}")
         print(f"Recall: {recall:.2f}")
         print(f"F1 Score: {f1:.2f}")
