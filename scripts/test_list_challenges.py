@@ -47,7 +47,8 @@ def test_list_challenges():
         )
 
     # Test with both category and difficulty filters
-    challenges = picoctf.list_challenges(category=category, difficulty=difficulty)
+    challenges = picoctf.list_challenges(
+        category=category, difficulty=difficulty)
     if challenges:
         logging.info(
             f"Retrieved {len(challenges)} challenges in category "

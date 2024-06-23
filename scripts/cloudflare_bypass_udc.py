@@ -3,6 +3,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 
+
 def initialize_undetected_webdriver():
     try:
         # Set up undetected Chrome options for headless mode
@@ -24,6 +25,7 @@ def initialize_undetected_webdriver():
         print(f"Error initializing undetected WebDriver: {e}")
         return None
 
+
 def main():
     driver = initialize_undetected_webdriver()
     if driver:
@@ -33,7 +35,8 @@ def main():
 
             # Wait for the Cloudflare challenge to be bypassed
             WebDriverWait(driver, 60).until(
-                EC.presence_of_element_located((By.ID, "challenge-success-text"))
+                EC.presence_of_element_located(
+                    (By.ID, "challenge-success-text"))
             )
 
             # Interact with the page as needed
@@ -46,6 +49,7 @@ def main():
         finally:
             # Close the browser
             driver.quit()
+
 
 if __name__ == "__main__":
     main()

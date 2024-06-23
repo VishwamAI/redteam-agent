@@ -53,10 +53,38 @@ jobs:
       run: |
         pip install --no-build-isolation -r requirements.txt --verbose || true
 
+    - name: Print flake8 configuration
+      run: |
+        cat .flake8
+
+    - name: Print last commit hash
+      run: |
+        git log -1 --pretty=format:"%H"
+
+    - name: Uninstall existing flake8 and plugins
+      run: |
+        pip uninstall -y flake8 flake8-per-file-ignores mccabe pycodestyle pyflakes
+
+    - name: Install flake8 and compatible plugins
+      run: |
+        pip install flake8==3.9.2
+        pip install mccabe==0.6.1
+        pip install pycodestyle==2.7.0
+        pip install pyflakes==2.3.1
+
+    - name: Print flake8 configuration before linting
+      run: |
+        cat .flake8
+
     - name: Lint with flake8
       run: |
-        pip install flake8
-        flake8 .
+        flake8 --version
+        flake8 --bug-report
+        flake8 --config .flake8 .
+
+    - name: Print flake8 output
+      run: |
+        flake8 --config .flake8 . || true
 
     - name: Run tests with pytest
       run: |

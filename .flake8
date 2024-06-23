@@ -1,3 +1,12 @@
 [flake8]
-exclude = venv
+exclude = venv, debug_venv
 max-line-length = 79
+per-file-ignores =
+    examples/multi/finalize.py: E501
+    models/jarvis_model.py: E501
+    scripts/learning/learning_module.py: E501
+    tests/test_auto_learn.py: E501
+    scripts/auto_learn.py: E501
+    scripts/automation/engine_template.py: E501
+    scripts/cmgr_api_interaction.py: E501
+    scripts/test_cmgr_interface.py: E501

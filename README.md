@@ -87,3 +87,7 @@ For any questions or inquiries, please contact the project maintainer at [kasina
 - **CI/CD Integration**: The project includes a CI/CD pipeline using GitHub Actions, which automates the process of checking out the code, setting up Python, installing dependencies, linting with flake8, and running tests with pytest. The CI/CD configuration can be found in the `.github/workflows/ci.yml` file.
 
 <!-- Triggering a new build -->
+<!-- Minor change to trigger CI/CD pipeline -->
+<!-- Another minor change to trigger CI/CD pipeline -->
+<!-- Yet another minor change to trigger CI/CD pipeline -->
+<!-- Adding another minor change to trigger CI/CD pipeline -->

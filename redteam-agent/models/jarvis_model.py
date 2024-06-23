@@ -8,6 +8,7 @@ from sklearn.compose import ColumnTransformer
 from sklearn.pipeline import Pipeline
 import joblib
 
+
 class JarvisModel:
     def __init__(self):
         self.model = RandomForestClassifier()
@@ -18,16 +19,20 @@ class JarvisModel:
             ('scaler', StandardScaler(with_mean=False))
         ])
 
-        categorical_transformer = Pipeline(steps=[
-            ('imputer', SimpleImputer(strategy='constant', fill_value='missing')),
-            ('onehot', OneHotEncoder(handle_unknown='ignore'))
-        ])
+        categorical_transformer = Pipeline(
+            steps=[
+                ('imputer', SimpleImputer(
+                    strategy='constant', fill_value='missing')), ('onehot', OneHotEncoder(
+                        handle_unknown='ignore'))])
 
-        # Create a column transformer to apply the preprocessing steps to the appropriate columns
+        # Create a column transformer to apply the preprocessing steps to the
+        # appropriate columns
         self.preprocessor = ColumnTransformer(
             transformers=[
-                ('num', numerical_transformer, [0, 1, 2]),  # Updated to include all numerical features
-                ('cat', categorical_transformer, [3])       # Assuming categorical feature is at index 3
+                # Updated to include all numerical features
+                ('num', numerical_transformer, [0, 1, 2]),
+                # Assuming categorical feature is at index 3
+                ('cat', categorical_transformer, [3])
             ]
         )
 
@@ -39,7 +44,9 @@ class JarvisModel:
 
         # Debug statements to print the shapes and types of the features
         print("Features shape before preprocessing:", features.shape)
-        print("Features types before preprocessing:", [type(x) for x in features[0]])
+        print(
+            "Features types before preprocessing:", [
+                type(x) for x in features[0]])
 
         # Fit the preprocessor on the training data if specified
         if fit_preprocessor:
@@ -49,7 +56,9 @@ class JarvisModel:
         features_preprocessed = self.preprocessor.transform(features)
 
         # Debug statement to print the shape of the preprocessed features
-        print("Features shape after preprocessing:", features_preprocessed.shape)
+        print(
+            "Features shape after preprocessing:",
+            features_preprocessed.shape)
         print("Preprocessed features:", features_preprocessed)
 
         return features_preprocessed, labels
@@ -81,6 +90,7 @@ class JarvisModel:
         self.model = data['model']
         self.preprocessor = data['preprocessor']
         print(f"Model loaded from {model_path}")
+
 
 if __name__ == "__main__":
     # Example usage

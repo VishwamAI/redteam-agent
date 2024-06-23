@@ -22,8 +22,15 @@ chrome_options.add_argument("--user-data-dir=/tmp")
 service = Service('/usr/local/bin/chromedriver')
 
 # Use Xvfb to run Chrome in a virtual display environment
-xvfb_command = ["xvfb-run", "--auto-servernum", "--server-args=-screen 0 1920x1080x24", "chromedriver"]
-xvfb_process = subprocess.Popen(xvfb_command, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+xvfb_command = [
+    "xvfb-run",
+    "--auto-servernum",
+    "--server-args=-screen 0 1920x1080x24",
+    "chromedriver"]
+xvfb_process = subprocess.Popen(
+    xvfb_command,
+    stdout=subprocess.PIPE,
+    stderr=subprocess.PIPE)
 
 # Set the DISPLAY environment variable to use the Xvfb display
 os.environ["DISPLAY"] = ":99"
@@ -35,12 +42,14 @@ try:
     # Navigate to the picoCTF practice page
     driver.get("https://play.picoctf.org/practice")
 
-    # Take a screenshot before waiting for the Cloudflare challenge to be bypassed
+    # Take a screenshot before waiting for the Cloudflare challenge to be
+    # bypassed
     driver.save_screenshot("/home/ubuntu/screenshots/before_wait.png")
 
     # Increase the wait time for the Cloudflare challenge to be bypassed
     WebDriverWait(driver, 120).until(
-        EC.presence_of_element_located((By.XPATH, "//h2[text()='picoGym Practice Challenges']"))
+        EC.presence_of_element_located(
+            (By.XPATH, "//h2[text()='picoGym Practice Challenges']"))
     )
 
     # Interact with the page as needed

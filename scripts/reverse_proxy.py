@@ -22,7 +22,9 @@ class ReverseProxy:
 
     def forward_request(self, request):
         target_url = self.target_url + request.full_path
-        headers = {key: value for key, value in request.headers if key != 'Host'}
+        headers = {
+            key: value for key,
+            value in request.headers if key != 'Host'}
         response = requests.request(
             method=request.method,
             url=target_url,
@@ -55,7 +57,9 @@ class ReverseProxy:
             response.headers.extend(headers)
             return response
         except Exception as e:
-            print(f"Error serving swagger.json: {e}")
+            print(
+                "Error serving swagger.json: {}".format(e)
+            )
             abort(500)
 
 

@@ -1,0 +1,44 @@
+./examples/multi/solver/solve.py:7:1: E302 expected 2 blank lines, found 1
+./examples/multi/solver/solve.py:11:1: E305 expected 2 blank lines after class or function definition, found 1
+./redteam-agent/examples/multi/finalize.py:12:80: E501 line too long (84 > 79 characters)
+./redteam-agent/examples/multi/solver/solve.py:2:1: F401 'time' imported but unused
+./redteam-agent/examples/multi/solver/solve.py:11:28: F821 undefined name 'CMD'
+./redteam-agent/examples/multi/solver/solve.py:11:47: F821 undefined name 'CMD'
+./redteam-agent/examples/multi/solver/solve.py:11:57: F821 undefined name 'CMD'
+./redteam-agent/models/jarvis_model.py:23:80: E501 line too long (82 > 79 characters)
+./redteam-agent/models/jarvis_model.py:83:80: E501 line too long (80 > 79 characters)
+./redteam-agent/scripts/learning/learning_module.py:4:80: E501 line too long (83 > 79 characters)
+./redteam-agent/scripts/learning/learning_module.py:25:80: E501 line too long (120 > 79 characters)
+./redteam-agent/tests/test_auto_learn.py:1:80: E501 line too long (122 > 79 characters)
+./redteam-agent/tests/test_jarvis_model.py:28:9: F841 local variable 'labels' is assigned to but never used
+./scripts/auto_learn.py:7:1: F401 'os' imported but unused
+./scripts/auto_learn.py:9:1: F401 'json' imported but unused
+./scripts/auto_learn.py:10:1: F401 'time' imported but unused
+./scripts/auto_learn.py:79:80: E501 line too long (91 > 79 characters)
+./scripts/auto_learn.py:205:35: F841 local variable 'y_test' is assigned to but never used
+./scripts/auto_learn.py:205:80: E501 line too long (93 > 79 characters)
+./scripts/auto_learn.py:220:9: F811 redefinition of unused 'json' from line 9
+./scripts/auto_learn.py:221:80: E501 line too long (91 > 79 characters)
+./scripts/auto_learn.py:229:80: E501 line too long (98 > 79 characters)
+./scripts/auto_learn.py:237:9: F811 redefinition of unused 'time' from line 10
+./scripts/automation/engine_template.py:19:80: E501 line too long (83 > 79 characters)
+./scripts/automation/engine_template.py:105:80: E501 line too long (90 > 79 characters)
+./scripts/automation/engine_template.py:106:80: E501 line too long (85 > 79 characters)
+./scripts/automation/engine_template.py:107:80: E501 line too long (93 > 79 characters)
+./scripts/cmgr_api_interaction.py:29:80: E501 line too long (80 > 79 characters)
+./scripts/cmgr_api_interaction.py:65:80: E501 line too long (82 > 79 characters)
+./scripts/cmgr_api_interaction.py:89:80: E501 line too long (84 > 79 characters)
+./scripts/cmgrd_api_interaction.py:2:5: F821 undefined name 'challenge_id'
+./scripts/cmgrd_api_interaction.py:2:19: F821 undefined name 'response'
+./scripts/cmgrd_api_interaction.py:2:41: F821 undefined name 'response'
+./scripts/cmgrd_api_interaction.py:5:5: F821 undefined name 'build_id'
+./scripts/cmgrd_api_interaction.py:5:15: F821 undefined name 'response'
+./scripts/cmgrd_api_interaction.py:5:37: F821 undefined name 'response'
+./scripts/cmgrd_api_interaction.py:8:5: F821 undefined name 'instance_id'
+./scripts/cmgrd_api_interaction.py:8:18: F821 undefined name 'response'
+./scripts/cmgrd_api_interaction.py:8:40: F821 undefined name 'response'
+./scripts/cmgrd_api_interaction.py:11:5: F821 undefined name 'instance_id'
+./scripts/cmgrd_api_interaction.py:11:18: F821 undefined name 'response'
+./scripts/cmgrd_api_interaction.py:11:40: F821 undefined name 'response'
+./scripts/test_cmgr_interface.py:112:80: E501 line too long (81 > 79 characters)
+./tests/test_jarvis_model.py:28:9: F841 local variable 'labels' is assigned to but never used

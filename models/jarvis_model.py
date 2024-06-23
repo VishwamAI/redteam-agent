@@ -20,15 +20,17 @@ class JarvisModel:
         ])
 
         categorical_transformer = Pipeline(steps=[
-            ('imputer', SimpleImputer(strategy='constant', fill_value='missing')),
+            ('imputer', SimpleImputer(strategy='constant',
+                                      fill_value='missing')),
             ('onehot', OneHotEncoder(handle_unknown='ignore'))
         ])
 
-        # Create a column transformer to apply the preprocessing steps to the appropriate columns
+        # Create a column transformer to apply the preprocessing steps
+        # to the appropriate columns
         self.preprocessor = ColumnTransformer(
             transformers=[
-                ('num', numerical_transformer, [0, 1, 2]),  # Updated to include all numerical features
-                ('cat', categorical_transformer, [3])       # Assuming categorical feature is at index 3
+                ('num', numerical_transformer, [0, 1, 2]),
+                ('cat', categorical_transformer, [3])
             ]
         )
 
@@ -39,8 +41,10 @@ class JarvisModel:
         labels = raw_data[:, -1]
 
         # Debug statements to print the shapes and types of the features
-        print("Features shape before preprocessing:", features.shape)
-        print("Features types before preprocessing:", [type(x) for x in features[0]])
+        print("Features shape before preprocessing:",
+              features.shape)
+        print("Features types before preprocessing:",
+              [type(x) for x in features[0]])
 
         # Fit the preprocessor on the training data if specified
         if fit_preprocessor:
@@ -50,8 +54,10 @@ class JarvisModel:
         features_preprocessed = self.preprocessor.transform(features)
 
         # Debug statement to print the shape of the preprocessed features
-        print("Features shape after preprocessing:", features_preprocessed.shape)
-        print("Preprocessed features:", features_preprocessed)
+        print("Features shape after preprocessing:",
+              features_preprocessed.shape)
+        print("Preprocessed features:",
+              features_preprocessed)
 
         return features_preprocessed, labels
 
@@ -70,14 +76,17 @@ class JarvisModel:
         return self.model.predict(features_preprocessed)
 
     def save_model(self, model_path):
-        joblib.dump({'model': self.model, 'preprocessor': self.preprocessor}, model_path)
-        print(f"Model saved to {model_path}")
+        joblib.dump({'model': self.model, 'preprocessor': self.preprocessor},
+                    model_path)
+        print(f"Model saved to:\n"
+              f"{model_path}")
 
     def load_model(self, model_path):
         data = joblib.load(model_path)
         self.model = data['model']
         self.preprocessor = data['preprocessor']
-        print(f"Model loaded from {model_path}")
+        print(f"Model loaded from:\n"
+              f"{model_path}")
 
 
 if __name__ == "__main__":
@@ -87,6 +96,7 @@ if __name__ == "__main__":
     features, labels = jarvis.preprocess_data(raw_data, fit_preprocessor=True)
     jarvis.train(features, labels)
     predictions = jarvis.predict(raw_data)
-    print(f"Predictions: {predictions}")
+    print(f"Predictions:\n"
+          f"{predictions}")
     jarvis.save_model("jarvis_model.pkl")
     jarvis.load_model("jarvis_model.pkl")
