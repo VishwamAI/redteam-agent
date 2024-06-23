@@ -84,5 +84,5 @@ if __name__ == "__main__":
     # Example incremental training
     new_data = np.random.rand(20, 11)  # Example new data
     # Generate discrete labels (0 or 1)
-    new_data[:, -1] = np.random.randint(0, 2, size=new_data.shape[0])
+    new_data[:, -1] = np.random.randint(0, 2, size=raw_data.shape[0])
     learning_module.incremental_train(new_data)
