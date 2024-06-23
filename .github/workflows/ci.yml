@@ -90,6 +90,10 @@ jobs:
       run: |
         echo "PYTHONPATH=$PYTHONPATH:$(pwd)" >> $GITHUB_ENV
 
+    - name: Install pytest
+      run: |
+        pip install pytest
+
     - name: Run tests with pytest
       run: |
         pytest
