@@ -182,7 +182,7 @@ trio==0.25.1
 trio-websocket==0.11.1
 Twisted==22.1.0
 typer==0.12.3
-typing_extensions>=4.0.0,<5.0.0
+typing_extensions>=4.6.1,<5.0.0
 tzdata==2023.4
 tzlocal==5.2
 # ubuntu-advantage-tools==8001
