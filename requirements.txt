@@ -23,7 +23,7 @@ charset-normalizer==3.3.2
 click==8.1.7
 cloudpathlib==0.18.1
 cloudpickle==3.0.0
-colorama==0.4.4
+colorama<0.4.4
 confection==0.1.5
 configobj==5.0.8
 constantly==15.1.0
