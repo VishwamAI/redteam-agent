@@ -10,7 +10,8 @@ metadata = {"flag": os.environ["FLAG"]}
 
 def generate_password(length=10):
     ALPHABET = (
-        "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+        "abcdefghijklmnopqrstuvwxyz"
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
         "0123456789-_+=."
     )
     return "".join(random.choices(ALPHABET, k=length))
