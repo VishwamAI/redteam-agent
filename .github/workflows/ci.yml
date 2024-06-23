@@ -92,8 +92,4 @@ jobs:
 
     - name: Run tests with pytest
       run: |
-        pip install pytest
-        pip install numpy
-        pip install scikit-learn
-        pip install requests
         pytest
