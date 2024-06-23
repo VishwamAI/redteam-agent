@@ -1,10 +1,7 @@
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score
-from sklearn.metrics import precision_score
-from sklearn.metrics import recall_score
-from sklearn.metrics import f1_score
+from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 import joblib
 
 
@@ -22,15 +19,9 @@ class LearningModule:
         self.model.fit(X_train, y_train)
         predictions = self.model.predict(X_test)
         accuracy = accuracy_score(y_test, predictions)
-        precision = precision_score(
-            y_test, predictions, average='weighted'
-        )
-        recall = recall_score(
-            y_test, predictions, average='weighted'
-        )
-        f1 = f1_score(
-            y_test, predictions, average='weighted'
-        )
+        precision = precision_score(y_test, predictions, average='weighted')
+        recall = recall_score(y_test, predictions, average='weighted')
+        f1 = f1_score(y_test, predictions, average='weighted')
         print(f"Training completed. Model accuracy: {accuracy}")
         print(f"Precision: {precision}")
         print(f"Recall: {recall}")
