@@ -26,7 +26,6 @@ class TestJarvisModel(unittest.TestCase):
             raw_data[:, :-1], fit_preprocessor=True)[0]
 
         # Check if the preprocessed features have the expected shape and type
-        # Updated expected shape based on OneHotEncoder output
         self.assertEqual(features.shape, (4, 5))
         self.assertTrue(np.issubdtype(features.dtype, np.number))
 
