@@ -57,7 +57,8 @@ class TestAutoLearn(unittest.TestCase):
     def test_fit_vectorizer(self):
         text_features = ['desc1 hint1 cat1', 'desc2 hint2 cat2']
         self.vectorizer.fit_transform.return_value = np.array(
-            [[0.1, 0.2], [0.3, 0.4]])
+            [[0.1, 0.2], [0.3, 0.4]]
+        )
         transformed_features = fit_vectorizer(self.vectorizer, text_features)
         self.vectorizer.fit_transform.assert_called_once_with(text_features)
         self.assertTrue(
