@@ -61,13 +61,16 @@ jobs:
       run: |
         git log -1 --pretty=format:"%H"
 
+    - name: Install flake8
+      run: |
+        pip install flake8
+
     - name: Clear flake8 cache
       run: |
         flake8 --clear-cache
 
     - name: Lint with flake8
       run: |
-        pip install flake8
         flake8 --version
         flake8 --bug-report
         flake8 --config .flake8 .
