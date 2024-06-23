@@ -22,8 +22,8 @@ class TestJarvisModel(unittest.TestCase):
             [np.nan, 2.0, 5.0, 0, 'X', 1],
             [4.0, 3.0, 6.0, 1, 'Z', 0]
         ], dtype=object)  # Ensure correct data types
-        features, labels = self.jarvis.preprocess_data(
-            raw_data[:, :-1], fit_preprocessor=True)
+        features = self.jarvis.preprocess_data(
+            raw_data[:, :-1], fit_preprocessor=True)[0]
         # Ensure labels are of integer type for classification
         labels = raw_data[:, -1].astype(int)
 
@@ -41,8 +41,8 @@ class TestJarvisModel(unittest.TestCase):
             [np.nan, 2.0, 5.0, 0, 'X', 1],
             [4.0, 3.0, 6.0, 1, 'Z', 0]
         ], dtype=object)  # Ensure correct data types
-        features, labels = self.jarvis.preprocess_data(
-            raw_data[:, :-1], fit_preprocessor=True)
+        features = self.jarvis.preprocess_data(
+            raw_data[:, :-1], fit_preprocessor=True)[0]
         # Ensure labels are of integer type for classification
         labels = raw_data[:, -1].astype(int)
         self.jarvis.train(features, labels)
@@ -59,8 +59,8 @@ class TestJarvisModel(unittest.TestCase):
             [np.nan, 2.0, 5.0, 0, 'X', 1],
             [4.0, 3.0, 6.0, 1, 'Z', 0]
         ], dtype=object)  # Ensure correct data types
-        features, labels = self.jarvis.preprocess_data(
-            raw_data[:, :-1], fit_preprocessor=True)
+        features = self.jarvis.preprocess_data(
+            raw_data[:, :-1], fit_preprocessor=True)[0]
         # Ensure labels are of integer type for classification
         labels = raw_data[:, -1].astype(int)
         self.jarvis.train(features, labels)
