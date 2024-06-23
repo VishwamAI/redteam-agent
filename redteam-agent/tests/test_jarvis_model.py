@@ -24,8 +24,6 @@ class TestJarvisModel(unittest.TestCase):
         ], dtype=object)  # Ensure correct data types
         features = self.jarvis.preprocess_data(
             raw_data[:, :-1], fit_preprocessor=True)[0]
-        # Ensure labels are of integer type for classification
-        labels = raw_data[:, -1].astype(int)
 
         # Check if the preprocessed features have the expected shape and type
         # Updated expected shape based on OneHotEncoder output
