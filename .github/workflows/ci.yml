@@ -92,7 +92,7 @@ jobs:
 
     - name: Set PYTHONPATH
       run: |
-        echo "PYTHONPATH=$PYTHONPATH:$(pwd):$(pwd)/scripts" >> $GITHUB_ENV
+        echo "PYTHONPATH=$PYTHONPATH:$(pwd):$(pwd)/scripts:$(pwd)/redteam-agent" >> $GITHUB_ENV
 
     - name: Install pytest
       run: |
