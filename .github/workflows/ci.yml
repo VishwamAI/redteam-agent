@@ -65,6 +65,10 @@ jobs:
       run: |
         pip install flake8
 
+    - name: Print flake8 configuration before linting
+      run: |
+        cat .flake8
+
     - name: Lint with flake8
       run: |
         flake8 --version
