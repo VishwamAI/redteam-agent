@@ -1,6 +1,6 @@
 # Ensure Cython is installed first
 Cython==3.0.10
-PyYAML @ https://files.pythonhosted.org/packages/7d/39/472f2554a0f1e825bd7c5afc11c817cd7a2f3657460f7159f691fbb37c51/PyYAML-6.0.1-cp39-cp39-manylinux_2_17_x86_64.manylinux2014_x86_64.whl
+PyYAML>=3.10,<5.5
 wheel==0.40.0
 absl-py==2.1.0
 altair==5.2.0
