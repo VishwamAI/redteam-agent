@@ -83,7 +83,8 @@ class JarvisModel:
 
     def save_model(self, model_path):
         joblib.dump(
-            {'model': self.model, 'preprocessor': self.preprocessor}, model_path
+            {'model': self.model, 'preprocessor': self.preprocessor},
+            model_path
         )
         print(f"Model saved to {model_path}")
 
