@@ -90,4 +90,5 @@ jobs:
       run: |
         pip install pytest
         pip install numpy
+        pip install scikit-learn
         pytest
