@@ -6,8 +6,7 @@ with open("metadata.json", "r") as f:
 
 
 def buffer_predicate(buff):
-    CMD = "example_command"  # Define CMD variable
-    return len(buff) > len(CMD) and buff[-len(CMD):] == CMD
+    return len(buff) > len("example_command") and buff[-len("example_command"):] == "example_command"
 
 
 s = ssh(host="work", user=md["username"], password=md["password"])
