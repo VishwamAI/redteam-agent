@@ -67,10 +67,10 @@ jobs:
 
     - name: Install flake8 and compatible plugins
       run: |
-        pip install flake8==3.9.2
+        pip install flake8==4.0.1
         pip install mccabe==0.6.1
-        pip install pycodestyle==2.7.0
-        pip install pyflakes==2.3.1
+        pip install pycodestyle==2.8.0
+        pip install pyflakes==2.4.0
 
     - name: Print flake8 configuration before linting
       run: |
