@@ -1,4 +1,10 @@
-from scripts.auto_learn import initialize_components, list_challenges, process_challenge, fit_vectorizer, combine_features
+from scripts.auto_learn import (
+    initialize_components,
+    list_challenges,
+    process_challenge,
+    fit_vectorizer,
+    combine_features
+)
 import unittest
 import sys
 import os
