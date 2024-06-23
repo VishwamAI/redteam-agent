@@ -89,4 +89,5 @@ jobs:
     - name: Run tests with pytest
       run: |
         pip install pytest
+        pip install numpy
         pytest
