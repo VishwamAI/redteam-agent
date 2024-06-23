@@ -22,8 +22,10 @@ class JarvisModel:
         categorical_transformer = Pipeline(
             steps=[
                 ('imputer', SimpleImputer(
-                    strategy='constant', fill_value='missing')), ('onehot', OneHotEncoder(
-                        handle_unknown='ignore'))])
+                    strategy='constant', fill_value='missing')),
+                ('onehot', OneHotEncoder(handle_unknown='ignore'))
+            ]
+        )
 
         # Create a column transformer to apply the preprocessing steps to the
         # appropriate columns
