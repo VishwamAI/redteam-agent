@@ -54,7 +54,7 @@ GitPython==3.1.41
 google-pasta==0.2.0
 greenlet==3.0.3
 grpcio==1.64.1
-# gym==0.23.0
+gym==0.23.0
 gym-notices==0.0.8
 h11==0.14.0
 h5py==3.11.0
