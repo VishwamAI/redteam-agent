@@ -1,5 +1,6 @@
 import random
 
+
 def generate_password(length=10):
     ALPHABET = (
         'abcdefghijklmnopqrstuvwxyz'
