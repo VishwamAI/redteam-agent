@@ -65,10 +65,13 @@ jobs:
       run: |
         pip uninstall -y flake8 flake8-per-file-ignores mccabe pycodestyle pyflakes
 
-    - name: Install flake8
+    - name: Install flake8 and compatible plugins
       run: |
         pip install flake8==3.9.2
-        pip install flake8-per-file-ignores
+        pip install flake8-per-file-ignores==0.8.1
+        pip install mccabe==0.6.1
+        pip install pycodestyle==2.4.0
+        pip install pyflakes==2.0.0
 
     - name: Print flake8 configuration before linting
       run: |
