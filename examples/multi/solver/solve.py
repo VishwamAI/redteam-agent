@@ -4,9 +4,11 @@ from pwnlib.tubes import ssh
 with open("metadata.json", "r") as f:
     md = json.loads(f.read())
 
+
 def buffer_predicate(buff):
     CMD = "example_command"  # Define CMD variable
     return len(buff) > len(CMD) and buff[-len(CMD):] == CMD
+
 
 s = ssh.ssh(host="work", user=md["username"], password=md["password"])
 sh = s.shell(tty=True)
