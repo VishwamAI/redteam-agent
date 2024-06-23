@@ -196,10 +196,10 @@ def update_knowledge_base(cmgr, vectorizer, learning_module, challenges):
     all_labels = np.hstack(all_labels)
 
     if all_features.shape[0] > 1:
-        X_train, X_test, y_train, y_test = train_test_split(
+        X_train, X_test, y_train, _ = train_test_split(
             all_features, all_labels, test_size=0.2)
     else:
-        X_train, X_test, y_train, y_test = all_features, all_features, all_labels, all_labels
+        X_train, X_test, y_train, _ = all_features, all_features, all_labels, all_labels
 
     learning_module.train(X_train, y_train)
     learning_module.save_model(
@@ -231,7 +231,6 @@ def main():
             submit_flag(flag)
 
         # Sleep for a specified interval before checking for new challenges
-        import time
         time.sleep(3600)  # Sleep for 1 hour
 
 
