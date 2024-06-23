@@ -1,5 +1,4 @@
 import json
-import time
 
 from pwnlib.tubes import ssh
 
@@ -8,7 +7,7 @@ with open("metadata.json", "r") as f:
 
 
 def buffer_predicate(buff):
-    return len(buff) > len(CMD) and buff[-len(CMD):] == CMD
+    return len(buff) > len("example_command") and buff[-len("example_command"):] == "example_command"
 
 
 s = ssh.ssh(host="work", user=md["username"], password=md["password"])
