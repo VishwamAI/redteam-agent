@@ -1,5 +1,5 @@
 # Ensure Cython is installed first
-Cython==0.29.36
+Cython==3.0.10
 PyYAML==5.4.1
 wheel==0.40.0
 absl-py==2.1.0
