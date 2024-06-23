@@ -27,8 +27,7 @@ class CMGRAPI:
         else:
             print(
                 f"Failed to retrieve challenge {challenge_id} with status code "
-                f"{response.status_code}: {response.text}"
-            )
+                f"{response.status_code}: {response.text}")
             return None
 
     def build_challenge(self, challenge_id, build_data):
@@ -63,8 +62,7 @@ class CMGRAPI:
         else:
             print(
                 f"Failed to start instance for build {build_id} with status code "
-                f"{response.status_code}: {response.text}"
-            )
+                f"{response.status_code}: {response.text}")
             return None
 
     def get_instance(self, instance_id):
@@ -87,8 +85,7 @@ class CMGRAPI:
         else:
             print(
                 f"Failed to run solver for instance {instance_id} with status code "
-                f"{response.status_code}: {response.text}"
-            )
+                f"{response.status_code}: {response.text}")
             return None
 
 
