@@ -75,6 +75,10 @@ jobs:
         flake8 --bug-report
         flake8 --config .flake8 .
 
+    - name: Print flake8 output
+      run: |
+        flake8 --config .flake8 . || true
+
     - name: Run tests with pytest
       run: |
         pip install pytest
