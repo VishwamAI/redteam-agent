@@ -19,15 +19,9 @@ class LearningModule:
         self.model.fit(X_train, y_train)
         predictions = self.model.predict(X_test)
         accuracy = accuracy_score(y_test, predictions)
-        precision = precision_score(
-            y_test, predictions, average='weighted'
-        )
-        recall = recall_score(
-            y_test, predictions, average='weighted'
-        )
-        f1 = f1_score(
-            y_test, predictions, average='weighted'
-        )
+        precision = precision_score(y_test, predictions, average='weighted')
+        recall = recall_score(y_test, predictions, average='weighted')
+        f1 = f1_score(y_test, predictions, average='weighted')
         print(f"Training completed. Model accuracy: {accuracy},")
         print(f"Precision: {precision}, Recall: {recall},")
         print(f"F1 Score: {f1}")
