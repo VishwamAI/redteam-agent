@@ -1,3 +1,5 @@
 [flake8]
 exclude = venv, debug_venv
 max-line-length = 79
+per-file-ignores =
+    examples/multi/finalize.py: E501
