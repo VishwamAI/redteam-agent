@@ -113,8 +113,8 @@ jobs:
         CHROMEDRIVER_URL="https://storage.googleapis.com/chrome-for-testing-public/$CHROMEDRIVER_VERSION/linux64/chromedriver-linux64.zip"
         echo "ChromeDriver URL: $CHROMEDRIVER_URL"
         wget -N --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 0 $CHROMEDRIVER_URL
-        unzip chromedriver-linux64.zip
-        sudo mv chromedriver /usr/local/bin/
+        unzip chromedriver-linux64.zip -d chromedriver-linux64
+        sudo mv chromedriver-linux64/chromedriver /usr/local/bin/
         sudo chmod +x /usr/local/bin/chromedriver
 
     - name: Run tests with pytest
