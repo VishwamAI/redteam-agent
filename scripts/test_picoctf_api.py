@@ -4,10 +4,7 @@ from scripts.picoctf_api import PicoCTFAPI
 
 def test_picoctf_api():
     # Initialize PicoCTFAPI
-    base_url = "https://play.picoctf.org"
-    username = "kasinadhsarma"
-    password = "1kl12_2>"
-    picoctf_api = PicoCTFAPI(base_url, username, password)
+    picoctf_api = PicoCTFAPI()
 
     # Initialize variables
     build = None
