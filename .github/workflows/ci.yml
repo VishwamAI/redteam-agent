@@ -108,12 +108,8 @@ jobs:
         sudo apt-get install -y google-chrome-stable
         CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+\.\d+')
         echo "Chrome version: $CHROME_VERSION"
-        CHROMEDRIVER_VERSION=$(curl -sS --retry 5 --retry-delay 10 https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION)
-        if [[ -z "$CHROMEDRIVER_VERSION" || $CHROMEDRIVER_VERSION == *"Error"* ]]; then
-          echo "Error fetching ChromeDriver version for Chrome version $CHROME_VERSION. Attempting to fetch the latest ChromeDriver version."
-          CHROMEDRIVER_VERSION=$(curl -sS --retry 5 --retry-delay 10 https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
-        fi
-        echo "ChromeDriver version: $CHROMEDRIVER_VERSION"
+        CHROMEDRIVER_VERSION="126.0.6478.114"
+        echo "Hardcoded ChromeDriver version: $CHROMEDRIVER_VERSION"
         CHROMEDRIVER_URL="https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
         echo "ChromeDriver URL: $CHROMEDRIVER_URL"
         wget -N --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 0 $CHROMEDRIVER_URL
