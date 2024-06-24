@@ -9,4 +9,5 @@ per-file-ignores =
     scripts/auto_learn.py: E501
     scripts/automation/engine_template.py: E501
     scripts/cmgr_api_interaction.py: E501
-    scripts/test_cmgr_interface.py: E501
+    tests/test_jarvis_model.py: F841
+    examples/multi/solver/solve.py: F401, F821

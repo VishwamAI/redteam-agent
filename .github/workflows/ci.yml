@@ -8,6 +8,7 @@ on:
   pull_request:
     branches:
       - '*'
+  workflow_dispatch:
 
 jobs:
   build:
@@ -20,7 +21,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.10'
+        python-version: '3.9'
 
     - name: Set up Node.js
       uses: actions/setup-node@v3
@@ -49,9 +50,13 @@ jobs:
         python -m pip install --upgrade pip
         pip install cython
 
+    - name: Print requirements.txt
+      run: |
+        cat requirements.txt
+
     - name: Install dependencies
       run: |
-        pip install --no-build-isolation -r requirements.txt --verbose || true
+        pip install -r requirements.txt --verbose
 
     - name: Print flake8 configuration
       run: |
@@ -67,10 +72,10 @@ jobs:
 
     - name: Install flake8 and compatible plugins
       run: |
-        pip install flake8==3.9.2
+        pip install flake8==4.0.1
         pip install mccabe==0.6.1
-        pip install pycodestyle==2.7.0
-        pip install pyflakes==2.3.1
+        pip install pycodestyle==2.8.0
+        pip install pyflakes==2.4.0
 
     - name: Print flake8 configuration before linting
       run: |
@@ -86,7 +91,36 @@ jobs:
       run: |
         flake8 --config .flake8 . || true
 
-    - name: Run tests with pytest
+    - name: Set PYTHONPATH
+      run: |
+        echo "PYTHONPATH=$PYTHONPATH:$(pwd):$(pwd)/scripts:$(pwd)/redteam-agent" >> $GITHUB_ENV
+
+    - name: Install pytest
       run: |
         pip install pytest
+
+    - name: Install Chrome and ChromeDriver
+      run: |
+        sudo apt-get install -y wget unzip
+        wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo apt-key add -
+        sudo sh -c 'echo "deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list'
+        sudo apt-get update
+        sudo apt-get install -y google-chrome-stable
+        CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+\.\d+')
+        echo "Chrome version: $CHROME_VERSION"
+        CHROMEDRIVER_VERSION="126.0.6478.63"
+        echo "ChromeDriver version: $CHROMEDRIVER_VERSION"
+        CHROMEDRIVER_URL="https://storage.googleapis.com/chrome-for-testing-public/$CHROMEDRIVER_VERSION/linux64/chromedriver-linux64.zip"
+        echo "ChromeDriver URL: $CHROMEDRIVER_URL"
+        wget -N --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 0 $CHROMEDRIVER_URL
+        unzip chromedriver-linux64.zip -d chromedriver-linux64
+        sudo mv chromedriver-linux64/chromedriver-linux64/chromedriver /usr/local/bin/
+        sudo chmod +x /usr/local/bin/chromedriver
+
+    - name: Start CMGR service
+      run: |
+        nohup python -m scripts.cmgr_service &
+
+    - name: Run tests with pytest
+      run: |
         pytest

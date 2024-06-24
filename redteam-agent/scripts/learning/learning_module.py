@@ -1,7 +1,10 @@
 import numpy as np
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
+from sklearn.metrics import accuracy_score
+from sklearn.metrics import precision_score
+from sklearn.metrics import recall_score
+from sklearn.metrics import f1_score
 import joblib
 
 
@@ -22,7 +25,9 @@ class LearningModule:
         recall = recall_score(y_test, predictions, average='weighted')
         f1 = f1_score(y_test, predictions, average='weighted')
         print(
-            f"Training completed. Model accuracy: {accuracy}, Precision: {precision}, Recall: {recall}, F1 Score: {f1}")
+            f"Training completed. Model accuracy: {accuracy}, "
+            f"Precision: {precision}, Recall: {recall}, F1 Score: {f1}"
+        )
 
     def predict(self, X):
         """
@@ -79,5 +84,5 @@ if __name__ == "__main__":
     # Example incremental training
     new_data = np.random.rand(20, 11)  # Example new data
     # Generate discrete labels (0 or 1)
-    new_data[:, -1] = np.random.randint(0, 2, size=new_data.shape[0])
+    new_data[:, -1] = np.random.randint(0, 2, size=raw_data.shape[0])
     learning_module.incremental_train(new_data)

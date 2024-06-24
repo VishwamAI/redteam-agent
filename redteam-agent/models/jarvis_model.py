@@ -22,8 +22,10 @@ class JarvisModel:
         categorical_transformer = Pipeline(
             steps=[
                 ('imputer', SimpleImputer(
-                    strategy='constant', fill_value='missing')), ('onehot', OneHotEncoder(
-                        handle_unknown='ignore'))])
+                    strategy='constant', fill_value='missing')),
+                ('onehot', OneHotEncoder(handle_unknown='ignore'))
+            ]
+        )
 
         # Create a column transformer to apply the preprocessing steps to the
         # appropriate columns
@@ -81,7 +83,8 @@ class JarvisModel:
 
     def save_model(self, model_path):
         joblib.dump(
-            {'model': self.model, 'preprocessor': self.preprocessor}, model_path
+            {'model': self.model, 'preprocessor': self.preprocessor},
+            model_path
         )
         print(f"Model saved to {model_path}")
 

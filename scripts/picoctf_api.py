@@ -1,41 +1,32 @@
-import requests
+class PicoCTFAPI:
+    def login(self):
+        # Placeholder login method
+        pass
 
+    def list_challenges(self):
+        # Placeholder list_challenges method
+        return []
 
-def get_challenge(challenge_id):
-    response = requests.get(
-        f"https://example.com/api/challenges/{challenge_id}")
-    if response.status_code != 200:
-        print(f"Failed to retrieve challenge {challenge_id} with status code "
-              f"{response.status_code}: {response.text}")
-        return None
-    return response.json()
+    def get_challenge(self, challenge_id):
+        # Placeholder get_challenge method
+        return {}
 
+    def build_challenge(self, challenge_id):
+        # Placeholder build_challenge method
+        return {}
 
-def start_instance(build_id):
-    response = requests.post(
-        f"https://example.com/api/builds/{build_id}/start")
-    if response.status_code != 200:
-        print("Failed to start instance for build {} with status code {}: {}"
-              .format(build_id, response.status_code, response.text))
-        return None
-    return response.json()
+    def get_build(self, build_id):
+        # Placeholder get_build method
+        return {}
 
+    def start_instance(self, build_id):
+        # Placeholder start_instance method
+        return {}
 
-def get_instance(instance_id):
-    response = requests.get(
-        f"https://example.com/api/instances/{instance_id}")
-    if response.status_code != 200:
-        print(f"Failed to retrieve instance {instance_id} with status code "
-              f"{response.status_code}: {response.text}")
-        return None
-    return response.json()
+    def get_instance(self, instance_id):
+        # Placeholder get_instance method
+        return {}
 
-
-def run_solver(instance_id):
-    response = requests.post(
-        f"https://example.com/api/instances/{instance_id}/solve")
-    if response.status_code != 200:
-        print("Failed to run solver for instance {} with status code {}: {}"
-              .format(instance_id, response.status_code, response.text))
-        return None
-    return response.json()
+    def run_solver(self, instance_id):
+        # Placeholder run_solver method
+        return {}
