@@ -117,8 +117,18 @@ jobs:
         sudo mv chromedriver-linux64/chromedriver-linux64/chromedriver /usr/local/bin/
         sudo chmod +x /usr/local/bin/chromedriver
 
-    # Removed steps to start and check CMGR service status
+    - name: Start CMGR service
+      run: |
+        ./examples/cmgrd &
+
+    - name: Health check for CMGR service
+      run: |
+        until curl -s http://127.0.0.1:4200/health; do echo "Waiting for CMGR service..."; sleep 5; done
 
     - name: Run tests with pytest
       run: |
         pytest
+
+    - name: Stop CMGR service
+      run: |
+        pkill -f cmgrd
