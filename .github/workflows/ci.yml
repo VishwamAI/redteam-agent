@@ -119,8 +119,16 @@ jobs:
 
     - name: Start CMGR service
       run: |
-        nohup python -m scripts.cmgr_service &
+        ./examples/cmgrd &
+
+    - name: Health check for CMGR service
+      run: |
+        until curl -s http://127.0.0.1:4200/health; do echo "Waiting for CMGR service..."; sleep 5; done
 
     - name: Run tests with pytest
       run: |
         pytest
+
+    - name: Stop CMGR service
+      run: |
+        pkill -f cmgrd
