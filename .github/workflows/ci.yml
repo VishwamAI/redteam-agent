@@ -110,7 +110,9 @@ jobs:
         echo "Chrome version: $CHROME_VERSION"
         CHROMEDRIVER_VERSION=$(curl -sS --retry 5 --retry-delay 10 https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$(echo $CHROME_VERSION | cut -d '.' -f 1))
         echo "ChromeDriver version: $CHROMEDRIVER_VERSION"
-        wget -N --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 0 https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip
+        CHROMEDRIVER_URL="https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
+        echo "ChromeDriver URL: $CHROMEDRIVER_URL"
+        wget -N --retry-connrefused --waitretry=1 --read-timeout=20 --timeout=15 -t 0 $CHROMEDRIVER_URL
         unzip chromedriver_linux64.zip
         sudo mv chromedriver /usr/local/bin/
         sudo chmod +x /usr/local/bin/chromedriver
