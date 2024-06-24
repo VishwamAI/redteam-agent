@@ -108,8 +108,7 @@ jobs:
         sudo apt-get install -y google-chrome-stable
         CHROME_VERSION=$(google-chrome --version | grep -oP '\d+\.\d+\.\d+\.\d+')
         echo "Chrome version: $CHROME_VERSION"
-        CHROME_MAJOR_VERSION=$(echo $CHROME_VERSION | cut -d '.' -f 1)
-        CHROMEDRIVER_VERSION=$(curl -sS --retry 5 --retry-delay 10 https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_MAJOR_VERSION)
+        CHROMEDRIVER_VERSION=$(curl -sS --retry 5 --retry-delay 10 https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION)
         if [[ -z "$CHROMEDRIVER_VERSION" || $CHROMEDRIVER_VERSION == *"Error"* ]]; then
           echo "Error fetching ChromeDriver version for Chrome $CHROME_VERSION. Defaulting to latest ChromeDriver version."
           CHROMEDRIVER_VERSION=$(curl -sS --retry 5 --retry-delay 10 https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
