@@ -110,8 +110,13 @@ jobs:
         echo "Chrome version: $CHROME_VERSION"
         CHROMEDRIVER_VERSION=$(curl -sS --retry 5 --retry-delay 10 https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_VERSION)
         if [[ -z "$CHROMEDRIVER_VERSION" || $CHROMEDRIVER_VERSION == *"Error"* ]]; then
-          echo "Error fetching ChromeDriver version for Chrome $CHROME_VERSION. Defaulting to latest ChromeDriver version."
-          CHROMEDRIVER_VERSION=$(curl -sS --retry 5 --retry-delay 10 https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
+          echo "Error fetching ChromeDriver version for Chrome $CHROME_VERSION. Attempting to fetch the major version."
+          CHROME_MAJOR_VERSION=$(echo $CHROME_VERSION | cut -d'.' -f1)
+          CHROMEDRIVER_VERSION=$(curl -sS --retry 5 --retry-delay 10 https://chromedriver.storage.googleapis.com/LATEST_RELEASE_$CHROME_MAJOR_VERSION)
+          if [[ -z "$CHROMEDRIVER_VERSION" || $CHROMEDRIVER_VERSION == *"Error"* ]]; then
+            echo "Error fetching ChromeDriver version for Chrome major version $CHROME_MAJOR_VERSION. Defaulting to latest ChromeDriver version."
+            CHROMEDRIVER_VERSION=$(curl -sS --retry 5 --retry-delay 10 https://chromedriver.storage.googleapis.com/LATEST_RELEASE)
+          fi
         fi
         echo "ChromeDriver version: $CHROMEDRIVER_VERSION"
         CHROMEDRIVER_URL="https://chromedriver.storage.googleapis.com/$CHROMEDRIVER_VERSION/chromedriver_linux64.zip"
