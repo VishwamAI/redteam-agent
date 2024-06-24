@@ -117,6 +117,10 @@ jobs:
         sudo mv chromedriver-linux64/chromedriver-linux64/chromedriver /usr/local/bin/
         sudo chmod +x /usr/local/bin/chromedriver
 
+    - name: Start CMGR service
+      run: |
+        nohup python -m scripts.cmgr_service &
+
     - name: Run tests with pytest
       run: |
         pytest
