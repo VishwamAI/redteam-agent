@@ -121,6 +121,14 @@ jobs:
       run: |
         nohup python -m scripts.cmgr_service &
 
+    - name: Check CMGR service status
+      run: |
+        until curl --output /dev/null --silent --head --fail http://127.0.0.1:4200; do
+          echo "Waiting for CMGR service to start..."
+          sleep 5
+        done
+        echo "CMGR service is up and running."
+
     - name: Run tests with pytest
       run: |
         pytest
